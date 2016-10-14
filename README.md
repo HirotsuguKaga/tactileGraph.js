@@ -7,14 +7,14 @@ Braille.js is a canvas like tactile graphic drawing library.
 　作成したオブジェクトのプロパティ―として各メソッドを実行する。
 　ex.　var bg = brailleGraph
 
-Propaties
+## Propaties
 name: ダウンロードされるファイルの名称。
 arr: データの本体。点のy座標の値を千倍してx座標の値を加算した4～6桁の数値を配列として保持する。
 canvas: プレビューを表示するCanvas要素のID。
 size: 用紙サイズ。デフォルトはA4。
 
 
-メソッド一覧
+## メソッド一覧
 　drawDot(x, y);
 　drawBraille(str, x, y );
 　drawLine(x1, y1, x2, y2 );
@@ -23,7 +23,7 @@ size: 用紙サイズ。デフォルトはA4。
 　convertText(str);
 
 
-描画系
+# 描画系
 drawDot(int x, int y);
  指定した座標に点を打つ。
  
@@ -40,12 +40,12 @@ fillRect(int x, int y, width, height);
  左上の角(int x, int y)を起点に指定した幅と高さの長方形を点線と同じ間隔の点で埋める。
 
 
-設定系
+# 設定系
 setCanvas(String id);
 setSize(String size);
 
-入出力系
+# 入出力系
+loadEdl();
 
-
-その他
+# その他
 convertText(str);
