@@ -3,29 +3,32 @@
 [![License](https://img.shields.io/cocoapods/l/SAHistoryNavigationViewController.svg?style=flat)](http://cocoapods.org/pods/SAHistoryNavigationViewController)
 
 # tactileGraph.js
-Just a 'canvas like' tactile graphic drawing library.
+Just a 'canvas like' tactile graphic drawing library.:octocat:
 
+***
 
-## Usage
-　任意の変数に""オブジェクトを代入してオブジェクトを作成する。
-　作成したオブジェクトのプロパティ―として各メソッドを実行する。
-　ex.　var bg = brailleGraph
+## 使い方
+1. 任意の変数に""オブジェクトを代入してオブジェクトを作成する。
+2.　作成したオブジェクトのプロパティ―として各メソッドを実行する。
+'''javascript
+var tg = tactileGraph;
+tg.drawBraille("ABCDEF", 0, 10);
 
-## Propaties
-name: ダウンロードされるファイルの名称。
-arr: データの本体。点のy座標の値を千倍してx座標の値を加算した4～6桁の数値を配列として保持する。
-canvas: プレビューを表示するCanvas要素のID。
-size: 用紙サイズ。デフォルトはA4。
+3. 出力メソッドを用いて触図データを取り出す。
 
+***
 
-## Methods
-　drawDot(x, y);
-　drawBraille(str, x, y );
-　drawLine(x1, y1, x2, y2 );
-　strokeRect(x, y, w, h );
-　fillRect(x, y, w, h );
-  strokeCircle(r, x, y);
-　convertText(str);
+## 一覧
+　* drawDot(x, y);
+　* drawBraille(str, x, y );
+　* drawLine(x1, y1, x2, y2 );
+　* strokeRect(x, y, w, h );
+　* fillRect(x, y, w, h );
+  * strokeCircle(r, x, y);
+  * setCanvas(id);
+  * setSize(str);
+  * setInterval(num);
+　* convertText(str);
 
 
 
