@@ -6,7 +6,7 @@
 Just a 'canvas like' tactile graphic drawing library.:octocat:
 　　
    　
-***   　
+***
 ***
 ## 概要
 html5のキャンバス的な簡単な命令で、エーデルやMAP2ESA用の触図データを作成するJavaScriptライブラリです。
