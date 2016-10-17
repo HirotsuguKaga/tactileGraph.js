@@ -4,9 +4,13 @@
 
 # tactileGraph.js
 Just a 'canvas like' tactile graphic drawing library.:octocat:
-
+  
+  
+  
 ***
-
+## 概要
+html5のキャンバス的な簡単な命令で、エーデルやMAP2ESA用の触図データを作成するJavaScriptライブラリです。
+  
 ## 使い方
 1. 任意の変数に""オブジェクトを代入してオブジェクトを作成する。
 2.　作成したオブジェクトのプロパティ―として各メソッドを実行する。
@@ -18,20 +22,23 @@ tg.drawLine(0,20,50,20);
 ```
 
 3. 出力メソッドを用いて触図データを取り出す。
-  
+```javascript
+hoge.href = map2esa();
+```
+　　
 ***
 
 ## 一覧
-　* drawDot(x, y);
-　* drawBraille(str, x, y );
-　* drawLine(x1, y1, x2, y2 );
-　* strokeRect(x, y, w, h );
-　* fillRect(x, y, w, h );
-  * strokeCircle(r, x, y);
-  * setCanvas(id);
-  * setSize(str);
-  * setInterval(num);
-　* convertText(str);
+* drawDot(x, y);
+* drawBraille(str, x, y );
+* drawLine(x1, y1, x2, y2 );
+* strokeRect(x, y, w, h );
+* fillRect(x, y, w, h );
+* strokeCircle(r, x, y);
+* setCanvas(id);
+* setSize(str);
+* setInterval(num);
+* convertText(str);
   
   
 
