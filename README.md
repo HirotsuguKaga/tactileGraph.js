@@ -38,6 +38,9 @@ hoge.href = map2esa();
 * setCanvas(id);
 * setSize(str);
 * setInterval(num);
+* loadEdl();
+* map2esa();
+* clear();
 * convertText(str);
   
   
@@ -74,8 +77,14 @@ hoge.href = map2esa();
   
   
 ## 入出力系
+### loadEdl();
+ エーデル用の触図データを返す。
+  
 ### map2esa();
 　map2esa用のPNG画像データをdataURLとして返す。
+
+### clear();
+ 触図データをリセットする。
   
   
 ## その他
