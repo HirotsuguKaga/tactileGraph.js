@@ -6,7 +6,7 @@
 Just a 'canvas like' tactile graphic drawing library.
 
 
-# 使い方
+## Usage
 　任意の変数に""オブジェクトを代入してオブジェクトを作成する。
 　作成したオブジェクトのプロパティ―として各メソッドを実行する。
 　ex.　var bg = brailleGraph
@@ -18,16 +18,17 @@ canvas: プレビューを表示するCanvas要素のID。
 size: 用紙サイズ。デフォルトはA4。
 
 
-## メソッド一覧
+## Methods
 　drawDot(x, y);
 　drawBraille(str, x, y );
 　drawLine(x1, y1, x2, y2 );
 　strokeRect(x, y, w, h );
 　fillRect(x, y, w, h );
+  strokeCircle(r, x, y);
 　convertText(str);
 
 
-# 描画系
+## 描画系
 ### drawDot(int x, int y);
  指定した座標に点を打つ。
  
@@ -47,7 +48,7 @@ size: 用紙サイズ。デフォルトはA4。
  指定した座標を中心に半径rの円を描画する。
 
 
-# 設定系
+## 設定系
 ### setCanvas(String id);
 　プレビューを表示するためのcanvas要素のidを指定する。
 
@@ -58,11 +59,11 @@ size: 用紙サイズ。デフォルトはA4。
 　直線や長方形、円形等を描画する際の点の間隔を設定する。デフォルトは6。
 
 
-# 入出力系
+## 入出力系
 ### map2esa();
 　map2esa用のPNG画像データをdataURLとして返す。
 
 
-# その他
+## その他
 ### convertText(str);
  濁点や拗音などを記号に置き換えた文字列を返す。数字列の直前に数符を挿入し、数字の後にア行やラ行の文字がある場合は、間に繋ぎ符（＿）を挿入する。漢字や分かち書き、長音の点訳、外字符や大文字符の挿入は未対応。
