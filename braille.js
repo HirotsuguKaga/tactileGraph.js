@@ -13,26 +13,32 @@
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
 var tactileGraphic = function() {
-	var name = "";
 	var arr = [];
 	var size = "A4";
-	
-    //var canvas = document.getElementById('');
-    //var ctx = canvas.getContext('2d');
+	var canvas,ctx;
+	var interval = 6;
 	return {
 
           /////////////////////設定系メソッド////////////////////////
   setCanvas:function(id){
     canvas = document.getElementById(id);
     ctx = canvas.getContext('2d');
+    var len = arr.length;
+    for(i=0; i<len; i++){
+      var x = arr[i] % 1000;
+      var y = (arr[i] - X) / 1000;
+      ctx.beginPath();
+      ctx.arc(x, y, 1, 0, Math.PI*2, false);
+      ctx.fill();
+    }
   },
   
   setSize:function(str){
     size = str;
   },
 
-  setNamefunction(str){
-    name = str;
+  setInterval:function(num){
+    interval = num;
   },
 
          ///////////////////////描画系メソッド//////////////////////
@@ -55,7 +61,7 @@ var tactileGraphic = function() {
   },
 
   drawBraille:function(str,x,y){
-    var arrLetter = new Array("あアｱ１1ＡAａa","いイｲ２2ＢBｂb","うウｳ３3ＣCｃc","えエｴ６6ＦFｆf","おオｵ９9ＩIｉi","かカｶ＊*","きキｷ｛{","くクｸ","けケｹ","こコｺ＠@","さサｻ","しシｼ","すスｽ","せセｾ","そソｿＷWｗw","たタﾀＯoｏo","ちチﾁＲRｒr","つツﾂＮNｎn","てテﾃＱQｑq","とトﾄＴTｔt","なナﾅＫKｋk","にニﾆＬLｌl","ぬヌﾇＭMｍm","ねネﾈＰPｐp％%","のノﾉＳSｓs","はハﾊＵUｕu","ひヒﾋＶVｖv","ふフﾌＸXｘx","へヘﾍ＆&","ほホﾎ","まマﾏＺZｚz","みミﾐ[","むムﾑＹYｙy","めメﾒ","もモﾓ]","やヤﾔ／/分","ゆユﾕ〒郵","よヨﾖ√根｝}","らラﾗ5５ＥEｅe","りリﾘ8８ＨHｈh","るルﾙ4４ＤDｄd","れレﾚ７7ＧGｇg","ろロﾛ０0ＪJｊj","わワﾜ’'?","ゐヰ、，,外＄$↓","ゑヱ、。．.句∋","をヲｦ－","んンﾝ八語","濁・〃中","数","　 &nbsp;無","ーー三","小＾^ぎギｷﾞじジｼﾞぢヂﾁﾞびビﾋﾞ↑","拗†￥\´?","半πΠ¶?ぱパﾊﾟ大","促っッｯ一","＿_「」-‐継～：:","七＝=","斜‡ぴピﾋﾟ≠","？?＋+五疑","二；;","！!！感六","零閉","｜|拡");
+    var arrLetter = new Array("あアｱ１1ＡAａa","いイｲ２2ＢBｂb","うウｳ３3ＣCｃc","えエｴ６6ＦFｆf","おオｵ９9ＩIｉi","かカｶ＊*","きキｷ｛{","くクｸ","けケｹ","こコｺ＠@","さサｻ","しシｼ","すスｽ","せセｾ","そソｿＷWｗw","たタﾀＯoｏo","ちチﾁＲRｒr","つツﾂＮNｎn","てテﾃＱQｑq","とトﾄＴTｔt","なナﾅＫKｋk","にニﾆＬLｌl","ぬヌﾇＭMｍm","ねネﾈＰPｐp％%","のノﾉＳSｓs","はハﾊＵUｕu","ひヒﾋＶVｖv","ふフﾌＸXｘx","へヘﾍ＆&","ほホﾎ","まマﾏＺZｚz","みミﾐ[","むムﾑＹYｙy","めメﾒ","もモﾓ]","やヤﾔ／/分","ゆユﾕ〒郵","よヨﾖ√根｝}","らラﾗ5５ＥEｅe","りリﾘ8８ＨHｈh","るルﾙ4４ＤDｄd","れレﾚ７7ＧGｇg","ろロﾛ０0ＪJｊj","わワﾜ’'?","ゐヰ、，,外＄$↓","ゑヱ、。．.句∋","をヲｦ－","八語","濁・〃中","数","　 &nbsp;無","ーー三","小＾^ぎギｷﾞじジｼﾞぢヂﾁﾞびビﾋﾞ↑","拗†￥\´?","半πΠ¶?ぱパﾊﾟ大","促っッｯ一","＿_「」-‐継～：:","七＝=","斜‡ぴピﾋﾟ≠","？?＋+五疑","二；;","！!！感六","んンﾝ零閉","｜|拡");
   var arrNum = new Array("1","12","14","124","24","16","126","146","1246","246","156","1256","1456","12456","2456","135","1235","1345","12345","2345","13","123","134","1234","234","136","1236","1346","12346","2346","1356","12356","13456","123456","23456","34","346","345","15","125","145","1245","245","3","56","256","35","236","5","3456","","25","45","4","6","2","36","2356","46","26","23","235","356","456");
     str += "";
     str = this.convertText(str);
@@ -69,17 +75,17 @@ var tactileGraphic = function() {
       var a = new Array(".", "\(", "\)", "\[", "\]", "\\", "\*", "?", "\{", "\}", "\^", "$", "-", "\|", "\/");
       var b = new Array("256","2356","2356","2356","2356","4","16","26","2356","2356"," ","56","36","456","34");
       for(var i= 0 ; i < a.length ; i++){ //エスケープが必要な文字を先に文字列として比較
-        if(letter == a[i])return b[i]
+        if(letter === a[i])return b[i]
       }
 
-      for(var i = 0 ; i < arrLetter.length ; i++){ //>
-        if(arrLetter[i].match(letter)){
-          return arrNum[i];
+      for(var j = 0 ; j < arrLetter.length ; j++){ //>
+        if(arrLetter[j].match(letter)){
+          return arrNum[j];
         }
       }
       //alert("文字列に点字に変換出来ない文字が含まれています。");
       return "none";
-    };
+    }
     
     this.arr2braille(arr,x,y);
   },
@@ -88,7 +94,7 @@ var tactileGraphic = function() {
     var w = 6;
     var h = 7;
     var r = 15;
-    if(arr.length==1) x += 7;   //一文字の場合、インデントしてマスの中央に寄せる
+    if(arr.length===1) x += 7;   //一文字の場合、インデントしてマスの中央に寄せる
     for(var i = 0 ; i < arr.length ; i++){         //>
       if(arr[i].match("1"))this.drawDot(x + r * i , y);
       if(arr[i].match("2"))this.drawDot(x + r * i , y + h);
@@ -103,11 +109,10 @@ var tactileGraphic = function() {
   drawLine:function(x1, y1, x2, y2) {     ////点線の描画処理///
     var d = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     var rad = Math.atan2(y2 - y1, x2 - x1);
-    var space = 3;
-    var dotted = Math.round(d / space / 2 );
+    var dotted = Math.round(d / interval );
     for (var i = 0; i <= dotted; i++) {
-      var x3 = Math.cos(rad) * space * (i * 2) + x1;
-      var y3 = Math.sin(rad) * space * (i * 2) + y1;
+      var x3 = Math.cos(rad) * interval * i + x1;
+      var y3 = Math.sin(rad) * interval * i + y1;
       this.drawDot(x3, y3);
     }
   },
@@ -124,6 +129,16 @@ var tactileGraphic = function() {
     var j = Math.round(h /s /2 );
     for (var i = 0; i <= j; i++) {
       this.drawLine(x, y + s*i*2, x+w, y + s*i*2);
+    }
+  },
+  
+  strokeCircle:function(r, x, y) {     ////円の描画処理///
+    var cir = 2 * Math.PI * r;
+    var a = Math.round(360 / (cir / interval)); // 角度（度）
+    for(i=0; a*i < 360; i++){
+      var X = x + r * Math.cos(a*i / 180 * Math.PI); // X座標
+      var Y = y + r * Math.sin(a*i / 180 * Math.PI); // Y座標
+      this.drawDot(X, Y);
     }
   },
 
@@ -168,8 +183,27 @@ var tactileGraphic = function() {
     }
     
     str = "EDEL" + size + "0,740\n2" + str;
-    arr=[];
     return str;
+  },
+
+  clear:function(){arr=[];},
+
+  map2esa:function(){
+    var element = document.createElement("canvas");
+    element.setAttribute("width", 599);
+    element.setAttribute("height", 744);
+    var ctx2 = element.getContext('2d');
+    
+    var len = arr.length;
+    
+    for(i=0; i<len; i++){
+      var X = arr[i] % 1000;
+      var Y = (arr[i] - X) / 1000;
+      ctx2.fillRect(X,Y,1,1);
+    }
+    var data = element.toDataURL();
+    return data;
   }
-	};
+
+  };
 };
