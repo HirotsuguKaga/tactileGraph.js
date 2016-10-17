@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/cocoapods/l/SAHistoryNavigationViewController.svg?style=flat)](http://cocoapods.org/pods/SAHistoryNavigationViewController)
+
 # Braille.js
 Braille.js is a canvas like tactile graphic drawing library.
 
