@@ -4,8 +4,10 @@
 
 # tactileGraph.js
 Just a 'canvas like' tactile graphic drawing library.:octocat:
-　　
-   　
+   
+   
+   
+   
 ***
 ***
 ## 概要
@@ -14,12 +16,11 @@ html5のキャンバス的な簡単な命令で、エーデルやMAP2ESA用の�
 ## 使い方
 1. 任意の変数に""オブジェクトを代入してオブジェクトを作成する。
 2.　作成したオブジェクトのプロパティ―として各メソッドを実行する。
-```javascript
-var tg = tactileGraph;
-tg.drawBraille("ABCDEF", 0, 10);
-tg.drawLine(0,20,50,20);
-```
-
+　```javascript
+　var tg = tactileGraph;
+　tg.drawBraille("ABCDEF", 0, 10);
+　tg.drawLine(0,20,50,20);
+　```
 3. 出力メソッドを用いて触図データを取り出す。
 ```javascript
 hoge.href = map2esa();
