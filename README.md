@@ -49,11 +49,13 @@ hoge.href = map2esa();
 ### drawDot(int x, int y);
  指定した座標に点を打つ。
   
-### drawBraille(string str, int x, int y );
+### drawBraille(string str, int x, int y , int returnX);
  点字文字列を描画する。点字に変換できない文字が含まれる場合はアラートを表示する。座標は1文字目の1の点を表す。省略した場合は(0,0)。
+ 第五引数はオプションで改行位置の座標を表す。省略た場合は用紙の端で改行する。
   
 ### drawLine(int x1, int y1, int x2, int y2 );
- 始点座標(x1, y1)から終点座標(x2, y2)に点線を描画する。
+ 始点座標(x1, y1)から終点座標(x2, y2)に点線を描画する。第三、第四引数を省略いた場合は、前回の描画の終点から指定した座標へ向かって線を描画する。
+ （デフォルトは(0,0)）
   
 ### strokeRect(int x, int y, int width, int height);
  左上の角(x,y)を起点に指定した幅と高さの長方形の枠線を点線で描画する。長方形のサイズは点の間隔の倍数に設定すると角がうまく収まる。
