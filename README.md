@@ -4,8 +4,7 @@
 
 # tactileGraph.js
 Just a 'canvas like' tactile graphic drawing library.:octocat:
-_
-_
+  
 ***
 ***
 ## 概要
