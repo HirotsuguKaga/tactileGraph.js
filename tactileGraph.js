@@ -271,11 +271,11 @@ var tactileGraphic = function() {
     x = Math.round(x);
     y = Math.round(y);
     if(ctx){
-      ctx.fillStyle = 'FF0';
+      ctx.fillStyle = '#FF0';
       ctx.beginPath();
       ctx.arc(x, y, 1, 0, Math.PI*2, false);
       ctx.fill();
-      ctx.fillStyle = '000';
+      ctx.fillStyle = '#000';
     }
   },
   
