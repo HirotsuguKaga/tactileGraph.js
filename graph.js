@@ -77,7 +77,7 @@ function drawGraph(){ ///////////////bar chart////////////////////////
     bar.drawLine(300, 570, x2, y2);
     var x3 = 300 + 170 * Math.cos(Math.PI / 180 * a); // X座標
     var y3 = 570 + 170 * Math.sin(Math.PI / 180 * a); // Y座標
-    bar,drawBraille(arr[i][0],x3,y3);
+    bar.drawBraille(arr[i][0],x3,y3);
   }
 }
 
