@@ -266,6 +266,18 @@ var tactileGraphic = function() {
     }
     arr.push(y*1000 + x);
   },
+
+  drawMark:function(x,y) {               /////点の描画///////
+    x = Math.round(x);
+    y = Math.round(y);
+    if(ctx){
+      ctx.fillStyle = 'FF0';
+      ctx.beginPath();
+      ctx.arc(x, y, 1, 0, Math.PI*2, false);
+      ctx.fill();
+      ctx.fillStyle = '000';
+    }
+  },
   
   clearDot:function(x,y) {               /////点の削除///////
     if(ctx){
