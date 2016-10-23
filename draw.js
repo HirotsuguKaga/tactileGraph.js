@@ -59,7 +59,7 @@ function onClick (e) {
   if(document.getElementById('q1').checked == true){tg.drawDot(x, y);}
   else if(document.getElementById('q2').checked == true){
     if(fx == -1){
-      tg.drawDot(x, y);
+      tg.drawMark(x, y);
       fx = x; fy =y;
     } else {
       tg.drawLine(fx, fy, x, y);
