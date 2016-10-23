@@ -45,12 +45,12 @@ hoge.href = map2esa();
 
 ## 描画系
 ### drawDot(int x, int y);
- 指定した座標に点を打つ。
+ 指定した座標に点を打つ。全ての描画の基礎となるメソッドです。
   
 ### drawBraille(string str, int x, int y , int returnX);
  点字文字列を描画する。点字に変換できない文字が含まれる場合はアラートを表示する。座標は1文字目の1の点の位置を表す。
  第一、第二引数を省略した場合は(0,0)から。
- 第五引数はオプションで改行位置の座標を表す。省略た場合は用紙の端で改行する。
+ 第五引数はオプションで改行位置の座標を表す。省略した場合は用紙の端で改行する。
   
 ### drawLine(int x1, int y1, int x2, int y2 );
  始点座標(x1, y1)から終点座標(x2, y2)に点線を描画する。第三、第四引数を省略いた場合は、前回の描画の終点から第一、第二引数の座標へ線を描画する。
@@ -64,7 +64,14 @@ hoge.href = map2esa();
   
 ### strokeCircle(int r, int x, int y);
  指定した座標を中心に半径rの円を描画する。
-  
+
+### clearDot(int x, int y);
+ 指定した座標の点を取り除く。
+
+### clear();
+ 触図データをリセットする。
+ 
+
 ## 設定系
 ### setCanvas(String id);
 　プレビューを表示するためのcanvas要素のidを指定する。
@@ -81,9 +88,6 @@ hoge.href = map2esa();
   
 ### map2esa();
 　map2esa用のPNG画像データをdataURLとして返す。
-
-### clear();
- 触図データをリセットする。
   
 ## その他
 ### convertText(str);
