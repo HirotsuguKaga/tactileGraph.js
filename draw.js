@@ -51,10 +51,22 @@ context = canvas.getContext('2d');
 
 canvas.addEventListener('click', onClick, false);
 
-var o;
+var fx = fy = -1;
 function onClick (e) {
   var x = y = 0;
   x = e.clientX - canvas.offsetLeft;
   y = e.clientY - canvas.offsetTop;
-  tg.drawDot(x, y);
+  if(document.getElementById('q1').checked == true){tg.drawDot(x, y);}
+  else if(document.getElementById('q2').checked == true){
+    if(fx == -1){
+      tg.drawDot(x, y);
+      fx = x; fy =y;
+    } else {
+      tg.drawLine(fx, fy, x, y);
+      fx = -1;
+    }
+  } else if(document.getElementById('q3').checked == true){
+    var str = txt.value;
+    tg.drawBraille(str, x, y);
+  }
 };
