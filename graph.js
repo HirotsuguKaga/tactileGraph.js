@@ -70,6 +70,7 @@ function drawGraph(){ ///////////////bar chart////////////////////////
   }
      console.log(sum);
   bar.strokeCircle(300, 570, 150);
+  bar.strokeCircle(300, 170, 80);
   var a= -90;
   for(var i=0; i<arr.length; i++){
     a += 360*(arr[i][1]/sum) ; // 角度（度）
