@@ -212,7 +212,6 @@ var tactileGraphic = function() {
       if(arr[i].match("4"))this.drawDot(x + w + r * j , y + l*k);
       if(arr[i].match("5"))this.drawDot(x + w + r * j , y + h + l*k);
       if(arr[i].match("6"))this.drawDot(x + w + r * j , y + h*2 + l*k);
-      if(arr[i].match("6"))this.drawDot(x + w + r * j , y + h*2 + l*k);
       j++
       if(arr[i].match("\n")){j = 0; k++;}
     }
@@ -247,10 +246,10 @@ var tactileGraphic = function() {
     }
   },
   
-  strokeCircle:function(r, x, y) {     ////円の描画処理///
+  strokeCircle:function(x, y, r) {     ////円の描画処理///
     var cir = 2 * Math.PI * r;
     var a = Math.round(360 / (cir / interval)); // 角度（度）
-    for(i=0; a*i < 360; i++){
+    for(var i=0; a*i < 360; i++){
       var X = x + r * Math.cos(a*i / 180 * Math.PI); // X座標
       var Y = y + r * Math.sin(a*i / 180 * Math.PI); // Y座標
       this.drawDot(X, Y);
@@ -258,6 +257,8 @@ var tactileGraphic = function() {
   },
 
   drawDot:function(x,y) {               /////点の描画///////
+    x = Math.round(x);
+    y = Math.round(y);
     if(ctx){
       ctx.beginPath();
       ctx.arc(x, y, 1, 0, Math.PI*2, false);
@@ -265,7 +266,7 @@ var tactileGraphic = function() {
     }
     arr.push(y*1000 + x);
   },
-
+  
   clearDot:function(x,y) {               /////点の削除///////
     if(ctx){
       ctx.fillStyle = '#fff';
@@ -279,7 +280,15 @@ var tactileGraphic = function() {
       return v != target;
     });
   },
-		
+
+  clear:function(){
+    arr=[];
+    var fromX = 0;
+    var fromY = 0;
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, sizeX, sizeY);
+    ctx.fillStyle = '#000';
+  },
              /////////////入出力系メソッド//////////////////
 
   loadEdl:function() {              //////エーデルファイルの出力///////
@@ -293,7 +302,7 @@ var tactileGraphic = function() {
     for(i=0; i<len; i++){
       var X = arr[i] % 1000;
       var Y = (arr[i] - X) / 1000;
-      if(arr[i-1]!=arr[i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
+      if(arr[i-1] !== arr[i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
         str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));
       }
     }
@@ -315,23 +324,17 @@ var tactileGraphic = function() {
     return str;
   },
 
-  clear:function(){
-    arr=[];
-    var fromX = 0;
-    var fromY = 0;
-  },
-
   map2esa:function(){
     var element = document.createElement("canvas");
     element.setAttribute("width", 599);
     element.setAttribute("height", 744);
     var ctx2 = element.getContext('2d');
     ctx2.fillStyle = '#fff';
-    ctx2.fillRect(0, 0, 599, 744);
+    ctx2.fillRect(0, 0, sizeX, sizeY);
     ctx2.fillStyle = '#000';
     var len = arr.length;
     
-    for(i=0; i<len; i++){
+    for(var i = 0; i<len; i++){
       var X = arr[i] % 1000;
       var Y = (arr[i] - X) / 1000;
       ctx2.fillRect(X,Y,1,1);
