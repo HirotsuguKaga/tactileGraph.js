@@ -68,15 +68,16 @@ function drawGraph(){ ///////////////bar chart////////////////////////
   for(var i=0; i<arr.length; i++){
     sum += parseInt(arr[i][1]);
   }
-     console.log(sum);
   bar.strokeCircle(300, 570, 150);
-  bar.strokeCircle(300, 170, 80);
   var a= -90;
   for(var i=0; i<arr.length; i++){
     a += 360*(arr[i][1]/sum) ; // 角度（度）
     var x2 = 300 + 145 * Math.cos(Math.PI / 180 * a); // X座標
     var y2 = 570 + 145 * Math.sin(Math.PI / 180 * a); // Y座標
     bar.drawLine(300, 570, x2, y2);
+    var x3 = 300 + 165 * Math.cos(Math.PI / 180 * a); // X座標
+    var y3 = 570 + 165 * Math.sin(Math.PI / 180 * a); // Y座標
+    brailleRight(arr[i][0],x3,y3);
   }
 }
 
