@@ -1,14 +1,14 @@
 var file = document.querySelector('#getfile');
 var txt = document.querySelector('#txt');
 
-file.onchange = function (){   //�t�@�C���I����
+file.onchange = function (){   //ファイル選択後
   var fileList = file.files;
     var reader = new FileReader();
-    reader.readAsArrayBuffer(fileList[0]);//�ǂݍ���  Uncaught TypeError: Failed to execute
+    reader.readAsArrayBuffer(fileList[0]);//読み込み  Uncaught TypeError: Failed to execute
     reader.onload = function  () {
       filename =file.name;
       var array = new Uint8Array(reader.result);
-      var uniArray = Encoding.convert(array, 'UNICODE','AUTO');//�z����u���j�R�[�h�v�ɕϊ�
+      var uniArray = Encoding.convert(array, 'UNICODE','AUTO');//配列を「ユニコード」に変換
       var result = Encoding.codeToString(uniArray);
       
       txt.value = result;
@@ -17,7 +17,7 @@ file.onchange = function (){   //�t�@�C���I����
     }
 };
 
-txt.onchange = function (){   //�t�@�C���I����
+txt.onchange = function (){   //ファイル選択後
   console.log("txt change");
       drawGraph();
 };
@@ -50,7 +50,7 @@ var Y=60;
 var R = 40; //line heightt
 var textWidth = 14;
 
-function drawGraph(){ ///////////////////////////////////////
+function drawGraph(){ ///////////////bar chart////////////////////////
   bar.clear();
   bar.drawBraille("bar chart",10,5); //title
   bar.strokeRect(100-5, Y-20, 470, 300);
@@ -62,8 +62,8 @@ function drawGraph(){ ///////////////////////////////////////
     brailleRight(arr[i][0],X,Y+R*i);
   }
   
-  
   bar.drawBraille("pie chart",10,430); ////////pie chart/////////////
+  bar.setInterval(6);
   var sum=0;
   for(var i=0; i<arr.length; i++){
     sum += parseInt(arr[i][1]);
@@ -72,9 +72,9 @@ function drawGraph(){ ///////////////////////////////////////
   bar.strokeCircle(300, 570, 150);
   var a= -90;
   for(var i=0; i<arr.length; i++){
-    a += 360*(arr[i][1]/sum) ; // �p�x�i�x�j
-    var x2 = 300 + 145 * Math.cos(Math.PI / 180 * a); // X���W
-    var y2 = 570 + 145 * Math.sin(Math.PI / 180 * a); // Y���W
+    a += 360*(arr[i][1]/sum) ; // 角度（度）
+    var x2 = 300 + 145 * Math.cos(Math.PI / 180 * a); // X座標
+    var y2 = 570 + 145 * Math.sin(Math.PI / 180 * a); // Y座標
     bar.drawLine(300, 570, x2, y2);
   }
 }
@@ -82,9 +82,71 @@ function drawGraph(){ ///////////////////////////////////////
 function brailleRight(str, x, y){
   str +="";
   var length = str.length + 1;
-  x -= length * textWidth;
+  x -= length * textWidth + 7;
   bar.drawBraille(str, x,y);
 }
 window.onload = function(){
   drawGraph(arr);
 }
+
+                  ///////////ダウンロード処理///////////
+var filename = "Graph";
+
+var edl = document.querySelector('#edl');
+//var png = document.querySelector('#png');
+var esa = document.querySelector('#esa');
+
+edl.onclick = function() {
+  var blob = new Blob([ bar.loadEdl() ], { "type" : "text/plain" });
+  if (window.navigator.msSaveBlob) { 
+    window.navigator.msSaveBlob(blob, filename + ".edl"); 
+  } else {
+    edl.download =  filename + ".edl";  //ダウンロードするファイル名を設定
+    edl.href = window.URL.createObjectURL(blob);
+  }
+}
+
+esa.onclick = function(){
+  imgURL = bar.map2esa();
+  // DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+  var bin = atob(imgURL.split(',')[1]);
+  // 空の Uint8Array ビューを作る
+  var buffer = new Uint8Array(bin.length);
+  // Uint8Array ビューに 1 バイトずつ値を埋める
+  for (var i = 0; i < bin.length; i++) {
+    buffer[i] = bin.charCodeAt(i);
+  }
+  // Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+  var blob = new Blob([buffer.buffer], {type: 'image/png'});
+  
+  if (window.navigator.msSaveBlob) {
+  // for IE
+  window.navigator.msSaveBlob(blob, filename + '.png'); 
+  } else {
+    esa.download =  filename + ".png";  //ダウンロードするファイル名を設定
+    esa.href = window.URL.createObjectURL(blob);
+  }
+}
+
+
+/*
+png.onclick = function() {
+  // DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+  var bin = atob(imgURL.split(',')[1]);
+  // 空の Uint8Array ビューを作る
+  var buffer = new Uint8Array(bin.length);
+  // Uint8Array ビューに 1 バイトずつ値を埋める
+  for (var i = 0; i < bin.length; i++) {
+    buffer[i] = bin.charCodeAt(i);
+  }
+  // Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+  var blob = new Blob([buffer.buffer], {type: 'image/png'});
+  
+  if (window.navigator.msSaveBlob) {
+  // for IE
+  window.navigator.msSaveBlob(blob, filename + '.png'); 
+  } else {
+    png.download =  filename + ".png";  //ダウンロードするファイル名を設定
+    png.href = window.URL.createObjectURL(blob);
+  }
+}*/
