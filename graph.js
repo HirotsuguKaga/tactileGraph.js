@@ -76,6 +76,11 @@ function drawGraph(){ ///////////////bar chart////////////////////////
     var x2 = 300 + 145 * Math.cos(Math.PI / 180 * a); // X座標
     var y2 = 570 + 145 * Math.sin(Math.PI / 180 * a); // Y座標
     bar.drawLine(300, 570, x2, y2);
+    
+    var b = a - 13;		
+    var x3 = 300 + 170 * Math.cos(Math.PI / 180 * b); // X座標		
+    var y3 = 570 + 170 * Math.sin(Math.PI / 180 * b); // Y座標		
+    bar.drawBraille(arr[i][0],x3,y3);
   }
 }
 
@@ -108,45 +113,17 @@ edl.onclick = function() {
 
 esa.onclick = function(){
   imgURL = bar.map2esa();
-  // DataURL のデータ部分を抜き出し、Base64からバイナリに変換
   var bin = atob(imgURL.split(',')[1]);
-  // 空の Uint8Array ビューを作る
   var buffer = new Uint8Array(bin.length);
-  // Uint8Array ビューに 1 バイトずつ値を埋める
   for (var i = 0; i < bin.length; i++) {
     buffer[i] = bin.charCodeAt(i);
   }
-  // Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
   var blob = new Blob([buffer.buffer], {type: 'image/png'});
   
   if (window.navigator.msSaveBlob) {
-  // for IE
   window.navigator.msSaveBlob(blob, filename + '.png'); 
   } else {
-    esa.download =  filename + ".png";  //ダウンロードするファイル名を設定
+    esa.download =  filename + ".png";
     esa.href = window.URL.createObjectURL(blob);
   }
 }
-
-
-/*
-png.onclick = function() {
-  // DataURL のデータ部分を抜き出し、Base64からバイナリに変換
-  var bin = atob(imgURL.split(',')[1]);
-  // 空の Uint8Array ビューを作る
-  var buffer = new Uint8Array(bin.length);
-  // Uint8Array ビューに 1 バイトずつ値を埋める
-  for (var i = 0; i < bin.length; i++) {
-    buffer[i] = bin.charCodeAt(i);
-  }
-  // Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
-  var blob = new Blob([buffer.buffer], {type: 'image/png'});
-  
-  if (window.navigator.msSaveBlob) {
-  // for IE
-  window.navigator.msSaveBlob(blob, filename + '.png'); 
-  } else {
-    png.download =  filename + ".png";  //ダウンロードするファイル名を設定
-    png.href = window.URL.createObjectURL(blob);
-  }
-}*/
