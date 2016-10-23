@@ -62,24 +62,24 @@ function drawGraph(){ ///////////////bar chart////////////////////////
     brailleRight(arr[i][0],X,Y+R*i);
   }
   
-  bar.drawBraille("pie chart",10,430); ////////pie chart/////////////
+  bar.drawBraille("pie chart",10,410); ////////pie chart/////////////
   bar.setInterval(6);
   var sum=0;
   for(var i=0; i<arr.length; i++){
     sum += parseInt(arr[i][1]);
   }
      console.log(sum);
-  bar.strokeCircle(300, 570, 150);
+  bar.strokeCircle(300, 560, 150);
   var a= -90;
   for(var i=0; i<arr.length; i++){
     a += 360*(arr[i][1]/sum) ; // 角度（度）
     var x2 = 300 + 145 * Math.cos(Math.PI / 180 * a); // X座標
-    var y2 = 570 + 145 * Math.sin(Math.PI / 180 * a); // Y座標
+    var y2 = 560 + 145 * Math.sin(Math.PI / 180 * a); // Y座標
     bar.drawLine(300, 570, x2, y2);
     
     var b = a - 13;		
     var x3 = 300 + 170 * Math.cos(Math.PI / 180 * b); // X座標		
-    var y3 = 570 + 170 * Math.sin(Math.PI / 180 * b); // Y座標		
+    var y3 = 560 + 170 * Math.sin(Math.PI / 180 * b); // Y座標		
     bar.drawBraille(arr[i][0],x3,y3);
   }
 }
