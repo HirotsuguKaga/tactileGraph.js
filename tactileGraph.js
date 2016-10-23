@@ -271,7 +271,7 @@ var tactileGraphic = function() {
     x = Math.round(x);
     y = Math.round(y);
     if(ctx){
-      ctx.fillStyle = '#Fa0';
+      ctx.fillStyle = '#F20';
       ctx.beginPath();
       ctx.arc(x, y, 1, 0, Math.PI*2, false);
       ctx.fill();
