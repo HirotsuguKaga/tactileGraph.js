@@ -1,8 +1,10 @@
 <html><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="tactileGraph.js"></script>
 <script>
 var chord="";
 var xchord="";
 var ychord="";
+var tg = tactileGraphic();
 
 window.onload = function() {
 	canvas = document.getElementById ('world');
@@ -26,6 +28,9 @@ window.addEventListener('DOMContentLoaded', function() {
       }, true);
       // ファイルの内容をData URL形式で取得（1）
       reader.readAsDataURL(input);
+      reader.onload = function  () {
+        Graph(0,0);
+      }
     }
   }, true);
 });
@@ -51,38 +56,40 @@ X=x/23;
 x=Math.floor(X)*23+3;
 Y=y/21;
 y=Math.floor(Y)*21+3;
-drawDot(x,y)
+drawDot(x,y);
 }
 
 function drawDot(x,y) {//描く
-var canvas = document.getElementById('world');
-var ctx = canvas.getContext('2d');
-var bit = ctx.getImageData(x, y, 1, 1);//色の判定
-var buf = bit.data;
-var color = buf[3];
-var color2 = buf[0];
+ var canvas = document.getElementById('world');
+ var ctx = canvas.getContext('2d');
+ var bit = ctx.getImageData(x, y, 1, 1);//色の判定
+ var buf = bit.data;
+ var color = buf[3];
+ var color2 = buf[0];
   if(color==0||color2==255){
    ctx.beginPath();
    ctx.rect(x, y, 16, 14);
    ctx.fillStyle = 'rgba(0,0,255,255)';
-   ctx.fill();}
-  else{
-   ctx.beginPath();
-   ctx.clearRect(x, y, 16, 14);
-   ctx.fill();} 
+   ctx.fill();
+   tg.drawDot(x/23*6-3,y/21*6-3);
+  }else{
+    ctx.beginPath();
+    ctx.clearRect(x, y, 16, 14);
+    ctx.fill();
+    tg.clearDot(x/23*6-3,y/21*6-3);
+  }
 }
 
 function delAll(){ var canvas = document.getElementById('world');
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0,0,920,840);
-  document.getElementById('yomi').value="";
   xchord="";ychord=""}
   
   
 /*　　　座標化　　*/
 function writeChord(){
-var j=0;
-	for(i=0;j<920;i=i+21){//xy座標の走査
+	var j=0;xchord="";ychord=""
+	for(var i=0;j<920;i+=21){//xy座標の走査
 	var canvas = document.getElementById('world');
 	var ctx = canvas.getContext('2d');
 	var bit = ctx.getImageData(j+4,i+4,1,1);  // 1px by 1px のデータを取得
@@ -93,20 +100,12 @@ var j=0;
 		ychord=ychord+","+y;}
 		if(i>840){j=j+23;i=-21}//走査の改行
 	}
-var id=document.getElementById('ID').value;
-var num=document.getElementById('NUM').value;
-var Yomi=document.getElementById('yomi').value;
 xchord = xchord.replace(/(.)(.+?)/,"$2");
 ychord = ychord.replace(/(.)(.+?)/,"$2");
-chord="var "+id+num+"=[["+xchord+"],["+ychord+"]];";
+chord="[["+xchord+"],["+ychord+"]];";
 document.getElementById('tx').value=document.getElementById('tx').value+chord+"\n";//文字データを書き出し;
-document.getElementById('tx2').value=document.getElementById('tx2').value+"case \'"+Yomi+"\':draw("+id+num+");break;\n";
 //delAll();
-num++;
-var num=("0"+num).slice(-2);//ゼロ埋め
-document.getElementById('NUM').value=num;
 }
-
 
 function del(){
   pos=0;line=0;
@@ -115,6 +114,7 @@ function del(){
   ctx.fillStyle="white";
   ctx.clearRect(0,0,920,840);
 }
+
 </script>
 <style type="text/css">
 canvas {background-color: transparent;}
@@ -127,18 +127,52 @@ TEXTAREA{vertical-align: TOP}</style>
 <canvas id='graph' width="920" height="840" on style="position:absolute;z-index: 0"></canvas>
 
 <section id="edit" style="position: relative;top: 850;">
-トレース元の画像を選択<input id="file" name="file" type="file" />
-<input type="button" value="画像を表示" onclick="Graph(0,0)">　拡大・縮小
-<input type="button" value="+" onclick="zoom()"><input type="button" value="-" onclick="zoomOut()">　小さく移動
-<input type="button" value="&uarr;" onclick="move(0,-1)"><input type="button" value="&darr;" onclick="move(0,1)">
-<input type="button" value="&larr;" onclick="move(-1,0)"><input type="button" value="&rarr;" onclick="move(1,0)">　大きく移動
-<input type="button" value="&uArr;" onclick="move(0,-25)"><input type="button" value="&dArr;" onclick="move(0,25)">
+画像を選択<input id="file" name="file" type="file" />
+　拡大縮小<input type="button" value="+" onclick="zoom()"><input type="button" value="-" onclick="zoomOut()">
+　小移動<input type="button" value="&uarr;" onclick="move(0,-1)"><input type="button" value="&darr;" onclick="move(0,1)">
+<input type="button" value="&larr;" onclick="move(-1,0)"><input type="button" value="&rarr;" onclick="move(1,0)">
+　大移動<input type="button" value="&uArr;" onclick="move(0,-25)"><input type="button" value="&dArr;" onclick="move(0,25)">
 <input type="button" value="&lArr;" onclick="move(-25,0)"><input type="button" value="&rArr;" onclick="move(25,0)"><br><br>
-<input type="button" value="描画をクリア" onclick="delAll()">　　読み<textarea id="yomi" cols="10" rows="1" placeholder="変換する文字"></textarea>　<input type="button" value="数値化" onclick="writeChord()">　　　　　
-ID<textarea id="ID" cols="5" rows="1" placeholder="記号"></textarea>No<textarea id="NUM" cols="3" rows="1">00</textarea>
-<br>
-<textarea id="tx" cols="50" rows="25" wrap="off" placeholder="座標数字コードがここに表示されます"></textarea>
-<textarea id="tx2" cols="30" rows="25" wrap="off" placeholder="命令文がここに表示されます"></textarea>
+<input type="button" value="描画をクリア" onclick="delAll()">　
+<a href="javascript:void(0)" download="" id="edl">edlファイルをダウンロード</a>　
+<a href="javascript:void(0)" download="" id="esa">画像をダウンロード</a><br><br><br>
+<input type="button" value="数値化" onclick="writeChord()"><br>
+<textarea id="tx" cols="90" rows="15" wrap="off" placeholder="座標数字コードがここに表示されます"></textarea>
+<script>////////////////////ダウンロード処理/////////////////////////
+var filename = "drawing";
 
-<textarea id="write" cols="10" rows="1" oninput="text()" style="font-size:130%;" placeholder="文字修正用"></textarea></div>
-</html>
+var edl = document.querySelector('#edl');
+var esa = document.querySelector('#esa');
+
+edl.onclick = function() {
+  var blob = new Blob([ tg.loadEdl() ], { "type" : "text/plain" });
+  if (window.navigator.msSaveBlob) { 
+    window.navigator.msSaveBlob(blob, filename + ".edl"); 
+  } else {
+    edl.download =  filename + ".edl";  //ダウンロードするファイル名を設定
+    edl.href = window.URL.createObjectURL(blob);
+  }
+}
+
+esa.onclick = function(){
+  imgURL = tg.map2esa();
+  // DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+  var bin = atob(imgURL.split(',')[1]);
+  // 空の Uint8Array ビューを作る
+  var buffer = new Uint8Array(bin.length);
+  // Uint8Array ビューに 1 バイトずつ値を埋める
+  for (var i = 0; i < bin.length; i++) {
+    buffer[i] = bin.charCodeAt(i);
+  }
+  // Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+  var blob = new Blob([buffer.buffer], {type: 'image/png'});
+  
+  if (window.navigator.msSaveBlob) {
+  // for IE
+  window.navigator.msSaveBlob(blob, filename + '.png'); 
+  } else {
+    esa.download =  filename + ".png";  //ダウンロードするファイル名を設定
+    esa.href = window.URL.createObjectURL(blob);
+  }
+}
+</script></html>
