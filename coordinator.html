@@ -50,8 +50,12 @@ function Graph(xx,yy,zz){
 
 
 function clickfunc (event) {
-x = event.clientX - canvas.offsetLeft;
-y = event.clientY - canvas.offsetTop;
+// x = event.clientX - canvas.offsetLeft;
+// y = event.clientY - canvas.offsetTop;
+   var rect = canvas.getBoundingClientRect();   ///スクロールによる位置のずれを補正
+   x = event.clientX - rect.left;
+   y = event.clientY - rect.top;
+
 X=x/23;
 x=Math.floor(X)*23+3;
 Y=y/21;

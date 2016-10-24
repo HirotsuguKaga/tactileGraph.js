@@ -38,6 +38,23 @@ esa.onclick = function(){
   }
 }
 
+      function getMousePosition(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top -0.125
+        };
+      }
+     function draw() {
+        var canvas = document.getElementById('a');
+        var context = canvas.getContext('2d');
+
+        canvas.addEventListener('mousemove', function (evt) {
+          var mousePos = getMousePosition(canvas, evt);
+          var message = 'Mouse position X:' + mousePos.x + ', Y:' + mousePos.y;
+          document.getElementById('out').innerHTML = message;
+        }, false);
+      }
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -54,8 +71,13 @@ canvas.addEventListener('click', onClick, false);
 var fx = fy = -1;
 function onClick (e) {
   var x = y = 0;
-  x = e.clientX - canvas.offsetLeft;
-  y = e.clientY - canvas.offsetTop;
+  //  x = e.clientX - canvas.offsetLeft; //不可
+  //  y = e.clientY - canvas.offsetTop;  //不可
+   var rect = canvas.getBoundingClientRect();   ///スクロールによる位置のずれを補正
+   x = e.clientX - rect.left;
+   y = e.clientY - rect.top -0.125;
+  
+  
   if(document.getElementById('q1').checked == true){
     tg.drawDot(x, y);
   }else if(document.getElementById('q2').checked == true){
