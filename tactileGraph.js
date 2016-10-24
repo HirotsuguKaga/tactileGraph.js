@@ -224,7 +224,7 @@ var tactileGraphic = function() {
     var d = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     var rad = Math.atan2(y2 - y1, x2 - x1);
     var dotted = Math.round(d / interval );
-    for (var i = 0; i <= dotted; i++) {
+    for (var i = 0; i < dotted; i++) {
       var x3 = Math.cos(rad) * interval * i + x1;
       var y3 = Math.sin(rad) * interval * i + y1;
       this.drawDot(x3, y3);
@@ -232,6 +232,7 @@ var tactileGraphic = function() {
   },
 
   strokeRect:function(x, y, w, h) {   ////長方形の描画処理①///
+    this.drawDot(x + w, y + h);
     this.drawLine(x, y , x+w, y);
     this.drawLine(x, y , x, y+h);
     this.drawLine(x+w, y , x+w, y+h);
@@ -239,6 +240,8 @@ var tactileGraphic = function() {
   },
 
   fillRect:function(x, y, w, h) {     ////長方形の描画処理②///
+    if(w<0){w*=-1; x-=w; console.log(w)}
+    if(h<0){h*=-1; y-=h}
     var s = 3;
     var j = Math.round(h /s /2 );
     for (var i = 0; i <= j; i++) {

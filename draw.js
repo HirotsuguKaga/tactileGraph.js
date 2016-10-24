@@ -56,8 +56,9 @@ function onClick (e) {
   var x = y = 0;
   x = e.clientX - canvas.offsetLeft;
   y = e.clientY - canvas.offsetTop;
-  if(document.getElementById('q1').checked == true){tg.drawDot(x, y);}
-  else if(document.getElementById('q2').checked == true){
+  if(document.getElementById('q1').checked == true){
+    tg.drawDot(x, y);
+  }else if(document.getElementById('q2').checked == true){
     if(fx == -1){
       tg.drawMark(x, y);
       fx = x; fy =y;
@@ -65,7 +66,24 @@ function onClick (e) {
       tg.drawLine(fx, fy, x, y);
       fx = -1;
     }
-  } else if(document.getElementById('q3').checked == true){
+  }else if(document.getElementById('q3').checked == true){
+    if(fx == -1){
+      tg.drawMark(x, y);
+      fx = x; fy =y;
+    } else {
+      tg.strokeRect(fx, fy, x-fx, y-fy);
+      fx = -1;
+    }
+  }else if(document.getElementById('q4').checked == true){
+    if(fx == -1){
+      tg.drawMark(x, y);
+      fx = x; fy =y;
+    } else {
+      tg.clearDot(fx,fy);
+      tg.fillRect(fx, fy, x-fx, y-fy);
+      fx = -1;
+    }
+  }else if(document.getElementById('q5').checked == true){
     var str = txt.value;
     tg.drawBraille(str, x, y);
   }
