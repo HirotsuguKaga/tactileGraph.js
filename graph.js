@@ -47,16 +47,17 @@ bar.setCanvas('a');
 
 var X=110;
 var Y=60;
-var R = 40; //line heightt
+var R = 42; //line heightt
 var textWidth = 14;
 
 function drawGraph(){ ///////////////bar chart////////////////////////
   bar.clear();
   bar.drawBraille("bar chart",10,5); //title
-  bar.strokeRect(100-5, Y-20, 470, 300);
-  bar.setInterval(4);
   arr = createArray(txt.value);
-  for(var i=0; i<arr.length; i++){  //////////////////////////////////
+  var len = arr.length;
+  bar.strokeRect(100-5, Y-20, 474, 12 + len*42); //枠線
+  bar.setInterval(4);
+  for(var i=0; i<len; i++){  //////////////////////////////////
     var width = 450 * (arr[i][1]/max);
     bar.fillRect(100,Y+R*i-1, width,16);
     brailleRight(arr[i][0],X,Y+R*i);
