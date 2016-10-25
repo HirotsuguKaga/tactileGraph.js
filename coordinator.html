@@ -133,7 +133,7 @@ TEXTAREA{vertical-align: TOP}</style>
 <canvas id='graph' width="920" height="840" on style="position:absolute;z-index: 0"></canvas>
 
 <section id="edit" style="position: relative;top: 850;">
-画像を選択<input id="file" name="file" type="file" />
+下絵画像を選択<input id="file" name="file" type="file" />
 　拡大縮小<input type="button" value="+" onclick="zoom()"><input type="button" value="-" onclick="zoomOut()">
 　小移動<input type="button" value="&uarr;" onclick="move(0,-1)"><input type="button" value="&darr;" onclick="move(0,1)">
 <input type="button" value="&larr;" onclick="move(-1,0)"><input type="button" value="&rarr;" onclick="move(1,0)">
@@ -142,7 +142,7 @@ TEXTAREA{vertical-align: TOP}</style>
 <input type="button" value="描画をクリア" onclick="delAll()">　
 <a href="javascript:void(0)" download="" id="edl">edlファイルをダウンロード</a>　
 <a href="javascript:void(0)" download="" id="esa">画像をダウンロード</a><br><br><br>
-<input type="button" value="点座標を数値化する" onclick="writeChord()"><br>
+<input type="button" value="点の座標を数値化する" onclick="writeChord()"><br>
 <textarea id="tx" cols="90" rows="15" wrap="off" placeholder="座標数字コードがここに表示されます"></textarea>
 <script>////////////////////ダウンロード処理/////////////////////////
 var filename = "drawing";
