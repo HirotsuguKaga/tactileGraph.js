@@ -6,7 +6,7 @@
 Just a 'canvas like' tactile graphic drawing library.:octocat:
   
 ***
-https://hirotsugukaga.github.io/tactileGraph.js/
+GitHub-Pages: https://hirotsugukaga.github.io/tactileGraph.js/
 ***
 ## 概要
 html5のキャンバス的な簡単な命令で、エーデルやMAP2ESA用の触図データを作成するJavaScriptライブラリです。
