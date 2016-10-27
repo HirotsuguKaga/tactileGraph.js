@@ -5,14 +5,15 @@
 # tactileGraph.js
 Just a 'canvas like' tactile graphic drawing library.:octocat:
   
+***
   日本語：https://github.com/HirotsuguKaga/tactileGraph.js/blob/master/README_ja.md
 ***
 GitHub-Pages: https://hirotsugukaga.github.io/tactileGraph.js/
 ***
 
 ## USAGE
-ex.
 ```javascript
+ex.
 　var tg = tactileGraph;
 　tg.drawBraille("ABCDEF", 0, 10);
 　tg.drawLine(0,20,50,20);
