@@ -1,5 +1,4 @@
-
-          ///////////ダウンロード処理/////////////////////////
+   ///////////////Download///////////////////
 var filename = "drawing";
 
 var edl = document.querySelector('#edl');
@@ -54,6 +53,8 @@ pr.setCanvas('b');
      };
   }
 
+function hypo(a,b){return Math.sqrt(a*a + b*b)} //hypotenuse
+
 function draw() {
   canvas.addEventListener('mousemove', function (evt) {
     var mousePos = getMousePosition(canvas, evt);
@@ -68,8 +69,7 @@ function draw() {
       if(document.getElementById('q4').checked == true)pr.fillRect(fx, fy, x-fx, y-fy);
       if(document.getElementById('q5').checked == true){
         pr.drawDot(fx, fy);
-        var r = Math.sqrt((fx-x)*(fx-x)+(fy-y)*(fy-y));
-        pr.strokeCircle(fx, fy, r);
+        pr.strokeCircle(fx, fy, hypo(fx-x, fy-y));
       }
     }
   }, false);
@@ -120,8 +120,7 @@ ctx.fillRect(x,y,3,3);
     if(fx == -1){
       fx = x; fy =y;
     } else {
-      var r = Math.sqrt((fx-x)*(fx-x)+(fy-y)*(fy-y));
-      tg.strokeCircle(fx, fy, r);
+      tg.strokeCircle(fx, fy, hypo(fx-x,fy-y));
       fx = -1;
     }
   }else if(document.getElementById('q6').checked == true){  //drawBraille
