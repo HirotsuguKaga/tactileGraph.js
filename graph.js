@@ -60,12 +60,25 @@ function drawGraph(){ ///////////////bar chart////////////////////////
   bar.drawLine(83, Y -10 + len*42, 584, Y -10 + len*42); //横線
   
   bar.setInterval(4);
-  for(var i=0; i<len; i++){  //////////////////////////////////
+  for(var i=0; i<len; i++){  ///////////draw  bar///////////
     var width = 450 * (arr[i][1]/max);
     bar.fillRect(100,Y+R*i-1, width,16);
-    brailleRight(arr[i][0],X,Y+R*i);
+    bar.drawLine(85, Y+R*i+9, 94, Y+R*i+9);
+    brailleRight(arr[i][0],X-10,Y+R*i);
   }
   
+  var s=0;               ////scale
+  if(6<max<10){
+    s=5;
+    if(10<max<20)s=10;
+    if(25<max<50)s=25;
+    if(50<max<100)s=50;
+    if(100<max<200)s=100;
+    bar.drawLine(100+450 * (s/max), Y -6 + len*42, 100+450 * (s/max),  Y +6 + len*42);
+    bar.drawBraille(s, 100+450 * (s/max), Y +12 + len*42);
+  }
+
+
   bar.drawBraille("pie chart",10,410); ////////pie chart/////////////
   bar.setInterval(6);
   var sum=0;
