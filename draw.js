@@ -38,33 +38,46 @@ esa.onclick = function(){
   }
 }
 
-      function getMousePosition(canvas, evt) {
-        var rect = canvas.getBoundingClientRect();
-        return {
-          x: evt.clientX - rect.left,
-          y: evt.clientY - rect.top -0.125
-        };
-      }
-     function draw() {
-        var canvas = document.getElementById('a');
-        var context = canvas.getContext('2d');
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+var canvas = document.getElementById('b');
+ctx = canvas.getContext('2d');
 
-        canvas.addEventListener('mousemove', function (evt) {
-          var mousePos = getMousePosition(canvas, evt);
-          var message = 'Mouse position X:' + mousePos.x + ', Y:' + mousePos.y;
-          document.getElementById('out').innerHTML = message;
-        }, false);
+var pr = tactileGraphic();
+pr.setCanvas('b');
+
+  function getMousePosition(canvas, evt) {
+     var rect = canvas.getBoundingClientRect();
+     return {
+       x: evt.clientX - rect.left,
+       y: evt.clientY - Math.round(rect.top)
+     };
+  }
+
+function draw() {
+  canvas.addEventListener('mousemove', function (evt) {
+    var mousePos = getMousePosition(canvas, evt);
+    var message = 'Position X:' + mousePos.x + ', Y:' + mousePos.y;
+    document.getElementById('out').innerHTML = message;
+    var x = mousePos.x;
+    var y = mousePos.y;
+    if(fx != -1){
+      pr.clear();
+      if(document.getElementById('q2').checked == true)pr.drawLine(fx, fy, x, y);
+      if(document.getElementById('q3').checked == true)pr.strokeRect(fx, fy, x-fx, y-fy);
+      if(document.getElementById('q4').checked == true)pr.fillRect(fx, fy, x-fx, y-fy);
+      if(document.getElementById('q5').checked == true){
+        pr.drawDot(fx, fy);
+        var r = Math.sqrt((fx-x)*(fx-x)+(fy-y)*(fy-y));
+        pr.strokeCircle(fx, fy, r);
       }
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
+    }
+  }, false);
+}
 ////////////////////////////////////////////////////////////////////////////////////////
 var txt = document.querySelector('#txt');
-
 var tg = tactileGraphic();
 tg.setCanvas('a');
-
-var canvas = document.getElementById('a');
-context = canvas.getContext('2d');
 
 canvas.addEventListener('click', onClick, false);
 
@@ -75,37 +88,43 @@ function onClick (e) {
   //  y = e.clientY - canvas.offsetTop;  //不可
    var rect = canvas.getBoundingClientRect();   ///スクロールによる位置のずれを補正
    x = e.clientX - rect.left;
-   y = e.clientY - rect.top -0.125;
+   y = e.clientY - Math.round(rect.top);
   
   
-  if(document.getElementById('q1').checked == true){
+  if(document.getElementById('q1').checked == true){        //drawDot
     tg.drawDot(x, y);
-  }else if(document.getElementById('q2').checked == true){
+  }else if(document.getElementById('q2').checked == true){  //drawLine
     if(fx == -1){
-      tg.drawMark(x, y);
+ctx.fillRect(x,y,3,3);
       fx = x; fy =y;
     } else {
       tg.drawLine(fx, fy, x, y);
       fx = -1;
     }
-  }else if(document.getElementById('q3').checked == true){
+  }else if(document.getElementById('q3').checked == true){  //strokeRect
     if(fx == -1){
-      tg.drawMark(x, y);
       fx = x; fy =y;
     } else {
       tg.strokeRect(fx, fy, x-fx, y-fy);
       fx = -1;
     }
-  }else if(document.getElementById('q4').checked == true){
+  }else if(document.getElementById('q4').checked == true){  //fillRect
     if(fx == -1){
-      tg.drawMark(x, y);
       fx = x; fy =y;
     } else {
       tg.clearDot(fx,fy);
       tg.fillRect(fx, fy, x-fx, y-fy);
       fx = -1;
     }
-  }else if(document.getElementById('q5').checked == true){
+  }else if(document.getElementById('q5').checked == true){  //strokeCircle
+    if(fx == -1){
+      fx = x; fy =y;
+    } else {
+      var r = Math.sqrt((fx-x)*(fx-x)+(fy-y)*(fy-y));
+      tg.strokeCircle(fx, fy, r);
+      fx = -1;
+    }
+  }else if(document.getElementById('q6').checked == true){  //drawBraille
     var str = txt.value;
     tg.drawBraille(str, x, y);
   }

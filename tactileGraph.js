@@ -300,9 +300,7 @@ var tactileGraphic = function() {
     arr=[];
     var fromX = 0;
     var fromY = 0;
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, sizeX, sizeY);
-    ctx.fillStyle = '#000';
+    ctx.clearRect(0, 0, sizeX, sizeY);
   },
              /////////////入出力系メソッド//////////////////
 
