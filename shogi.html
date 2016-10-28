@@ -725,7 +725,8 @@ function draw4swell(koma) {
   ctx.fillStyle = '#000';
   ctx.font= 'bold 53px "Ikarashi Braille"';
   ctx.textAlign = "left";
-  ctx.fillText(filename,75, 95); /////タイトル//////
+  var name = Braille.convertText(filename);
+  ctx.fillText(name,75, 95); /////タイトル//////
   ctx.textAlign = "center";
   var i = 0;
   for( var y = 1; y <= 9; y++){           //盤面の駒の描画
