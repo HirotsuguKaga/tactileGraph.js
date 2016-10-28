@@ -1,7 +1,6 @@
 <html><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript">
 var code = new Array();
 var sp=2;//文字の間隔
-
 var a=[[4,2,3,4,1,4,1,4,2,3,5],[3,4,4,4,5,5,6,6,7,7,7]];
 var b=[[1,1,1,1,2,3,1,4,1,4,1,2,3],[1,2,3,4,4,4,5,5,6,6,7,7,7]];
 var c=[[2,3,1,1,2,3],[4,4,5,6,7,7]];
@@ -202,7 +201,6 @@ var c04=[[1,1,2,2,3,3,3,3,3,4,5,5,5,5,5,5,5,5,5,5,6,7,7,7,8,8,9],[4,9,4,8,4,5,6,
 var c05=[[1,1,1,1,2,3,3,4,4,4,4,4,4,4,5,6,7,7,8,8,8],[3,4,5,10,9,7,8,1,2,3,4,5,6,7,7,8,5,9,3,4,10]];
 var c06=[[1,2,2,3,3,3,3,3,4,4,4,4,5,5,5,5,5,5,5,5,6,6,6,6,7,7,7,7,7,8,8,9],[4,3,10,2,4,6,8,10,1,4,6,10,1,4,5,6,7,8,9,10,1,4,6,10,2,4,6,8,10,3,10,4]];
 var c07=[[1,2,2,3,3,4,4,5,5,5,5,5,5,5,5,6,6,7,7,8,8,9],[9,5,9,5,9,5,9,2,3,4,5,6,7,8,9,5,9,5,9,5,9,9]];
-
 var daku=[[1,1,1,3,3,3],[1,2,3,1,2,3]];
 var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
 
@@ -540,7 +538,7 @@ function del(){
   var ctx2 = canvas2.getContext('2d',{alpha: false});
   ctx2.fillStyle="white";
   ctx2.fillRect(0,0,790,599)
-  }
+}
 
 function draw(id) {
   var canvas = document.getElementById('cvs');
@@ -557,16 +555,14 @@ function draw(id) {
 	ctx.fillStyle="black";
 	ctx.fillRect(x*7+pos, y*7+line,1,1);
 	
-	var Y = x*7 + pos;   //////////////////////////////////////////////////////////////
-	var X = 599 - line-y*7;  /////////////////////////////////////////////
-	code.push(Y*1000+X);   ////Y座標を1000倍してXを加算//////////////　　　＊９０度回転処理を追加//////
+	var Y = x*7 + pos;   ////////
+	var X = 599 - line-y*7;//////
+	code.push(Y*1000+X);   ////Y座標を1000倍してXを加算///＊９０度回転処理を追加
 	code.sort(function(a,b){
         if( a < b ) return -1;
         if( a > b ) return 1;
         return 0;
 	});
-	console.log(code);
-
 	ctx2.beginPath();
 	ctx2.fillStyle="black";
 	ctx2.fillRect(x*7+pos, y*7+line,6,6)}
@@ -597,7 +593,11 @@ var img = ctx.getImageData(x,y,1,1);  // 1px by 1px のデータを取得
 }
 
 function blank(){pos=pos+35}//空白
-function CR(){pos=0;line=line+77}//改行
+function CR(){ //改行
+  var lh=Number(document.getElementById('LH').value);
+  pos=0;
+  line += lh;
+}
 
 var check=false;
 function chgImg(){//キャンバスを画像に変換
@@ -624,14 +624,13 @@ function close(){
 
 function space(){var SP=document.getElementById('SP').value;
 sp=Number(SP)}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 function convert(){
   var edicode = "";
   var len = code.length;
   for(var i=0; i<len; i++){
     var X = code[i] % 1000;
     var Y = (code[i] - X) / 1000;
-  	console.log(X);
     edicode += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));
   }
   edicode = "EDELA4,0,730" + "\n" + "2" + edicode;
@@ -656,8 +655,7 @@ function num2edi(num){
   }
   return str;
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////////////////
 window.onload=del;
 </script>
 <style type="text/css">
@@ -676,6 +674,7 @@ canvas{border:1px dashed #808080}</style>
 <textarea id="tx" cols="30" rows="8" oninput="text()" style="font-size:130%;" placeholder="テキスト入力欄"></textarea>
 <a href="#" download="decapoint.edl" id="edl">エーデルファイルをダウンロード</a>
 　文字間隔<textarea id="SP" cols="2" rows="1" oninput="space()">2</textarea>　
+　行の高さ<textarea id="LH" cols="4" rows="1" oninput="space()">77</textarea>　
 <input onclick="chgImg()" value="点図画像に変換" type="button">
 　　<a href="JavaScript:close()" id="CLOSE" style="display:none">点図画像を閉じる</a>
 　<a href="" download="Decapoint" id="downloadImg" style="display:none">点図画像をダウンロードする<br><img id="newImg"></a>
