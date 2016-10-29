@@ -18,7 +18,6 @@ file.onchange = function (){   //ファイル選択後
 };
 
 txt.onchange = function (){   //ファイル選択後
-  console.log("txt change");
       drawGraph();
 };
 
@@ -68,15 +67,14 @@ function drawGraph(){ ///////////////bar chart////////////////////////
   }
   
   var s=0;               ////scale
-  if(6<max<10){
-    s=5;
-    if(10<max<20)s=10;
-    if(25<max<50)s=25;
-    if(50<max<100)s=50;
-    if(100<max<200)s=100;
-    bar.drawLine(100+450 * (s/max), Y -6 + len*42, 100+450 * (s/max),  Y +6 + len*42);
-    bar.drawBraille(s, 100+450 * (s/max), Y +12 + len*42);
-  }
+  if(6<max<10)s=5;
+  if(10<max<20)s=10;
+  if(25<max<50)s=25;
+  if(50<max<100)s=50;
+  if(100<max<200)s=100;
+  bar.drawLine(100+450 * (s/max), Y -6 + len*42, 100+450 * (s/max),  Y +6 + len*42);
+  bar.drawBraille(s, 100+450 * (s/max), Y +12 + len*42);
+ 
 
 
   bar.drawBraille("pie chart",10,410); ////////pie chart/////////////
@@ -85,7 +83,7 @@ function drawGraph(){ ///////////////bar chart////////////////////////
   for(var i=0; i<arr.length; i++){
     sum += parseInt(arr[i][1]);
   }
-     console.log(sum);
+
   bar.strokeCircle(300, 560, 150);
   var a= -90;
   for(var i=0; i<arr.length; i++){
