@@ -34,7 +34,6 @@ function createArray(csvData) {
   for(var i = 0; i<csvArray.length; i++){
     numArray.push(csvArray[i][1]);
   }
-  console.log(numArray);
   max = Math.max.apply(null, numArray);
   return csvArray;
 }
