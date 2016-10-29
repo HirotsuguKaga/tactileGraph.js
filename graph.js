@@ -61,7 +61,7 @@ function drawGraph(){ ///////////////bar chart////////////////////////
   for(var i=0; i<len; i++){  ///////////draw  bar///////////
     var width = 450 * (arr[i][1]/max);
     bar.fillRect(100,Y+R*i-1, width,16);
-    bar.drawLine(87, Y+R*i+9, 94, Y+R*i+9);
+    bar.drawLine(82, Y+R*i+9, 94, Y+R*i+9);
     brailleRight(arr[i][0],X-10,Y+R*i);
   }
   
