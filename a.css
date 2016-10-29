@@ -1,0 +1,86 @@
+body,div,h1,h2,h3,h4,h5,h6,
+pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td {
+  color: #111;
+  font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Helvetica, Arial, sans-serif;
+  line-height: 160%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  }
+a {
+  color:inherit
+  }
+a:link {
+  color: #03b;
+  }
+a:visited {
+  color: #50b;
+  }
+h1 {
+  font-family: "見出ゴMB31";
+  text-align: center;
+  }
+
+h2 {
+  color: white;
+  background-color: #4169E1;
+  font-size: medium;
+  margin: 15px 0 5px;
+  padding-left: 5px;
+  }
+
+hr{
+  margin: 20px 0;
+  }
+
+article{
+  margin: 0 auto;
+  position: relative;
+  background: #fff;
+  max-width: 800px;
+  padding: 0px;
+  clear: both;
+  }
+section{
+  padding:0 10px
+  }
+
+section h2{	font-size: 125%;	border-left: 25px solid #4169E1;	padding-left: 10px;	margin-top: 20px;margin-bottom: 5px;}
+
+footer{
+  text-align: left;
+  font-size: 80%;
+  }
+
+/*ドロップダウンメニュー用*/
+.menu ul{margin:0;padding:0;}
+.menu ul li {list-style: none;  margin:0;  padding:0;  font-size:14px;  float: left;  position: relative;
+  width: 160px;/*親メニュー幅*/
+  height: 35px;/*親メニュー高さ*/
+  line-height: 35px;
+  background:#4169E1;/*親メニュー背景色*/
+  color: #fff;/*親メニュー文字色*/
+  text-align:center;  font-weight:bold;}
+.menu ul li a {color: #f5f5f5;  display: block;  text-decoration: none;}
+.menu ul li:hover, .menu ul li a:hover {background:#f90;/*ホバー時の親メニュー背景色*/
+  color:#fff;/*ホバー時の親メニュー文字色*/}
+.menu ul li ul {position: absolute;
+  top: 35px;/*親メニューの高さと同じにする*/
+  width: 160px;  z-index: 100;}
+.menu ul li ul li {visibility: hidden;  overflow: hidden; text-align: left;padding-left: 8px;
+  background:#58b;/*サブメニュー背景色*/
+  height: 0;
+  width: 260px;/*サブメニュー幅*/
+  white-space: nowrap;
+  }
+.menu ul li ul li:hover, .menu ul li ul li a:hover {
+  background:#FFbFb9;color:blue;/*ホバー時のサブメニュー背景色*/}
+.menu ul li:hover ul li, .menu ul li a:hover ul li{
+  visibility: visible;
+  overflow: visible;
+  min-height:35px;/*サブメニュー高さ*/
+  z-index: 10;}
+.menu * {-webkit-transition: 0.5s;  -moz-transition: 0.5s;  -ms-transition: 0.5s;  -o-transition: 0.5s;  transition: 0.5s;}
