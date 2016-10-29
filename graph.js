@@ -56,8 +56,8 @@ function drawGraph(){ ///////////////bar chart////////////////////////
   arr = createArray(txt.value);
   var len = arr.length;
   //bar.strokeRect(100-5, Y-20, 474, 12 + len*42); //枠線
-  bar.drawLine(100-5, Y-14, 100-5, Y + 8 + len*42);      //縦線
-  bar.drawLine(83, Y -10 + len*42, 584, Y -10 + len*42); //横線
+  bar.drawLine(100-5, Y-15, 100-5, Y + 8 + len*42);      //縦線
+  bar.drawLine(83, Y -9 + len*42, 584, Y -9 + len*42); //横線
   
   bar.setInterval(4);
   for(var i=0; i<len; i++){  ///////////draw  bar///////////
