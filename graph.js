@@ -62,7 +62,7 @@ function drawGraph(){ ///////////////bar chart////////////////////////
     var width = 450 * (arr[i][1]/max);
     bar.fillRect(100,Y+R*i-1, width,16);
     bar.drawLine(82, Y+R*i+9, 94, Y+R*i+9);
-    brailleRight(arr[i][0],X-10,Y+R*i);
+    brailleRight(arr[i][0], X-6, Y+R*i);
   }
   
   var s=0;               ////scale
@@ -71,7 +71,7 @@ function drawGraph(){ ///////////////bar chart////////////////////////
   if(25<max<50)s=25;
   if(50<max<100)s=50;
   if(100<max<200)s=100;
-  bar.drawLine(100+450 * (s/max), Y -6 + len*42, 100+450 * (s/max),  Y +6 + len*42);
+  bar.drawLine(100 + 450*(s/max), Y -6 + len*42, 100 + 450*(s/max),  Y +6 + len*42);
   bar.drawBraille(s, 100+450 * (s/max), Y +12 + len*42);
  
 
