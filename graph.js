@@ -66,13 +66,14 @@ function drawGraph(){ ///////////////bar chart////////////////////////
   }
   
   var s=0;               ////scale
-  if(6<max<10)s=5;
-  if(10<max<20)s=10;
-  if(25<max<50)s=25;
-  if(50<max<100)s=50;
-  if(100<max<200)s=100;
-  bar.drawLine(100 + 450*(s/max), Y -6 + len*42, 100 + 450*(s/max),  Y +6 + len*42);
-  bar.drawBraille(s, 100+450 * (s/max), Y +12 + len*42);
+  if(6<max && max <=10)s=5;
+  if(10<max && max <=20)s=10;
+  if(25<max && max <=50)s=25;
+  if(50<max && max <=100)s=50;
+  if(100<max && max <=200)s=100;
+  console.log(s);
+  bar.drawLine(100 + 450*(s/max), Y -2 + len*42, 100 + 450*(s/max),  Y +10 + len*42);
+  bar.drawBraille(s, 100+450 * (s/max), Y +14 + len*42);
  
 
 
