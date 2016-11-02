@@ -14,11 +14,12 @@ DEMO: https://hirotsugukaga.github.io/tactileGraph.js/
 ## USAGE
 ```javascript
 ex.
-　var tg = tactileGraph;
-　tg.drawBraille("ABCDEF", 0, 10);
+　var tg = tactileGraph;  //initial
+ 
+　tg.drawBraille("ABCDEF", 0, 10);  //drawing
 　tg.drawLine(0,20,50,20);
 
-　hoge.href = map2esa();
+　hoge.href = tg.map2esa();  //output
 ```
 
    
