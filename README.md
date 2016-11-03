@@ -63,12 +63,12 @@ ex.
   
 ### setSize(String size);
   
-### setInterval(int num)
+### setInterval(int num) //set a distance between dots in a line. (strokeCircle(), drawLine(), strokeRect, etc.)
   
 ## IO
-### loadEdl();
+### loadEdl(); //return blob.
   
-### map2esa();
+### map2esa(); //return blob.
   
 ## Misc
-### convertText(str);
+### convertText(String str); //return converted string.
