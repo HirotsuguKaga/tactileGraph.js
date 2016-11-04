@@ -60,15 +60,18 @@ ex.
 
 ## Setting
 ### setCanvas(String id);
-  
+set a canvas ID for screen preview(option).
 ### setSize(String size);
-  
-### setInterval(int num) //set a distance between dots in a line. (strokeCircle(), drawLine(), strokeRect, etc.)
+set paper size(A4 or B5).
+### setInterval(int num)
+set a distance between dots in a line. (strokeCircle(), drawLine(), strokeRect, etc.)
   
 ## IO
-### loadEdl(); //return blob.
-  
-### map2esa(); //return blob.
+### loadEdl();
+return blob.
+### map2esa();
+return blob.
   
 ## Misc
-### convertText(String str); //return converted string.
+### convertText(String str);
+return converted string.
