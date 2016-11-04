@@ -554,8 +554,14 @@ function draw(id) {
 	  ctx.beginPath();
 	  ctx.fillStyle="black";
 	  ctx.fillRect(x*7+pos, y*7+line,1,1);
-	  var Y = x*7 + pos;   ////////
-	  var X = 599 - line-y*7;//////
+	  if(document.getElementById('horizontal').checked){
+	    var Y = x*7 + pos;   ////////
+	    var X = 599 - line-y*7;//////
+	  }else{
+	    var X = x*7 + pos;
+	    var Y = y*7 + line;
+	  }
+	  
 	  if(X<0){
 	    X = 0;
 	  }else{
@@ -669,7 +675,8 @@ window.onload=del;
 <div style="float: left;"><br>
 　<a href="#" download="decapoint.edl" id="edl">EDLファイルをダウンロード</a><br>
 　文字間隔<textarea id="SP" cols="2" rows="1" oninput="space()">2</textarea>　<br>
-　行の高さ<textarea id="LH" cols="4" rows="1" oninput="space()">77</textarea>　<br><br>
+　行の高さ<textarea id="LH" cols="4" rows="1" oninput="space()">77</textarea>　<br>
+　用紙：<input type="radio" value="縦置き" name="set" id="vertical">縦置き　<input type="radio" value="横置き" name="set" id="horizontal" checked>横置き<br>
 　<input onclick="chgImg()" value="点図画像に変換" type="button"><br>
 　<a href="JavaScript:close()" id="CLOSE" style="display:none">点図画像を閉じる</a><br>
 　<a href="" download="Decapoint" id="downloadImg" style="display:none">点図画像をダウンロードする<br>
