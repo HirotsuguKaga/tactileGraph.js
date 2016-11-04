@@ -19,14 +19,16 @@ or
 <script src="tactileGraph.min.js"></script>
 ```
 ### 設定
-1. 任意の変数に代入してオブジェクトを作成。
-2. オブジェクトのプロパティ―として各メソッドを実行する。  
+1. tactileGraphを任意の変数に代入する。 
 ```javascript
 　var tg = tactileGraph;
+```
+2. 変数を苗字して各描画メソッドを実行。 
+```javascript
 　tg.drawBraille("ABCDEF", 0, 10);
 　tg.drawLine(0,20,50,20);
 ```
-3. 出力メソッドを用いて触図データを取り出す。
+3. 出力メソッドで触図データを取り出す。
 ```javascript
 hoge.href = loadEdl();
 ```
