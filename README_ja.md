@@ -19,8 +19,8 @@ or
 <script src="tactileGraph.min.js"></script>
 ```
 ### 設定
-1. 任意の変数に""オブジェクトを代入してオブジェクトを作成する。
-2.　作成したオブジェクトのプロパティ―として各メソッドを実行する。  
+1. 任意の変数に代入してオブジェクトを作成。
+2. オブジェクトのプロパティ―として各メソッドを実行する。  
 ```javascript
 　var tg = tactileGraph;
 　tg.drawBraille("ABCDEF", 0, 10);
