@@ -10,19 +10,15 @@
 html5のキャンバス的な簡単な命令で、エーデルやMAP2ESA用の触図データを作成するJavaScriptライブラリです。
    :octocat::octocat::octocat:
 ## 使い方
-### Installation
-
-#### In Browser:
-
+### インストール
 ```html
-<script src="encoding.js"></script>
+<script src="tactileGraph.js"></script>
 ```
-
 or
-
 ```html
-<script src="encoding.min.js"></script>
+<script src="tactileGraph.min.js"></script>
 ```
+### 設定
 1. 任意の変数に""オブジェクトを代入してオブジェクトを作成する。
 2.　作成したオブジェクトのプロパティ―として各メソッドを実行する。
 　```javascript
