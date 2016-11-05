@@ -1,4 +1,4 @@
-   ///////////////Download///////////////////
+///////////////Download///////////////////
 var filename = "drawing";
 
 var edl = document.querySelector('#edl');
@@ -45,23 +45,46 @@ ctx = canvas.getContext('2d');
 var pr = tactileGraphic();
 pr.setCanvas('b');
 
-  function getMousePosition(canvas, evt) {
-     var rect = canvas.getBoundingClientRect();
-     return {
-       x: evt.clientX - rect.left,
-       y: evt.clientY - Math.round(rect.top)
-     };
-  }
-
 function hypo(a,b){return Math.sqrt(a*a + b*b)} //hypotenuse
 
+
+function getMousePosition(canvas, evt) {/// Mouse move/////////////
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - rect.left,
+    y: evt.clientY - Math.round(rect.top)
+  };
+}
+
+var lx = ly = -6;
+
+var drawFlag = false;
+
 function draw() {
+  canvas.addEventListener("mousedown", function(){
+    drawFlag = true;
+  }, false);
+  canvas.addEventListener("mouseup", function(){
+    drawFlag = false;
+  }, false);
+
   canvas.addEventListener('mousemove', function (evt) {
     var mousePos = getMousePosition(canvas, evt);
     var message = 'Position X:' + mousePos.x + ', Y:' + mousePos.y;
     document.getElementById('out').innerHTML = message;
     var x = mousePos.x;
     var y = mousePos.y;
+    
+
+
+    if(document.getElementById('q1').checked == true && drawFlag){///////////free
+      if(5 < hypo(lx - x, ly - y)){
+        tg.drawDot(x,y);
+        lx=x;
+        ly=y;
+      }
+    }
+  
     if(fx != -1){
       pr.clear();
       if(document.getElementById('q2').checked == true)pr.drawLine(fx, fy, x, y);
@@ -87,13 +110,12 @@ function onClick (e) {
    var rect = canvas.getBoundingClientRect();   ///スクロールによる位置のずれを補正
    x = e.clientX - rect.left;
    y = e.clientY - Math.round(rect.top);
-  
-  
-  if(document.getElementById('q1').checked == true){        //drawDot
+
+  if(document.getElementById('q0').checked == true){        //drawDot
     tg.drawDot(x, y);
   }else if(document.getElementById('q2').checked == true){  //drawLine
     if(fx == -1){
-ctx.fillRect(x,y,3,3);
+      ctx.fillRect(x,y,3,3);
       fx = x; fy =y;
     } else {
       tg.drawLine(fx, fy, x, y);
