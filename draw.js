@@ -84,8 +84,6 @@ canvas.addEventListener('click', onClick, false);
 var fx = fy = -1;
 function onClick (e) {
   var x = y = 0;
-  //  x = e.clientX - canvas.offsetLeft; //不可
-  //  y = e.clientY - canvas.offsetTop;  //不可
    var rect = canvas.getBoundingClientRect();   ///スクロールによる位置のずれを補正
    x = e.clientX - rect.left;
    y = e.clientY - Math.round(rect.top);
