@@ -29,7 +29,7 @@ tg.drawLine(0,20,50,20);
 3. 出力メソッドで触図データを取り出す。
 ```javascript
 hoge.href = loadEdl();
-　or
+　and/or
 hoge.href = map2esa();
 ```
 　　
