@@ -16,17 +16,18 @@ html5のキャンバス的な簡単な命令で、エーデルやMAP2ESA用の�
 　or
 <script src="tactileGraph.min.js"></script>
 ```
-### 設定
-1. tactileGraphを任意の変数に代入する。 
+### JavaScript
+1. 初期設定 
 ```javascript
 var tg = tactileGraph;
+tg.setCanvas('hoge'); //プレビュー用CanvasのIDを指定（任意）
 ```
-2. 変数を苗字して各描画メソッドを実行。 
+2. 描画 
 ```javascript
 tg.drawBraille("ABCDEF", 0, 10);
 tg.drawLine(0,20,50,20);
 ```
-3. 出力メソッドで触図データを取り出す。
+3. 出力
 ```javascript
 hoge.href = loadEdl();
 　and/or
