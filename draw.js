@@ -70,7 +70,7 @@ function draw() {
 
   canvas.addEventListener('mousemove', function (evt) {
     var mousePos = getMousePosition(canvas, evt);
-    var message = 'Position X:' + mousePos.x + ', Y:' + mousePos.y;
+    var message = ' X:' + mousePos.x + ', Y:' + mousePos.y;
     document.getElementById('out').innerHTML = message;
     var x = mousePos.x;
     var y = mousePos.y;
