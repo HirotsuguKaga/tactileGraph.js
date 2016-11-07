@@ -65,7 +65,7 @@ function draw() {
     drawFlag = true;
   }, false);
   window.addEventListener("mouseup", function(){
-    drawFlag = false;
+    drawFlag = false;lx = ly = -6;
   }, false);
 
   canvas.addEventListener('mousemove', function (evt) {
@@ -77,6 +77,7 @@ function draw() {
 
     if(document.getElementById('q1').checked == true && drawFlag){///////////free line
       if(5 < hypo(lx - x, ly - y)){
+        if(10 < hypo(lx - x, ly - y) && lx != -6)tg.drawLine(lx,ly,x,y);
         tg.drawDot(x,y);
         lx=x;
         ly=y;
