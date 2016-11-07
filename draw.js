@@ -61,10 +61,10 @@ var lx = ly = -6;
 var drawFlag = false;
 
 function draw() {
-  canvas.addEventListener("mousedown", function(){
+  window.addEventListener("mousedown", function(){
     drawFlag = true;
   }, false);
-  canvas.addEventListener("mouseup", function(){
+  window.addEventListener("mouseup", function(){
     drawFlag = false;
   }, false);
 
