@@ -51,8 +51,8 @@ function hypo(a,b){return Math.sqrt(a*a + b*b)} //hypotenuse
 function getMousePosition(canvas, evt) {/// Mouse move/////////////
   var rect = canvas.getBoundingClientRect();
   return {
-    x: evt.clientX - rect.left,
-    y: evt.clientY - Math.round(rect.top)
+    x: Math.round(evt.clientX - rect.left),
+    y: Math.round(evt.clientY - rect.top)
   };
 }
 
