@@ -73,9 +73,9 @@ set a distance between dots in a line. (strokeCircle(), drawLine(), strokeRect, 
   
 ## Output
 ### loadEdl();
-return blob.
+return string.
 ### map2esa();
-return blob.
+return PNG.
   
 ## Misc
 ### convertText(String str);
