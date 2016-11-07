@@ -81,7 +81,29 @@ function draw() {
         lx=x;
         ly=y;
       }
-    }
+    }else if(document.getElementById('q7').checked == true && drawFlag){  ///////////////clearDot
+    tg.clearDot(x, y);
+    tg.clearDot(x, y+1);
+    tg.clearDot(x, y-1);
+    tg.clearDot(x+1, y);
+    tg.clearDot(x+1, y+1);
+    tg.clearDot(x+1, y-1);
+    tg.clearDot(x-1, y);
+    tg.clearDot(x-1, y+1);
+    tg.clearDot(x-1, y-1);
+    tg.clearDot(x+1, y-2);
+    tg.clearDot(x-1, y-2);
+    tg.clearDot(x+1, y+2);
+    tg.clearDot(x-1, y+2);
+    tg.clearDot(x, y+2);
+    tg.clearDot(x, y-2);
+    tg.clearDot(x+2, y);
+    tg.clearDot(x+2, y+1);
+    tg.clearDot(x+2, y-1);
+    tg.clearDot(x-2, y);
+    tg.clearDot(x-2, y+1);
+    tg.clearDot(x-2, y-1);
+  }
   
     if(fx != -1){
       pr.clear();
