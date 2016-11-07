@@ -12,23 +12,22 @@
 
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
-var tactileGraphic = function() {
-	var arr = [];
-	var size = "A4"; //Paper size
-	var sizeX = 599;
-	var sizeY = 744;
-	var l = 30; // Line height
-	var w = 6;
-    var h = 7;
-    var r = 15;
-    var fromX = 0;
-    var fromY = 0;
-	
-	var canvas,ctx;
-	var interval = 6;
-	return {
+  var tactileGraphic = function() {
+  var arr = [];
+  var size = "A4"; //Paper size
+  var sizeX = 599;
+  var sizeY = 744;
+  var l = 30; // Line height
+  var w = 6;
+  var h = 7;
+  var r = 15;
+  var fromX = 0;
+  var fromY = 0;
+  var canvas,ctx;
+  var interval = 6;
+  return {
 
-          /////////////////////設定系メソッド////////////////////////
+          /////////////////////設定系メソッド///////////////////////
   setCanvas:function(id){
     canvas = document.getElementById(id);
     ctx = canvas.getContext('2d');
@@ -60,6 +59,9 @@ var tactileGraphic = function() {
     interval = num;
   },
 
+  setColor:function(color){
+    ctx.fillStyle = color;
+  },
          ///////////////////////描画系メソッド//////////////////////
 
   convertText:function(str){    //拗音などを記号の組み合わせに変換する
@@ -169,22 +171,10 @@ var tactileGraphic = function() {
     
     function seek(letter){        //数字コードを取得
       var a = [
-      ['\n','\n'],
-      ['.','256'],
-      ['\(','2356'],
-      ['\)','2356'],
-      ['\[','2356'],
-      ['\]','2356'],
-      ['\\','4'],
-      ['\*','16'],
-      ['?','26'],
-      ['\{','2356'],
-      ['\}','2356'],
-      ['\^',' '],
-      ['$','56'],
-      ['-','36'],
-      ['\|','456'],
-      ['\/','34']]
+      ['\n','\n'], ['.','256'], ['\(','2356'], ['\)','2356'],
+      ['\[','2356'], ['\]','2356'], ['\\','4'], ['\*','16'],
+      ['?','26'], ['\{','2356'], ['\}','2356'], ['\^',' '],
+      ['$','56'], ['-','36'], ['\|','456'], ['\/','34']]
       for(var i= 0 ; i < a.length ; i++){ //エスケープが必要な文字を先に文字列として比較
         if(letter === a[i][0])return A[i][1];
       }
@@ -332,7 +322,6 @@ var tactileGraphic = function() {
       }
       return str;
     }
-    
     str = "EDEL" + size + "0,740\n2" + str;
     return str;
   },
