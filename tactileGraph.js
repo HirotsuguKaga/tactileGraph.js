@@ -344,11 +344,39 @@
     var data = element.toDataURL();
     return data;
   },
-  readEdl:function(str){
+  readEdl:function(str){  ////////////
     str+=""
     str = str.replace(/^.+?\n/,"");
     str = str.replace(/[0-9]/g,"");
-    console.log(str);
+    var edlarr = splitByLength(str, 4);
+    var len = edlarr.length;
+    for(var i=0; i<len; i++){
+      edlarr[i];
+      
+      
+      
+      
+      drowDot(x,y);
+    }
+    console.log(arr);
+    
+    ///////////////////////////////////////////
+    function splitByLength(str, length) {
+      var resultArr = [];
+      if (!str || !length || length < 1) {
+        return resultArr;
+      }
+      var index = 0;
+      var start = index;
+      var end = start + length;
+      while (start < str.length) {
+        resultArr[index] = str.substring(start, end);
+        index++;
+        start = end;
+        end = start + length;
+      }
+      return resultArr;
+    }
   }
 
   };

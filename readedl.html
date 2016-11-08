@@ -18,11 +18,6 @@ var file = document.querySelector('#getfile');
 var filename;
 var tg = tactileGraphic();
 
-          // ブラウザのUAを小文字で取得
-var userAgent = navigator.userAgent.toLowerCase();
-if (userAgent.indexOf('chrome') != -1) {
-  //document.getElementById('ie').style.display = "none"; //Chromeのみの処理
-}
 file.onchange = function (){   //ファイル選択後
   var fileList = file.files;
   load(fileList, 0);
@@ -31,13 +26,9 @@ file.onchange = function (){   //ファイル選択後
 function load(fileList, k){
   if(k < fileList.length){  //>
     var reader = new FileReader();
-    reader.readAsArrayBuffer(fileList[k]);//読み込み  Uncaught TypeError: Failed to execute
+    reader.readAsText(fileList[k]);//読み込み
     reader.onload = function  () {
-      var array = new Uint8Array(reader.result);
-      console.log(array);
-      tg.readEdl(reader.result);
-      
-      
+      tg.readEdl(reader.result);      
     }
   }
 }
