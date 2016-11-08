@@ -12,23 +12,22 @@
 
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
-var tactileGraphic = function() {
-	var arr = [];
-	var size = "A4"; //Paper size
-	var sizeX = 599;
-	var sizeY = 744;
-	var l = 30; // Line height
-	var w = 6;
-    var h = 7;
-    var r = 15;
-    var fromX = 0;
-    var fromY = 0;
-	
-	var canvas,ctx;
-	var interval = 6;
-	return {
+  var tactileGraphic = function() {
+  var arr = [];
+  var size = "A4"; //Paper size
+  var sizeX = 599;
+  var sizeY = 744;
+  var l = 30; // Line height
+  var w = 6;
+  var h = 7;
+  var r = 15;
+  var fromX = 0;
+  var fromY = 0;
+  var canvas,ctx;
+  var interval = 6;
+  return {
 
-          /////////////////////設定系メソッド////////////////////////
+          /////////////////////設定系メソッド///////////////////////
   setCanvas:function(id){
     canvas = document.getElementById(id);
     ctx = canvas.getContext('2d');
@@ -60,6 +59,9 @@ var tactileGraphic = function() {
     interval = num;
   },
 
+  setColor:function(color){
+    ctx.fillStyle = color;
+  },
          ///////////////////////描画系メソッド//////////////////////
 
   convertText:function(str){    //拗音などを記号の組み合わせに変換する
@@ -169,22 +171,10 @@ var tactileGraphic = function() {
     
     function seek(letter){        //数字コードを取得
       var a = [
-      ['\n','\n'],
-      ['.','256'],
-      ['\(','2356'],
-      ['\)','2356'],
-      ['\[','2356'],
-      ['\]','2356'],
-      ['\\','4'],
-      ['\*','16'],
-      ['?','26'],
-      ['\{','2356'],
-      ['\}','2356'],
-      ['\^',' '],
-      ['$','56'],
-      ['-','36'],
-      ['\|','456'],
-      ['\/','34']]
+      ['\n','\n'], ['.','256'], ['\(','2356'], ['\)','2356'],
+      ['\[','2356'], ['\]','2356'], ['\\','4'], ['\*','16'],
+      ['?','26'], ['\{','2356'], ['\}','2356'], ['\^',' '],
+      ['$','56'], ['-','36'], ['\|','456'], ['\/','34']]
       for(var i= 0 ; i < a.length ; i++){ //エスケープが必要な文字を先に文字列として比較
         if(letter === a[i][0])return A[i][1];
       }
@@ -224,7 +214,7 @@ var tactileGraphic = function() {
     var d = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     var rad = Math.atan2(y2 - y1, x2 - x1);
     var dotted = Math.round(d / interval );
-    for (var i = 0; i <= dotted; i++) {
+    for (var i = 0; i < dotted; i++) {
       var x3 = Math.cos(rad) * interval * i + x1;
       var y3 = Math.sin(rad) * interval * i + y1;
       this.drawDot(x3, y3);
@@ -232,6 +222,7 @@ var tactileGraphic = function() {
   },
 
   strokeRect:function(x, y, w, h) {   ////長方形の描画処理①///
+    this.drawDot(x + w, y + h);
     this.drawLine(x, y , x+w, y);
     this.drawLine(x, y , x, y+h);
     this.drawLine(x+w, y , x+w, y+h);
@@ -239,6 +230,8 @@ var tactileGraphic = function() {
   },
 
   fillRect:function(x, y, w, h) {     ////長方形の描画処理②///
+    if(w<0){w*=-1; x-=w; console.log(w)}
+    if(h<0){h*=-1; y-=h}
     var s = 3;
     var j = Math.round(h /s /2 );
     for (var i = 0; i <= j; i++) {
@@ -266,6 +259,18 @@ var tactileGraphic = function() {
     }
     arr.push(y*1000 + x);
   },
+
+  drawMark:function(x,y) {               /////補点の描画///////
+    x = Math.round(x);
+    y = Math.round(y);
+    if(ctx){
+      ctx.fillStyle = '#F20';
+      ctx.beginPath();
+      ctx.arc(x, y, 1, 0, Math.PI*2, false);
+      ctx.fill();
+      ctx.fillStyle = '#000';
+    }
+  },
   
   clearDot:function(x,y) {               /////点の削除///////
     if(ctx){
@@ -285,9 +290,7 @@ var tactileGraphic = function() {
     arr=[];
     var fromX = 0;
     var fromY = 0;
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, sizeX, sizeY);
-    ctx.fillStyle = '#000';
+    ctx.clearRect(0, 0, sizeX, sizeY);
   },
              /////////////入出力系メソッド//////////////////
 
@@ -319,7 +322,6 @@ var tactileGraphic = function() {
       }
       return str;
     }
-    
     str = "EDEL" + size + "0,740\n2" + str;
     return str;
   },
@@ -341,6 +343,44 @@ var tactileGraphic = function() {
     }
     var data = element.toDataURL();
     return data;
+  },
+
+  readEdl:function(str){              //////////// エーデルファイルの読み込み//////
+    str+=""
+    str = str.replace(/^.+?\n/,"");
+    str = str.replace(/[0-9]/g,"");
+    var edlarr = splitByLength(str, 4);
+    var len = edlarr.length;
+    for(var i=0; i<len; i++){
+      var x = edl2num(edlarr[i].charAt(0)) * 26 + edl2num(edlarr[i].charAt(1));
+      var y = edl2num(edlarr[i].charAt(2)) * 26 + edl2num(edlarr[i].charAt(3));
+      this.drawDot(x,y);
+    }
+    console.log(arr);
+    //////////////////////
+    function splitByLength(str, length) {
+      var resultArr = [];
+      if (!str || !length || length < 1) {
+        return resultArr;
+      }
+      var index = 0;
+      var start = index;
+      var end = start + length;
+      while (start < str.length) {
+        resultArr[index] = str.substring(start, end);
+        index++;
+        start = end;
+        end = start + length;
+      }
+      return resultArr;
+    }
+    //////////////////////
+    function edl2num(letter) {
+      var ed26 = ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','','','',''];
+      for(var i=0; i<ed26.length; i++){
+        if(letter==ed26[i])return i;
+      }
+    }
   }
 
   };
