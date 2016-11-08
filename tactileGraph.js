@@ -294,7 +294,7 @@
   },
              /////////////入出力系メソッド//////////////////
 
-  loadEdl:function() {              //////エーデルファイルの出力///////
+  loadEdl:function() {                         //////エーデルファイルの出力///////
     arr.sort(function(a,b){
       if( a < b ) return -1;
       if( a > b ) return 1;
@@ -326,7 +326,7 @@
     return str;
   },
 
-  map2esa:function(){
+  map2esa:function(){                  /////////map2esa用画像の出力///////
     var element = document.createElement("canvas");
     element.setAttribute("width", 599);
     element.setAttribute("height", 744);
@@ -344,23 +344,20 @@
     var data = element.toDataURL();
     return data;
   },
-  readEdl:function(str){  ////////////
+
+  readEdl:function(str){              //////////// エーデルファイルの読み込み//////
     str+=""
     str = str.replace(/^.+?\n/,"");
     str = str.replace(/[0-9]/g,"");
     var edlarr = splitByLength(str, 4);
     var len = edlarr.length;
     for(var i=0; i<len; i++){
-      edlarr[i];
-      
-      
-      
-      
-      drowDot(x,y);
+      var x = edl2num(edlarr[i].charAt(0)) * 26 + edl2num(edlarr[i].charAt(1));
+      var y = edl2num(edlarr[i].charAt(2)) * 26 + edl2num(edlarr[i].charAt(3));
+      this.drawDot(x,y);
     }
     console.log(arr);
-    
-    ///////////////////////////////////////////
+    //////////////////////
     function splitByLength(str, length) {
       var resultArr = [];
       if (!str || !length || length < 1) {
@@ -376,6 +373,13 @@
         end = start + length;
       }
       return resultArr;
+    }
+    //////////////////////
+    function edl2num(letter) {
+      var ed26 = ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','','','',''];
+      for(var i=0; i<ed26.length; i++){
+        if(letter==ed26[i])return i;
+      }
     }
   }
 
