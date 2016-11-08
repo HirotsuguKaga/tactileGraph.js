@@ -89,8 +89,7 @@ function draw() {
         }
       }
     }
-  }
-  
+
     if(fx != -1){
       pr.clear();
       if(document.getElementById('q2').checked == true)pr.drawLine(fx, fy, x, y);
