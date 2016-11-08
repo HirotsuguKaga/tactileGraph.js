@@ -74,6 +74,7 @@ set a distance between dots in a line. (strokeCircle(), drawLine(), strokeRect, 
 ## Output
 ### loadEdl();
 return string.
+### readEdl(String);
 ### map2esa();
 return PNG.
   
