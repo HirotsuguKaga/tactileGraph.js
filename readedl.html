@@ -1,0 +1,45 @@
+<!DOCTYPE html><html><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="a.css">
+<style>
+@font-face {
+    font-family: 'Ikarashi Braille';
+    src: local('Ikarashi Braille'), 
+    src: url('ikarashi.ttf');
+}
+</style>
+<h1></h1>
+<input type="file" id="getfile">　<br><br>
+
+
+<script type="text/javascript" src="tactileGraph.js"></script>
+<script>///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////// Hirotsugu Kaga 2016/09/20 ///////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var file = document.querySelector('#getfile');
+var filename;
+var tg = tactileGraphic();
+
+          // ブラウザのUAを小文字で取得
+var userAgent = navigator.userAgent.toLowerCase();
+if (userAgent.indexOf('chrome') != -1) {
+  //document.getElementById('ie').style.display = "none"; //Chromeのみの処理
+}
+file.onchange = function (){   //ファイル選択後
+  var fileList = file.files;
+  load(fileList, 0);
+};
+
+function load(fileList, k){
+  if(k < fileList.length){  //>
+    var reader = new FileReader();
+    reader.readAsArrayBuffer(fileList[k]);//読み込み  Uncaught TypeError: Failed to execute
+    reader.onload = function  () {
+      var array = new Uint8Array(reader.result);
+      console.log(array);
+      tg.readEdl(reader.result);
+      
+      
+    }
+  }
+}
+</script>
+</html>
