@@ -83,27 +83,12 @@ function draw() {
         ly=y;
       }
     }else if(document.getElementById('q7').checked == true && drawFlag){  ///////////////clearDot
-    tg.clearDot(x, y);
-    tg.clearDot(x, y+1);
-    tg.clearDot(x, y-1);
-    tg.clearDot(x+1, y);
-    tg.clearDot(x+1, y+1);
-    tg.clearDot(x+1, y-1);
-    tg.clearDot(x-1, y);
-    tg.clearDot(x-1, y+1);
-    tg.clearDot(x-1, y-1);
-    tg.clearDot(x+1, y-2);
-    tg.clearDot(x-1, y-2);
-    tg.clearDot(x+1, y+2);
-    tg.clearDot(x-1, y+2);
-    tg.clearDot(x, y+2);
-    tg.clearDot(x, y-2);
-    tg.clearDot(x+2, y);
-    tg.clearDot(x+2, y+1);
-    tg.clearDot(x+2, y-1);
-    tg.clearDot(x-2, y);
-    tg.clearDot(x-2, y+1);
-    tg.clearDot(x-2, y-1);
+      for(var i=-5; i<6; i++){
+        for(var j=-5; j<6 ; j++){
+          tg.clearDot(x+i, y+j);
+        }
+      }
+    }
   }
   
     if(fx != -1){
