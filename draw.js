@@ -37,6 +37,22 @@ esa.onclick = function(){
   }
 }
 
+
+var file = document.querySelector('#getfile');
+file.onchange = function (){   //ファイル選択後
+  var fileList = file.files;
+  load(fileList, 0);
+};
+
+function load(fileList, k){
+  if(k < fileList.length){  //>
+    var reader = new FileReader();
+    reader.readAsText(fileList[k]);//読み込み
+    reader.onload = function  () {
+      tg.readEdl(reader.result);      
+    }
+  }
+}
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 var canvas = document.getElementById('b');
