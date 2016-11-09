@@ -93,10 +93,13 @@ hoge.href = map2esa();
   
 ## 入出力系
 ### loadEdl();
- エーデル用の触図データを返す。
-  
+ エーデル用の触図データを返します。
+
+### readEdl(String);
+ tactileGraphオブジェクトにエーデルファイルの中身を文字列として読み込みます。現行の点図に重ね書きするため、必要に応じて事前にclear()メソッドを実行してください。
+ 
 ### map2esa();
-　map2esa用のPNG画像データをdataURLとして返す。
+　map2esa用のPNG画像データをdataURLとして返します。
   
 ## その他
 ### convertText(str);
