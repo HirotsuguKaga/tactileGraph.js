@@ -8,7 +8,7 @@ Just a 'canvas like' tactile graphic drawing library.:octocat:
 ***
   日本語：https://github.com/HirotsuguKaga/tactileGraph.js/blob/master/README_ja.md
 ***
-DEMO: https://hirotsugukaga.github.io/tactileGraph.js/
+Gh-Pages & DEMO: https://hirotsugukaga.github.io/tactileGraph.js/
 ***
 ### INSTALL
 ```html
