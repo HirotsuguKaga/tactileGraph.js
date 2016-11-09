@@ -6,7 +6,7 @@
 デモサイト: https://hirotsugukaga.github.io/tactileGraph.js/
 ***
 ## 概要
-html5のキャンバス的な簡単な命令で、エーデルやMAP2ESA用の触図データを作成するJavaScriptライブラリです。
+html5のキャンバスライクなシンプルな命令で、エーデルやMAP2ESA用の触図データを作成するJavaScriptライブラリです。
    :octocat::octocat::octocat:
 ## 使い方
 ### インストール
