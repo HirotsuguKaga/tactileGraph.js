@@ -25,6 +25,7 @@ tg.setCanvas('hoge'); //プレビュー用CanvasのIDを指定（任意）
 ```javascript
 tg.drawBraille("ABCDEF", 0, 10);
 tg.drawLine(0,20,50,20);
+　etc.
 ```
 3. 出力
 ```javascript
