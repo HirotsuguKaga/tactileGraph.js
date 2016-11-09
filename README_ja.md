@@ -3,7 +3,7 @@
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 # tactileGraph.js
 ***
-デモサイト: https://hirotsugukaga.github.io/tactileGraph.js/
+デモや詳しい説明はこちらへ: https://hirotsugukaga.github.io/tactileGraph.js/
 ***
 ## 概要
 html5のキャンバスライクなシンプルな命令で、エーデルやMAP2ESA用の触図データを作成するJavaScriptライブラリです。
