@@ -148,13 +148,13 @@
     ['ゆユﾕ〒郵','346'],['よヨﾖ√根｝}','345'],
     ['らラﾗ5５ＥEｅe','15'],['りリﾘ8８ＨHｈh','125'],
     ['るルﾙ4４ＤDｄd','145'],['れレﾚ７7ＧGｇg','1245'],
-    ['ろロﾛ０0ＪJｊj','245'],['わワﾜ’\'?','3'],
+    ['ろロﾛ０0ＪJｊj','245'],['わワﾜ’\'','3'],
     ['ゐヰ、，外＄$↓','56'],['ゑヱ、。．.句∋','256'],
     ['をヲｦ－','35'],['をヲｦ－','35'],
     ['んンﾝ零閉','356'],['八語','236'],
     ['濁・〃中','5'],['数','3456'],
     ['　 &nbsp;無',''],['ーー三','25'],
-    ['小＾^ぎギｷﾞじジｼﾞぢヂﾁﾞびビﾋﾞ↑','45'],['拗†￥\´?','4'],
+    ['小＾^ぎギｷﾞじジｼﾞぢヂﾁﾞびビﾋﾞ↑','45'],['拗†￥\´','4'],
     ['半πΠ¶?ぱパﾊﾟ大','6'],['促っッｯ一','2'],
     ['＿_「」-‐継～：:','36'],['七＝=','2356'],
     ['斜‡ぴピﾋﾟ≠','46'],['？?＋+五疑','26'],
@@ -260,18 +260,6 @@
     arr.push(y*1000 + x);
   },
 
-  drawMark:function(x,y) {               /////補点の描画///////
-    x = Math.round(x);
-    y = Math.round(y);
-    if(ctx){
-      ctx.fillStyle = '#F20';
-      ctx.beginPath();
-      ctx.arc(x, y, 1, 0, Math.PI*2, false);
-      ctx.fill();
-      ctx.fillStyle = '#000';
-    }
-  },
-  
   clearDot:function(x,y) {               /////点の削除///////
     if(ctx){
       ctx.fillStyle = '#fff';
@@ -282,7 +270,7 @@
     }
     var target = y*1000 + x;
     arr = arr.filter(function(v){
-      return v != target;
+      return v !== target;
     });
   },
 
@@ -352,8 +340,9 @@
     var edlarr = splitByLength(str, 4);
     var len = edlarr.length;
     for(var i=0; i<len; i++){
-      var x = edl2num(edlarr[i].charAt(0)) * 26 + edl2num(edlarr[i].charAt(1));
-      var y = edl2num(edlarr[i].charAt(2)) * 26 + edl2num(edlarr[i].charAt(3));
+      var code = edlarr[i];
+      var x = edl2num(code.charAt(0)) * 26 + edl2num(code.charAt(1));
+      var y = edl2num(code.charAt(2)) * 26 + edl2num(code.charAt(3));
       this.drawDot(x,y);
     }
     console.log(arr);
@@ -378,7 +367,7 @@
     function edl2num(letter) {
       var ed26 = ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','','','',''];
       for(var i=0; i<ed26.length; i++){
-        if(letter==ed26[i])return i;
+        if(letter===ed26[i])return i;
       }
     }
   }
