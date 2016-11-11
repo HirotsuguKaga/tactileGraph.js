@@ -73,6 +73,9 @@ hoge.href = map2esa();
   
 ### strokeCircle(int r, int x, int y);
  指定した座標を中心に半径rの円を描画します。
+ 
+### drawPattern(Array[[x1,y1],[x2,y2],[x3,y3]...], int x, int y);
+ 指定した座標を原点として、二次元配列として渡した点集合を描画します。
 
 ### clearDot(int x, int y);
  指定した座標の点を取り除きます。
