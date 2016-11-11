@@ -238,14 +238,22 @@
       this.drawLine(x, y + s*i*2, x+w, y + s*i*2);
     }
   },
-  
+
   strokeCircle:function(x, y, r) {     ////円の描画処理///
     var cir = 2 * Math.PI * r;
-    var a = Math.round(360 / (cir / interval)); // 角度（度）
+    var a = 360 / Math.round(cir / interval); // 角度（度)
+    
     for(var i=0; a*i < 360; i++){
       var X = x + r * Math.cos(a*i / 180 * Math.PI); // X座標
       var Y = y + r * Math.sin(a*i / 180 * Math.PI); // Y座標
       this.drawDot(X, Y);
+    }
+  }, 
+
+  drawDiagram:function(code, x, y) {     ////図形の描画処理///
+    var len = code.length;
+    for(var i=0; i < len; i++){
+      this.drawDot(code[i][0]+x, code[i][1]+y);
     }
   },
 
