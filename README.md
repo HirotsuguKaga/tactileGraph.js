@@ -48,7 +48,7 @@ set paper size(A4 or B5).
 ### setInterval(int num)
 set a distance between dots in a line. (strokeCircle(), drawLine(), strokeRect, etc.)
   
-## Output
+## Input/Output
 ### loadEdl();
 return string.
 ### readEdl(String);
