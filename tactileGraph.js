@@ -250,7 +250,7 @@
     }
   }, 
 
-  drawDiagram:function(code, x, y) {     ////図形の描画処理///
+  drawPattern:function(code, x, y) {     ////図形の描画処理///
     var len = code.length;
     for(var i=0; i < len; i++){
       this.drawDot(code[i][0]+x, code[i][1]+y);
