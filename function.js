@@ -64,20 +64,21 @@ function drawGraph(){///////////////////////////////////////////////////////
       }
     }
     tg.drawLine(0,403,599,403);
-    tg.drawLine(295,10,295,605);
+    tg.drawLine(295,10,295,705);
 
   }else if(document.getElementById('pie').checked == true){ /////////////////////////////////
-    for(var x= -200; x<599; x+=0.001){  /////
-      y = (50/x-400)*-1;
-      var X = 2*x + 290;
+    for(var X= -200; X<59; X+=0.01){  /////
+      y = (10/X)*-20+403;
+      var x = X*20 + 295;
       var len = Math.sqrt((lx-x)*(lx-x) + (ly-y)*(ly-y));
       if( len  > 5 ){
-        tg.drawDot(X, y);
+        tg.drawDot(x, y);
         lx = x;
         ly = y;
       }
     }
-    tg.drawLine(0,405,599,405);
+    tg.drawLine(0,403,599,403);
+    tg.drawLine(295,10,295,715);
 
   }else if(document.getElementById('line').checked == true){ ////////line tg/////////////////////
     for(var x= -200; x<599; x+=0.001){  /////
