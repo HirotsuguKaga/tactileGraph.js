@@ -6,9 +6,13 @@ tg.setCanvas('a');
 function drawGraph(){
   tg.clear();
   var x=y=lx=ly=0;
-  tg.drawBraille('Function Graph'); //title
-  tg.drawLine(0,400,599,400); //horizontal line
-  tg.drawLine(295,30,295,744);// vertical line
+  tg.drawBraille('Function Graph'); // title
+  tg.drawLine(0,400,599,400);       // horizontal line
+  tg.drawLine(295,30,295,744);      // vertical line
+  tg.drawLine(395,405,395,417);     // thick
+  tg.drawBraille('5', 395, 420);    // scale
+  tg.drawLine(495,405,495,417);     // thick
+  tg.drawBraille('10', 495, 420);    // scale
 
   if(txt.value){
     var str = replaceCode(txt.value);
