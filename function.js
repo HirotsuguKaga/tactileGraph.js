@@ -69,9 +69,7 @@ window.onload = function(){drawGraph();}
 
      ////////////////// Download process /////////////////
 var filename = "Function Graph";
-
 var edl = document.querySelector('#edl');
-//var png = document.querySelector('#png');
 var esa = document.querySelector('#esa');
 
 edl.onclick = function() {
@@ -92,7 +90,6 @@ esa.onclick = function(){
     buffer[i] = bin.charCodeAt(i);
   }
   var blob = new Blob([buffer.buffer], {type: 'image/png'});
-  
   if (window.navigator.msSaveBlob) {
   window.navigator.msSaveBlob(blob, filename + '.png'); 
   } else {
