@@ -76,6 +76,8 @@ function drawGraph(){
 }
 
 txt.onchange = function (){drawGraph();}
+txt2.onchange = function (){drawGraph();}
+scale.onchange = function (){drawGraph();}
 window.onload = function(){drawGraph();}
 
      ////////////////// Download process /////////////////
