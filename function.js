@@ -1,5 +1,6 @@
 var txt = document.querySelector('#txt');
 var txt2 = document.querySelector('#txt2');
+var scale = document.getElementById('scale');
 var tg = tactileGraphic();
 tg.setCanvas('a');
 
@@ -9,14 +10,17 @@ function drawGraph(){
   tg.drawBraille('Function Graph'); // title
   tg.drawLine(0, 400, 599, 400);       // horizontal line
   tg.drawLine(295, 30, 295, 744);      // vertical line
-  tg.drawLine(395, 405, 395, 417);     // thick
-  tg.drawBraille('5', 395, 420);    // scale
-  tg.drawLine(495, 405, 495, 417);     // thick
-  tg.drawBraille('10', 495, 420);    // scale
-  tg.drawLine(280, 300, 290, 300);     // thick
-  tg.drawBraille('5', 245, 300);    // scale
-  tg.drawLine(280, 200, 290, 200);     // thick
-  tg.drawBraille('10', 230, 200);    // scale
+
+  if(scale.checked == true){
+    tg.drawLine(395, 405, 395, 417);  // thick
+    tg.drawBraille('5', 395, 420);    // scale
+    tg.drawLine(495, 405, 495, 417);  // thick
+    tg.drawBraille('10', 495, 420);   // scale
+    tg.drawLine(280, 300, 290, 300);  // thick
+    tg.drawBraille('5', 245, 300);    // scale
+    tg.drawLine(280, 200, 290, 200);  // thick
+    tg.drawBraille('10', 230, 200);   // scale
+  }
 
   if(txt.value){
     var str = replaceCode(txt.value);
@@ -24,8 +28,9 @@ function drawGraph(){
       y = Math.round(eval(str.toString())*-20+400);
       var X = Math.round(x*20) + 295;
       var len = Math.sqrt((lx-X)*(lx-X) + (ly-y)*(ly-y));
-      if( len  > 5 && y > 30){
+      if( len  > 6 && y > 30){
         tg.drawDot(X, y);
+        console.log(y);
         lx = X;
         ly = y;
       }
@@ -38,7 +43,7 @@ function drawGraph(){
       y = Math.round(eval(str.toString())*-20+400);
       var X = Math.round(x*20) + 295;
       var len = Math.sqrt((lx-X)*(lx-X) + (ly-y)*(ly-y));
-      if( len  > 5 && y > 30){
+      if( len  > 6 && y > 30){
         tg.drawDot(X, y);
         lx = X;
         ly = y;
