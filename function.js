@@ -5,14 +5,30 @@ tg.setCanvas('a');
 function drawGraph(){
   tg.clear();
   var x=y=lx=ly=0;
-  tg.drawBraille('Function Graph');
-  tg.drawLine(0,400,599,400);
-  tg.drawLine(295,30,295,744);
+  tg.drawBraille('Function Graph'); //title
+  tg.drawLine(0,400,599,400); //horizontal line
+  tg.drawLine(295,30,295,744);// vertical line
 
   if(document.getElementById('bar').checked == true){/////////from Textarea////////
     var str = txt.value;
+    str = str.replace(/　/g,"");
+    str = str.replace(/＋/g,"+");
+    str = str.replace(/－/g,"-");
+    str = str.replace(/×/g,"*");
+    str = str.replace(/０/g,"0");
+    str = str.replace(/１/g,"1");
+    str = str.replace(/２/g,"2");
+    str = str.replace(/３/g,"3");
+    str = str.replace(/４/g,"4");
+    str = str.replace(/５/g,"5");
+    str = str.replace(/６/g,"6");
+    str = str.replace(/７/g,"7");
+    str = str.replace(/８/g,"8");
+    str = str.replace(/９/g,"9");
+    str = str.replace(/[XＸｘ]/g,"x");
+    str = str.replace(/([0-9])(x)/g,"$1*$2");
     for(var x= -200; x<59; x+=0.02){  /////
-      y = Math.round(eval(str)*-20+400);
+      y = Math.round(eval(str.toString())*-20+400);
       var X = Math.round(x*20) + 295;
       var len = Math.sqrt((lx-X)*(lx-X) + (ly-y)*(ly-y));
       if( len  > 5 && y > 30){
@@ -68,7 +84,8 @@ function drawGraph(){
 txt.onchange = function (){drawGraph();}
 window.onload = function(){drawGraph();}
 
-     //////////////////download/////////////////
+
+     ////////////////// Download process /////////////////
 var filename = "Function Graph";
 
 var edl = document.querySelector('#edl');
