@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="a.css">
-<h1>点図グラフ作成デモ</h1>
+<h1>点図グラフ作成</h1>
 csvファイルを選択、もしくは以下のテキストボックスを編集してください。<br><br>
 <input type="file" id="getfile" accept="" multiple="multiple">
 <a href="javascript:void(0)" download="" id="edl">EDLファイルをダウンロード</a>　
@@ -11,13 +11,16 @@ c,5
 d,6
 e,8
 f,10
-e,8</textarea><br>
-
+e,8</textarea><br><form name="radio">
+<input type="radio" name="v" id="bar" onClick="drawGraph()" checked>棒グラフ　
+<input type="radio" name="v" id="pie" onClick="drawGraph()">円グラフ　
+<input type="radio" name="v" id="line" onClick="drawGraph()">折れ線グラフ　
+<input type="radio" name="v" id="band" onClick="drawGraph()">帯グラフ
+</form>
 <p id="out"></p>
 <canvas id="a" width="599" height="744" style="border:  inset 2px #ccc;"></canvas>
 
 <script type="text/javascript" src="encoding.js"></script>
 <script type="text/javascript" src="tactileGraph.js"></script>
 <script type="text/javascript" src="graph.js"></script>
-
 </html>

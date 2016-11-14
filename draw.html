@@ -1,22 +1,25 @@
-<!DOCTYPE html><html><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">
-canvas {background-color: transparent;border:  inset 2px #ccc;}
-#b {background-image:url(grid.png)}
+<!DOCTYPE html><html><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="a.css"><style type="text/css">
+canvas {background-color: transparent;border: inset 2px #ccc; cursor:crosshair}
+//#b {background-image:url(grid.png)}
 </style>
-<body onload="draw()">
-<input type="radio" name="q" id="q1" value="一点" checked>点 
-<input type="radio" name="q" id="q2" value="点線">直線 
-<input type="radio" name="q" id="q3" value="点線">長方形□ 
-<input type="radio" name="q" id="q4" value="点線">長方形■ 
-<input type="radio" name="q" id="q5" value="点字">円 
-<input type="radio" name="q" id="q6" value="点字">点字 <textarea cols="20" rows="1" id="txt">ABCDEF</textarea><br><br>
+<body onload="draw()"><article>
+<input type="file" id="getfile" accept="edl">　<br>
 
+<input type="radio" name="q" id="q0">点　
+<input type="radio" name="q" id="q1" checked>自由　
+<input type="radio" name="q" id="q2">直線 
+<input type="radio" name="q" id="q3">矩形□ 
+<input type="radio" name="q" id="q4">矩形■ 
+<input type="radio" name="q" id="q5">円　
+<input type="radio" name="q" id="q6">点字 <textarea cols="20" rows="1" id="txt">ABCDEF</textarea>
+<br>
+<input type="radio" name="q" id="q7">消去　<a href="javascript:tg.clear()">全消去</a>　
 <a href="javascript:void(0)" download="" id="edl">edlファイルをダウンロード</a>　
 <a href="javascript:void(0)" download="" id="esa">画像をダウンロード</a>　
-<span id="out"></span><br><br>
+<span id="out"></span><br>
 <canvas id="a" width="599" height="744" style="position:absolute;z-index: 0"></canvas> <!--z-indexが高いほど手前-->
 <canvas id="b" width="599" height="744" style="position:absolute;z-index: 1"></canvas>
 <script type="text/javascript" src="encoding.js"></script>
 <script type="text/javascript" src="tactileGraph.js"></script>
-<script type="text/javascript" src="draw.js"></script>
-
+<script type="text/javascript" src="draw.js"></script></article>
 </body></html>

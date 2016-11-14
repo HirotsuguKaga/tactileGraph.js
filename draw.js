@@ -1,5 +1,5 @@
-   ///////////////Download///////////////////
-var filename = "drawing";
+///////////////Download///////////////////
+var filename = "tactileGraph";
 
 var edl = document.querySelector('#edl');
 //var png = document.querySelector('#png');
@@ -37,31 +37,75 @@ esa.onclick = function(){
   }
 }
 
+
+var file = document.querySelector('#getfile');
+file.onchange = function (){   //ファイル選択後
+  var fileList = file.files;
+  load(fileList, 0);
+};
+
+function load(fileList, k){
+  if(k < fileList.length){  //>
+    var reader = new FileReader();
+    reader.readAsText(fileList[k]);//読み込み
+    reader.onload = function  () {
+      tg.readEdl(reader.result);      
+    }
+  }
+}
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 var canvas = document.getElementById('b');
-ctx = canvas.getContext('2d');
 
 var pr = tactileGraphic();
 pr.setCanvas('b');
-
-  function getMousePosition(canvas, evt) {
-     var rect = canvas.getBoundingClientRect();
-     return {
-       x: evt.clientX - rect.left,
-       y: evt.clientY - Math.round(rect.top)
-     };
-  }
+pr.setColor("red");
 
 function hypo(a,b){return Math.sqrt(a*a + b*b)} //hypotenuse
 
+
+function getMousePosition(canvas, evt) {/// Mouse move/////////////
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: Math.round(evt.clientX - rect.left),
+    y: Math.round(evt.clientY - rect.top)
+  };
+}
+
+var lx = ly = -6;
+
+var drawFlag = false;
+
 function draw() {
+  window.addEventListener("mousedown", function(){
+    drawFlag = true;
+  }, false);
+  window.addEventListener("mouseup", function(){
+    drawFlag = false;lx = ly = -6;
+  }, false);
+
   canvas.addEventListener('mousemove', function (evt) {
     var mousePos = getMousePosition(canvas, evt);
-    var message = 'Position X:' + mousePos.x + ', Y:' + mousePos.y;
+    var message = ' X:' + mousePos.x + ', Y:' + mousePos.y;
     document.getElementById('out').innerHTML = message;
     var x = mousePos.x;
     var y = mousePos.y;
+
+    if(document.getElementById('q1').checked == true && drawFlag){///////////free line
+      if(5 < hypo(lx - x, ly - y)){
+        if(10 < hypo(lx - x, ly - y) && lx != -6)tg.drawLine(lx,ly,x,y);
+        tg.drawDot(x,y);
+        lx=x;
+        ly=y;
+      }
+    }else if(document.getElementById('q7').checked == true && drawFlag){  ///////////////clearDot
+      for(var i=-5; i<6; i++){
+        for(var j=-5; j<6 ; j++){
+          tg.clearDot(x+i, y+j);
+        }
+      }
+    }
+
     if(fx != -1){
       pr.clear();
       if(document.getElementById('q2').checked == true)pr.drawLine(fx, fy, x, y);
@@ -74,7 +118,7 @@ function draw() {
     }
   }, false);
 }
-////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 var txt = document.querySelector('#txt');
 var tg = tactileGraphic();
 tg.setCanvas('a');
@@ -84,31 +128,27 @@ canvas.addEventListener('click', onClick, false);
 var fx = fy = -1;
 function onClick (e) {
   var x = y = 0;
-  //  x = e.clientX - canvas.offsetLeft; //不可
-  //  y = e.clientY - canvas.offsetTop;  //不可
-   var rect = canvas.getBoundingClientRect();   ///スクロールによる位置のずれを補正
-   x = e.clientX - rect.left;
-   y = e.clientY - Math.round(rect.top);
-  
-  
-  if(document.getElementById('q1').checked == true){        //drawDot
+  var rect = canvas.getBoundingClientRect();   ///スクロールによる位置のずれを補正
+  x = e.clientX - rect.left;
+  y = e.clientY - Math.round(rect.top);
+  pr.clear();
+  if(document.getElementById('q0').checked == true){        //////////////drawDot
     tg.drawDot(x, y);
-  }else if(document.getElementById('q2').checked == true){  //drawLine
+  }else if(document.getElementById('q2').checked == true){  //////////////drawLine
     if(fx == -1){
-ctx.fillRect(x,y,3,3);
       fx = x; fy =y;
     } else {
       tg.drawLine(fx, fy, x, y);
       fx = -1;
     }
-  }else if(document.getElementById('q3').checked == true){  //strokeRect
+  }else if(document.getElementById('q3').checked == true){  ///////////////strokeRect
     if(fx == -1){
       fx = x; fy =y;
     } else {
       tg.strokeRect(fx, fy, x-fx, y-fy);
       fx = -1;
     }
-  }else if(document.getElementById('q4').checked == true){  //fillRect
+  }else if(document.getElementById('q4').checked == true){  ////////////////fillRect
     if(fx == -1){
       fx = x; fy =y;
     } else {
@@ -116,14 +156,14 @@ ctx.fillRect(x,y,3,3);
       tg.fillRect(fx, fy, x-fx, y-fy);
       fx = -1;
     }
-  }else if(document.getElementById('q5').checked == true){  //strokeCircle
+  }else if(document.getElementById('q5').checked == true){  ///////////////strokeCircle
     if(fx == -1){
       fx = x; fy =y;
     } else {
       tg.strokeCircle(fx, fy, hypo(fx-x,fy-y));
       fx = -1;
     }
-  }else if(document.getElementById('q6').checked == true){  //drawBraille
+  }else if(document.getElementById('q6').checked == true){  ///////////////drawBraille
     var str = txt.value;
     tg.drawBraille(str, x, y);
   }
