@@ -27,6 +27,7 @@ function drawGraph(){
     str = str.replace(/９/g,"9");
     str = str.replace(/[XＸｘ]/g,"x");
     str = str.replace(/([0-9])(x)/g,"$1*$2");
+    str = str.replace(/(x\^)([0-9])/g,"Math.pow(x, $2)");
     for(var x= -200; x<59; x+=0.02){  /////
       y = Math.round(eval(str.toString())*-20+400);
       var X = Math.round(x*20) + 295;
