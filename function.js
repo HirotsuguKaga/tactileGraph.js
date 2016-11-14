@@ -1,4 +1,5 @@
 var txt = document.querySelector('#txt');
+var txt2 = document.querySelector('#txt2');
 var tg = tactileGraphic();
 tg.setCanvas('a');
 
@@ -9,8 +10,35 @@ function drawGraph(){
   tg.drawLine(0,400,599,400); //horizontal line
   tg.drawLine(295,30,295,744);// vertical line
 
-  if(document.getElementById('bar').checked == true){/////////from Textarea////////
-    var str = txt.value;
+  if(txt.value){
+    var str = replaceCode(txt.value);
+    for(var x= -200; x<30; x+=0.01){  /////
+      y = Math.round(eval(str.toString())*-20+400);
+      var X = Math.round(x*20) + 295;
+      var len = Math.sqrt((lx-X)*(lx-X) + (ly-y)*(ly-y));
+      if( len  > 5 && y > 30){
+        tg.drawDot(X, y);
+        lx = X;
+        ly = y;
+      }
+    }
+  }
+
+  if(txt2.value){
+    var str = replaceCode(txt2.value);
+    for(var x= -200; x<30; x+=0.01){  /////
+      y = Math.round(eval(str.toString())*-20+400);
+      var X = Math.round(x*20) + 295;
+      var len = Math.sqrt((lx-X)*(lx-X) + (ly-y)*(ly-y));
+      if( len  > 5 && y > 30){
+        tg.drawDot(X, y);
+        lx = X;
+        ly = y;
+      }
+    }
+  }
+
+  function replaceCode(str){
     str = str.replace(/　/g,"");
     str = str.replace(/＋/g,"+");
     str = str.replace(/－/g,"-");
@@ -28,63 +56,12 @@ function drawGraph(){
     str = str.replace(/[XＸｘ]/g,"x");
     str = str.replace(/([0-9])(x)/g,"$1*$2");
     str = str.replace(/(x\^)([0-9])/g,"Math.pow(x, $2)");
-    for(var x= -200; x<30; x+=0.01){  /////
-      y = Math.round(eval(str.toString())*-20+400);
-      var X = Math.round(x*20) + 295;
-      var len = Math.sqrt((lx-X)*(lx-X) + (ly-y)*(ly-y));
-      if( len  > 5 && y > 30){
-        tg.drawDot(X, y);
-        lx = X;
-        ly = y;
-      }
-    }
-  }
-  
-  if(document.getElementById('pie').checked == true){ /////////////////////////////////
-    for(var X= -200; X<59; X+=0.01){  /////
-      y = Math.round((10/X)*-20+403);
-      x = Math.round(X*20) + 295;
-      var len = Math.sqrt((lx-x)*(lx-x) + (ly-y)*(ly-y));
-      if( len  > 5 ){
-        tg.drawDot(x, y);
-        lx = x;
-        ly = y;
-      }
-    }
-  }
-  
-  if(document.getElementById('line').checked == true){ ////////line tg/////////////////////
-    for(var X= -200; X<59; X+=0.01){  /////
-      y = Math.round((X*X)*-5+400);
-      x = Math.round(X*20) + 295;
-      var len = Math.sqrt((lx-x)*(lx-x) + (ly-y)*(ly-y));
-      if( len  > 5 ){
-        tg.drawDot(x, y);
-        lx = x;
-        ly = y;
-      }
-    }
-  }
-  
-  if(document.getElementById('band').checked == true){ ////////band tg/////////////////////
-    var str = txt.value;
-    for(var x= -200; x<59; x+=0.1){  /////
-      y = eval(str)*-5+400;
-      var X = x*10 + 295;
-      var len = Math.sqrt((lx-X)*(lx-X) + (ly-y)*(ly-y));
-      if( len  > 5 ){
-        tg.drawDot(X, y);
-        lx = X;
-        ly = y;
-      }
-    }
+    return str;
   }
 }
 
-
 txt.onchange = function (){drawGraph();}
 window.onload = function(){drawGraph();}
-
 
      ////////////////// Download process /////////////////
 var filename = "Function Graph";
