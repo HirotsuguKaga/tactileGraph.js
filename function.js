@@ -51,6 +51,8 @@ function drawGraph(){
     str = str.replace(/＋/g,"+");
     str = str.replace(/－/g,"-");
     str = str.replace(/×/g,"*");
+    str = str.replace(/（/g,"(");
+    str = str.replace(/）/g,")");
     str = str.replace(/０/g,"0");
     str = str.replace(/１/g,"1");
     str = str.replace(/２/g,"2");
