@@ -1,101 +1,58 @@
-var file = document.querySelector('#getfile');
 var txt = document.querySelector('#txt');
-
-file.onchange = function (){   //ファイル選択後
-  var fileList = file.files;
-    var reader = new FileReader();
-    reader.readAsArrayBuffer(fileList[0]);//読み込み  Uncaught TypeError: Failed to execute
-    reader.onload = function  () {
-      filename =file.name;
-      var array = new Uint8Array(reader.result);
-      var uniArray = Encoding.convert(array, 'UNICODE','AUTO');//配列を「ユニコード」に変換
-      var result = Encoding.codeToString(uniArray);
-      
-      txt.value = result;
-      arr = createArray(result);
-  
-    }
-};
-
-txt.onchange = function (){
-  drawGraph();
-};
-
-var arr=[];
-var max;
-function createArray(csvData) {
-  var tempArray = csvData.split("\n");
-  var csvArray = new Array();
-  var numArray = new Array();
-  for(var i = 0; i<tempArray.length;i++){
-    csvArray[i] = tempArray[i].split(",");
-  }
-  for(var i = 0; i<csvArray.length; i++){
-    numArray.push(csvArray[i][1]);
-  }
-  max = Math.max.apply(null, numArray);
-  return csvArray;
-}
-
-var textWidth = 14;
 var tg = tactileGraphic();
 tg.setCanvas('a');
 
-function drawGraph(){///////////////////////////////////////////////////////
+function drawGraph(){
   tg.clear();
-  arr = createArray(txt.value);
-  var len = arr.length;
-  var sum=0;
-  for(var i=0; i<arr.length; i++){
-    sum += parseInt(arr[i][1]);
-  }
+  var x=y=lx=ly=0;
+  tg.drawBraille('Function Graph');
+  tg.drawLine(0,400,599,400);
+  tg.drawLine(295,30,295,744);
 
-    var x=y=lx=ly=0;
-    
-  if(document.getElementById('bar').checked == true){//////////////////////////////!!!!!!!!!!!!!!!!!!!//////
-    for(var X= -200; X<59; X+=0.01){  /////
-      y = (X*X)*-5+400;
-      var x = X*20 + 295;
-      var len = Math.sqrt((lx-x)*(lx-x) + (ly-y)*(ly-y));
-      if( len  > 5 ){
-        tg.drawDot(x, y);
-        lx = x;
-        ly = y;
-      }
-    }
-    tg.drawLine(0,403,599,403);
-    tg.drawLine(295,10,295,705);
-
-  }else if(document.getElementById('pie').checked == true){ /////////////////////////////////
-    for(var X= -200; X<59; X+=0.01){  /////
-      y = (10/X)*-20+403;
-      var x = X*20 + 295;
-      var len = Math.sqrt((lx-x)*(lx-x) + (ly-y)*(ly-y));
-      if( len  > 5 ){
-        tg.drawDot(x, y);
-        lx = x;
-        ly = y;
-      }
-    }
-    tg.drawLine(0,403,599,403);
-    tg.drawLine(295,10,295,715);
-
-  }else if(document.getElementById('line').checked == true){ ////////line tg/////////////////////
-    for(var x= -200; x<599; x+=0.001){  /////
-      y = (1/2*x-400)*-1;
-      var X = 5*x + 290;
+  if(document.getElementById('bar').checked == true){/////////from Textarea////////
+    var str = txt.value;
+    for(var x= -200; x<59; x+=0.02){  /////
+      y = Math.round(eval(str)*-20+400);
+      var X = Math.round(x*20) + 295;
       var len = Math.sqrt((lx-X)*(lx-X) + (ly-y)*(ly-y));
-      if( len  > 5 ){
+      if( len  > 5 && y > 30){
         tg.drawDot(X, y);
-        lx = X
+        lx = X;
         ly = y;
       }
     }
-    tg.drawLine(0,405,599,405);
-
-  }else if(document.getElementById('band').checked == true){ ////////band tg/////////////////////
-    for(var x= -200; x<599; x+=0.1){  /////
-      y = (x*x-400)*-1;
+  }
+  
+  if(document.getElementById('pie').checked == true){ /////////////////////////////////
+    for(var X= -200; X<59; X+=0.01){  /////
+      y = Math.round((10/X)*-20+403);
+      x = Math.round(X*20) + 295;
+      var len = Math.sqrt((lx-x)*(lx-x) + (ly-y)*(ly-y));
+      if( len  > 5 ){
+        tg.drawDot(x, y);
+        lx = x;
+        ly = y;
+      }
+    }
+  }
+  
+  if(document.getElementById('line').checked == true){ ////////line tg/////////////////////
+    for(var X= -200; X<59; X+=0.01){  /////
+      y = Math.round((X*X)*-5+400);
+      x = Math.round(X*20) + 295;
+      var len = Math.sqrt((lx-x)*(lx-x) + (ly-y)*(ly-y));
+      if( len  > 5 ){
+        tg.drawDot(x, y);
+        lx = x;
+        ly = y;
+      }
+    }
+  }
+  
+  if(document.getElementById('band').checked == true){ ////////band tg/////////////////////
+    var str = txt.value;
+    for(var x= -200; x<59; x+=0.1){  /////
+      y = eval(str)*-5+400;
       var X = x*10 + 295;
       var len = Math.sqrt((lx-X)*(lx-X) + (ly-y)*(ly-y));
       if( len  > 5 ){
@@ -104,24 +61,15 @@ function drawGraph(){///////////////////////////////////////////////////////
         ly = y;
       }
     }
-    tg.drawLine(0,405,599,405);
-    tg.drawLine(295,10,295,605);
-  }
-
-
-
-  function brailleRight(str, x, y){
-    str +="";
-    var length = str.length + 1;
-    x -= length * textWidth + 7;
-    tg.drawBraille(str, x,y);
   }
 }
 
 
+txt.onchange = function (){drawGraph();}
+window.onload = function(){drawGraph();}
 
-                  ///////////download///////////
-var filename = "Graph";
+     //////////////////download/////////////////
+var filename = "Function Graph";
 
 var edl = document.querySelector('#edl');
 //var png = document.querySelector('#png');
@@ -154,7 +102,3 @@ esa.onclick = function(){
   }
 }
 
-
-window.onload = function(){
-  drawGraph();
-}
