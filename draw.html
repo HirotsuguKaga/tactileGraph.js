@@ -3,24 +3,21 @@ canvas {background-color: transparent;border: inset 2px #ccc; cursor:crosshair}
 //#b {background-image:url(grid.png)}
 </style>
 <body onload="draw()"><article>
-<input type="file" id="getfile" accept="edl">　<br>
-
+.edl <input type="file" id="getfile" accept="edl">　<br>
 <input type="radio" name="q" id="q0">点　
 <input type="radio" name="q" id="q1" checked>自由　
 <input type="radio" name="q" id="q2">直線 
 <input type="radio" name="q" id="q3">矩形□ 
 <input type="radio" name="q" id="q4">矩形■ 
 <input type="radio" name="q" id="q5">円　
-<input type="radio" name="q" id="q6">点字 <textarea cols="20" rows="1" id="txt">ABCDEF</textarea>
-<br>
+<input type="radio" name="q" id="q6">点字 <textarea cols="20" rows="1" id="txt">ABCDEF</textarea><br>
 <input type="radio" name="q" id="q7">消去　<a href="javascript:tg.clear()">全消去</a>　
 <a href="javascript:void(0)" download="" id="edl">edlファイルをダウンロード</a>　
-<a href="javascript:void(0)" download="" id="esa">画像をダウンロード</a>　
-<a href="https://hirotsugukaga.github.io/tactileGraph.js/">Back</a>
-<span id="out"></span><br>
+<a href="javascript:void(0)" download="" id="esa">画像をダウンロード</a>　　
+<a href="https://hirotsugukaga.github.io/tactileGraph.js/">Back</a><br>
+<div style="position:relative;height:750px" height="750" >
 <canvas id="a" width="599" height="744" style="position:absolute;z-index: 0"></canvas> <!--z-indexが高いほど手前-->
-<canvas id="b" width="599" height="744" style="position:absolute;z-index: 1"></canvas>
-<br>
+<canvas id="b" width="599" height="744" style="position:absolute;z-index: 1"></canvas></div>
 Powerd by <a href="https://github.com/HirotsuguKaga/tactileGraph.js">tactileGraph.js</a>
 
 <script type="text/javascript" src="encoding.js"></script>
