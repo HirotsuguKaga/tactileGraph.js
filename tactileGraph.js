@@ -230,7 +230,7 @@
   },
 
   fillRect:function(x, y, w, h) {     ////長方形の描画処理②///
-    if(w<0){w*=-1; x-=w; console.log(w)}
+    if(w<0){w*=-1; x-=w;}
     if(h<0){h*=-1; y-=h}
     var s = 3;
     var j = Math.round(h /s /2 );
@@ -343,7 +343,8 @@
 
   readEdl:function(str){              //////////// エーデルファイルの読み込み//////
     str+=""
-    str = str.replace(/^.+?\n/,"");
+    str = str.replace(/^.+?[\n\r]/,"");
+    str = str.replace(/[\n\r]/,"");
     str = str.replace(/[0-9]/g,"");
     var edlarr = splitByLength(str, 4);
     var len = edlarr.length;
@@ -353,7 +354,6 @@
       var y = edl2num(code.charAt(2)) * 26 + edl2num(code.charAt(3));
       this.drawDot(x,y);
     }
-    console.log(arr);
     //////////////////////
     function splitByLength(str, length) {
       var resultArr = [];
@@ -373,7 +373,7 @@
     }
     //////////////////////
     function edl2num(letter) {
-      var ed26 = ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','','','',''];
+      var ed26 = ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','\[','\\','\]','\^','\_'];
       for(var i=0; i<ed26.length; i++){
         if(letter===ed26[i])return i;
       }
