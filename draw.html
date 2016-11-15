@@ -1,17 +1,18 @@
 <!DOCTYPE html><html><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="a.css"><style type="text/css">
 canvas {background-color: transparent;border: inset 2px #ccc; cursor:crosshair}
 //#b {background-image:url(grid.png)}
+body{line-height:180%}
 </style>
 <body onload="draw()"><article>
-.edl <input type="file" id="getfile" accept="edl">　　　　
-<a href="https://hirotsugukaga.github.io/tactileGraph.js/">Back</a><br>
+<div style="float:right;"><a href="https://hirotsugukaga.github.io/tactileGraph.js/">Back</a></div>
+.edl <input type="file" id="getfile" accept="edl"><br>
 <input type="radio" name="q" id="q0">点　
 <input type="radio" name="q" id="q1" checked>自由　
 <input type="radio" name="q" id="q2">直線 
 <input type="radio" name="q" id="q3">矩形□ 
 <input type="radio" name="q" id="q4">矩形■ 
-<input type="radio" name="q" id="q5">円　
-<input type="radio" name="q" id="q6">点字 <textarea cols="20" rows="1" id="txt">ABCDEF</textarea><br>
+<input type="radio" name="q" id="q5">円〇 
+<input type="radio" name="q" id="q6">点字 <textarea cols="20" rows="1" id="txt">ABCDEFGHIJKLMN</textarea><br>
 <input type="radio" name="q" id="q7">消去　<a href="javascript:tg.clear()">全消去</a>　
 <a href="javascript:void(0)" download="" id="edl">edlファイルをダウンロード</a>　
 <a href="javascript:void(0)" download="" id="esa">画像をダウンロード</a>　
