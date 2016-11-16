@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="tactileGraph.js : tactileGraph.js is a canvas like tactile graphic drawing library.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>tactileGraph.js</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/HirotsuguKaga/tactileGraph.js">View on GitHub</a>
+
+          <h1 id="project_title">About tactileGraph.js</h1>
+          <h2 id="project_tagline">tactileGraph.js is a canvas like tactile graphic drawing library.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/HirotsuguKaga/tactileGraph.js/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/HirotsuguKaga/tactileGraph.js/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>詳しい使い方</h3>
+<ol>
+<li>以下のリンクからZIPファイルをダウンロードして解凍します。<br>
+　<a href="https://github.com/HirotsuguKaga/tactileGraph.js/zipball/master">tactileGraph.js.zip</a><br><br></li>
+<li>解凍したフォルダから"tactileGraph.js"か"tactileGraph.min.js"のどちらかのjsファイルを選択してhtmlファイルと同じフォルダに置きます。<br>
+（二つのファイルの中身は基本的に同じものですが、後者は可読性を無視して改行やコメントを取り除いてあり、その分だけファイルサイズが小さく、動作が若干早くなっています）<br><br></li>
+<li>htmlファイルの他のJavaScriptコードよりも上部に選択したjsファイルへのリンクを書き込みます。リンク文は、<br>
+&lt;script src="tactileGraph.js"&gt;&lt;/script&gt;もしくは<br>
+&lt;script src="tactileGraph.min.js"&gt;&lt;/script&gt;となります。<br><br></li>
+<li>以降はJavaScriptのコードの説明になります。<br>
+最初に任意の変数に"tactileGraph"を代入し、点図オブジェクトを作成します。<br>
+　ex.　var tg = tactileGraph; //「tg」の部分は任意<br>
+プログラム内には、作成した点図オブジェクトの数だけ点図データが保持されます。<br><br></li>
+<li>作成したオブジェクトの名前を「苗字」として各メソッドを実行します。<br>
+以下は、点図の画面上のプレビューに用いるhtmlのCanvas要素のIDを設定するメソッドの例です。（プレビューを必要としないプログラムであればcanvas要素は不要です）<br>
+　ex.　tg.setCanvas("cvs");<br><br></li>
+<li>座標を指定して描画メソッドを実行することによって点図を作成していきます。<br>
+各メソッドの詳しい説明は<a href="https://github.com/HirotsuguKaga/tactileGraph.js/blob/master/README_ja.md">README_ja.md</a>ファイルにあります。<br>
+　ex.　tg.drawBraille("ABCDEF", 0, 10);<br>
+　　　tg.drawLine(0,20,50,20);<br><br></li>
+<li>作成した点図データを出力するには、点図データを返り値としたメソッドをダウンロードリンクなどに代入します。<br>
+　ex.　download.href = tg.map2esa();</li>
+</ol>
+
+<h3>エーデルについて</h3>
+<p>
+エーデルとは、当時、盲学校教師だった藤野稔寛氏が開発した図形点訳ソフトです。<br>
+最新版のエーデルは以下のサイトから無料でダウンロードできます。<br>
+　<a href="http://www7a.biglobe.ne.jp/~EDEL-plus/">EDEL-plus のホームページ </a>
+</p>
+
+以下、作成中。
+
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">tactileGraph.js maintained by <a href="https://github.com/HirotsuguKaga">HirotsuguKaga</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
