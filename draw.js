@@ -166,5 +166,11 @@ function onClick (e) {
   }else if(document.getElementById('q6').checked == true){  ///////////////drawBraille
     var str = txt.value;
     tg.drawBraille(str, x, y);
+  }else if(document.getElementById('p1').checked == true){  ///////////////pattern
+    var h =[[0,6],[0,12],[6,0],[12,0],[18,6],[24,0],[30,0],[36,6],[36,12],[6,18],[12,24],[18,30],[24,24],[30,18]];
+    tg.drawPattern(h,x,y);
+  }else if(document.getElementById('p2').checked == true){  ///////////////pattern
+    var d =[[18,0],[12,6],[6,12],[0,18],[6,24],[12,30],[18,36],[24,30],[30,24],[36,18],[30,12],[24,6]];
+    tg.drawPattern(d,x,y);
   }
 };
