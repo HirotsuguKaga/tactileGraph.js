@@ -64,7 +64,7 @@ pr.setColor("red");
 function hypo(a,b){return Math.sqrt(a*a + b*b)} //hypotenuse
 
 
-function getMousePosition(canvas, evt) {/// Mouse move/////////////
+function getMousePosition(canvas, evt) { ///// Mouse move ///////////
   var rect = canvas.getBoundingClientRect();
   return {
     x: Math.round(evt.clientX - rect.left),
