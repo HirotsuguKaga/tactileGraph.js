@@ -52,6 +52,9 @@ function drawGraph(){  //////////////////////////////////////////////////
       case "txt":
         tg.drawBraille(arr[i][3],arr[i][1]*1,arr[i][2]*1);
         break;
+      case "circle":
+        tg.strokeCircle(arr[i][1]*1,arr[i][2]*1,arr[i][3]*1);
+        break;
     }
   }
 }
