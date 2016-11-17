@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="a.css">
+
+<h1>CUI点図エディタ</h1>
+
+
+<div style="float:left;">
+<textarea cols="20" rows="30" id="txt" onclick="javascript:drawGraph()">line 30 60 30 100
+line 330 60 330 100
+line 60 30 300 30
+line 60 130 300 130
+dot 30 30
+dot 30 130
+dot 330 30
+dot 330 130
+txt 80 75 abcdefghijklmn</textarea>　
+</div>
+
+<div style="float:left;">
+<canvas id="a" width="599" height="544" style="border:  inset 2px #ccc;"></canvas>
+</div><br>
+<input type="file" id="getfile" accept="" multiple="multiple">
+<a href="javascript:void(0)" download="" id="edl">EDLファイルをダウンロード</a>　
+<a href="javascript:void(0)" download="" id="esa">PNG画像をダウンロード</a>　
+<a href="https://hirotsugukaga.github.io/tactileGraph.js/">Back</a><br><br>
+Powerd by <a href="https://github.com/HirotsuguKaga/tactileGraph.js">tactileGraph.js</a>
+
+
+
+<script type="text/javascript" src="encoding.js"></script>
+<script type="text/javascript" src="tactileGraph.js"></script>
+<script type="text/javascript" src="cui.js"></script>
+</html>
