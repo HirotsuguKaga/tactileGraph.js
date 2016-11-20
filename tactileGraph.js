@@ -19,11 +19,12 @@
   var l = 30; // Line height
   var w = 6;
   var h = 7;
-  var r = 15;
+  var r = 15; //
   var fromX = 0;
   var fromY = 0;
   var canvas,ctx;
   var interval = 6;
+  var right = false; //右寄せチェック
   return {
 
           /////////////////////設定系メソッド///////////////////////
@@ -190,6 +191,10 @@
   },
 
   arr2braille:function(arr,x,y,returnX){ //点字の描画処理/
+    if(right===true){  //右寄せ
+      x -= arr.length * r-8;
+      right = false;
+    }
     var j = k = 0;
     for(var i = 0 ; i < arr.length ; i++){         //>
       if(returnX < x + r * j + w){j = 0; k++;}//改行
@@ -205,21 +210,117 @@
   },
 
   drawBrailleRight:function(str, x, y){  //
-    str +="";
-    var length = str.length + 1;
-    x -= length * r + 7;
+    right = true;
     this.drawBraille(str, x,y);
   },
 
+  drawBrailleMathRight:function(str, x, y){  //
+    right = true;
+    this.drawBrailleMath(str, x,y);
+  },
+
   drawBrailleMath:function(str, x, y){
-    str=str.replace(/Α/g,‡a);str=str.replace(/Β/g,‡b);str=str.replace(/Δ/g,‡c);str=str.replace(/Ε/g,‡e);str=str.replace(/Φ/g,‡f);str=str.replace(/Γ/g,‡g);str=str.replace(/Ι/g,‡i);str=str.replace(/Κ/g,‡k);str=str.replace(/Λ/g,‡l);str=str.replace(/Μ/g,‡m);str=str.replace(/Ν/g,‡n);str=str.replace(/Ο/g,‡o);str=str.replace(/Π/g,‡p);str=str.replace(/Ρ/g,‡r);str=str.replace(/Σ/g,‡s);str=str.replace(/Τ/g,‡t);str=str.replace(/Υ/g,‡y);str=str.replace(/Ω/g,‡w);str=str.replace(/Ξ/g,‡x);str=str.replace(/Ψ/g,‡y);str=str.replace(/Ζ/g,‡z);str=str.replace(/Η/g,‡さ);str=str.replace(/Θ/g,‡す);str=str.replace(/Χ/g,‡へ);str=str.replace(/α/g,†a);str=str.replace(/β/g,†b);str=str.replace(/δ/g,†c);str=str.replace(/ε/g,†e);str=str.replace(/φ/g,†f);str=str.replace(/γ/g,†g);str=str.replace(/ι/g,†i);str=str.replace(/κ/g,†k);str=str.replace(/λ/g,†l);str=str.replace(/μ/g,†m);str=str.replace(/ν/g,†n);str=str.replace(/ο/g,†o);str=str.replace(/π/g,†p);str=str.replace(/ρ/g,†r);str=str.replace(/σ/g,†s);str=str.replace(/τ/g,†ｔ);str=str.replace(/υ/g,†y);str=str.replace(/ω/g,†w);str=str.replace(/ξ/g,†x);str=str.replace(/ψ/g,†y);str=str.replace(/ζ/g,†z);str=str.replace(/η/g,†さ);str=str.replace(/θ/g,†す);str=str.replace(/χ/g,†へ);str=str.replace(/＋/g,？);str=str.replace(/－/g,を);str=str.replace(/×/g,＊);str=str.replace(/÷/g,分);str=str.replace(/・/g,わ);str=str.replace(/／/g,｜分);str=str.replace(/\//g,｜分);str=str.replace(/±/g,？を);str=str.replace(/?/g,を？);str=str.replace(/：/g,中促);str=str.replace(/＝/g,ーー);str=str.replace(/≒/g,中ー);str=str.replace(/≠/g,‡ー);str=str.replace(/=/g,ーー);str=str.replace(/＞/g,？？);str=str.replace(/＜/g,をを);str=str.replace(/>/g,？？);str=str.replace(/</g,をを);str=str.replace(/≧/g,ヱヱ);str=str.replace(/≦/g,語語);str=str.replace(/（/g,語);str=str.replace(/(/g,語);str=str.replace(/）/g,ん);str=str.replace(/)/g,ん);str=str.replace(/｛/g,半き);str=str.replace(/{/g,半き);str=str.replace(/｝/g,よわ);str=str.replace(/}/g,よわ);str=str.replace(/［/g,半み);str=str.replace(/[/g,半み);str=str.replace(/］/g,もわ);str=str.replace(/］/g,もわ);str=str.replace(/｜/g,し);str=str.replace(/|/g,し);str=str.replace(/∽/g,半わ);str=str.replace(/⊥/g,んわ);str=str.replace(/∠/g,す);str=str.replace(/⊿/g,ゆ);str=str.replace(/⌒/g,こ);str=str.replace(/平行四辺形/g,｜分分);str=str.replace(/∪/g,ゆ);str=str.replace(/∩/g,く);str=str.replace(/→/g,ーた);str=str.replace(/←/g,こー);str=str.replace(/?/g,こーた);str=str.replace(/√/g,根);str=str.replace(/！/g,外！);str=str.replace(/!/g,外！);
+    str=str.replace(/Α/g,'‡a');
+    str=str.replace(/Β/g,'‡b');
+    str=str.replace(/Δ/g,'‡c');
+    str=str.replace(/Ε/g,'‡e');
+    str=str.replace(/Φ/g,'‡f');
+    str=str.replace(/Γ/g,'‡g');
+    str=str.replace(/Ι/g,'‡i');
+    str=str.replace(/Κ/g,'‡k');
+    str=str.replace(/Λ/g,'‡l');
+    str=str.replace(/Μ/g,'‡m');
+    str=str.replace(/Ν/g,'‡n');
+    str=str.replace(/Ο/g,'‡o');
+    str=str.replace(/Π/g,'‡p');
+    str=str.replace(/Ρ/g,'‡r');
+    str=str.replace(/Σ/g,'‡s');
+    str=str.replace(/Τ/g,'‡t');
+    str=str.replace(/Υ/g,'‡y');
+    str=str.replace(/Ω/g,'‡w');
+    str=str.replace(/Ξ/g,'‡x');
+    str=str.replace(/Ψ/g,'‡y');
+    str=str.replace(/Ζ/g,'‡z');
+    str=str.replace(/Η/g,'‡さ');
+    str=str.replace(/Θ/g,'‡す');
+    str=str.replace(/Χ/g,'‡へ');
+    str=str.replace(/α/g,'†a');
+    str=str.replace(/β/g,'†b');
+    str=str.replace(/δ/g,'†c');
+    str=str.replace(/ε/g,'†e');
+    str=str.replace(/φ/g,'†f');
+    str=str.replace(/γ/g,'†g');
+    str=str.replace(/ι/g,'†i');
+    str=str.replace(/κ/g,'†k');
+    str=str.replace(/λ/g,'†l');
+    str=str.replace(/μ/g,'†m');
+    str=str.replace(/ν/g,'†n');
+    str=str.replace(/ο/g,'†o');
+    str=str.replace(/π/g,'†p');
+    str=str.replace(/ρ/g,'†r');
+    str=str.replace(/σ/g,'†s');
+    str=str.replace(/τ/g,'†ｔ');
+    str=str.replace(/υ/g,'†y');
+    str=str.replace(/ω/g,'†w');
+    str=str.replace(/ξ/g,'†x');
+    str=str.replace(/ψ/g,'†y');
+    str=str.replace(/ζ/g,'†z');
+    str=str.replace(/η/g,'†さ');
+    str=str.replace(/θ/g,'†す');
+    str=str.replace(/χ/g,'†へ');
+    str=str.replace(/\＋/g,'？');
+    str=str.replace(/－/g,'を');
+    str=str.replace(/×/g,'＊');
+    str=str.replace(/÷/g,'分');
+    str=str.replace(/・/g,'わ');
+    str=str.replace(/／/g,'｜分');
+    str=str.replace(/\//g,'｜分');
+    str=str.replace(/±/g,'？を');
+    str=str.replace(/：/g,'中促');
+    str=str.replace(/\＝/g,'ーー');
+    str=str.replace(/≒/g,'中ー');
+    str=str.replace(/≠/g,'‡ー');
+    str=str.replace(/=/g,'ーー');
+    str=str.replace(/＞/g,'？？');
+    str=str.replace(/＜/g,'をを');
+    str=str.replace(/\>/g,'？？');
+    str=str.replace(/\</g,'をを');
+    str=str.replace(/≧/g,'ヱヱ');
+    str=str.replace(/≦/g,'語語');
+    str=str.replace(/（/g,'語');
+    str=str.replace(/\(/g,'語');
+    str=str.replace(/）/g,'ん');
+    str=str.replace(/\)/g,'ん');
+    str=str.replace(/｛/g,'半き');
+    str=str.replace(/\{/g,'半き');
+    str=str.replace(/｝/g,'よわ');
+    str=str.replace(/\}/g,'よわ');
+    str=str.replace(/［/g,'半み');
+    str=str.replace(/\[/g,'半み');
+    str=str.replace(/］/g,'もわ');
+    str=str.replace(/\］/g,'もわ');
+    str=str.replace(/｜/g,'し');
+    str=str.replace(/\|/g,'し');
+    str=str.replace(/∽/g,'半わ');
+    str=str.replace(/⊥/g,'んわ');
+    str=str.replace(/∠/g,'す');
+    str=str.replace(/⊿/g,'ゆ');
+    str=str.replace(/⌒/g,'こ');
+    str=str.replace(/平行四辺形/g,'｜分分');
+    str=str.replace(/∪/g,'ゆ');
+    str=str.replace(/∩/g,'く');
+    str=str.replace(/→/g,'ーた');
+    str=str.replace(/←/g,'こー');
+    str=str.replace(/√/g,'根');
+    str=str.replace(/！/g,'外！');
+    str=str.replace(/\!/g,'外！');
     this.drawBraille(str, x,y);
   },
 
   drawDecapoint:function( str, posx, posy, returnX){
-var sp=2;//文字の間隔
-    x = x || 0;
-    y = y || 0;
+    var sp=2;//文字の間隔
+    posx = posx || 0;
+    posy = posy || 0;
     var pos = posx;
     var line = posy;
     returnX = returnX || sizeX;
@@ -533,10 +634,198 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       pos=posx;
       line += lh;
     }
-    for(var i=0; i<code.length; i++){
+    for(var i=0; i<code.length; i++){  //配列の描画
       this.drawDot(code[i][0],code[i][1]);
     }
   },
+
+  drawKleintype:function( str, posx, posy, returnX){
+    posx = posx || 0;
+    posy = posy || 0;
+    var pos = posx;
+    var line = posy;
+    returnX = returnX || sizeX;
+    var kl00=[[1,3,5,7,9,10,11,13,15,16,17,19,21,23,25],[34,29,24,18,12,24,7,1,7,24,13,18,24,29,34]];
+    var kl01=[[1,1,1,1,1,1,5,6,6,11,11,12,15,15,15,15],[1,6,12,21,27,34,17,1,34,17,34,1,6,12,22,29]];
+    var kl02=[[1,1,3,3,7,7,14,14,20,20,23,23],[13,20,7,27,2,33,1,35,2,33,7,28]];
+    var kl03=[[1,1,1,1,1,1,7,7,12,13,17,18,20,20,20],[1,7,14,21,28,34,1,34,34,1,30,6,12,18,24]];
+    var kl04=[[1,1,1,1,1,1,7,7,7,13,13,13,19,19],[1,8,15,21,28,35,1,18,35,1,18,35,1,35]];
+    var kl05=[[1,1,1,1,1,1,6,7,12,12,17],[1,7,14,21,28,34,17,1,1,17,1]];
+    var kl06=[[1,1,3,4,6,8,13,14,19,20,20,20],[14,20,8,26,3,31,1,33,2,24,28,33]];
+    var kl07=[[1,1,1,1,1,1,4,10,16,20,20,20,20,20,20],[1,7,13,21,28,34,17,17,17,1,7,13,21,28,34]];
+    var kl08=[[2,2,2,2,2,2],[1,7,14,21,28,35]];
+    var kl09=[[1,5,10,16,18,18,18,18,18],[27,31,33,32,1,7,14,21,27]];
+    var kl10=[[1,1,1,1,1,1,5,8,9,12,13,16,17,21,21],[1,7,14,21,28,35,17,13,21,9,25,5,30,1,35]];
+    var kl11=[[1,1,1,1,1,1,6,13,19],[1,7,14,20,27,34,34,34,34]];
+    var kl12=[[1,1,1,1,1,1,5,9,13,16,20,25,25,25,25,25,25],[1,9,16,22,28,34,6,10,14,10,5,1,8,14,20,27,34]];
+    var kl13=[[1,1,1,1,1,1,6,9,12,15,18,22,22,22,22,22,22],[1,8,15,22,28,35,6,13,19,24,29,1,8,15,22,28,35]];
+    var kl14=[[1,1,2,2,6,6,11,11,17,17,20,20,21],[15,21,9,28,4,32,1,35,5,31,11,26,19]];
+    var kl15=[[1,1,1,1,1,1,6,6,12,12,15,15],[1,7,13,20,26,34,1,17,1,17,6,12]];
+    var kl16=[[1,1,1,1,3,4,10,10,12,15,16,18,18,18,19,24],[9,14,20,25,4,30,1,32,25,29,4,10,16,22,32,32]];
+    var kl17=[[1,1,1,1,1,1,5,5,10,11,11,13,14,14,15,20],[1,6,12,19,26,34,1,16,16,1,21,26,6,11,31,33]];
+    var kl18=[[1,3,4,5,5,9,9,12,14,15,15,17,17],[28,9,3,14,32,1,17,33,19,3,29,8,24]];
+    var kl19=[[1,6,10,14,14,14,14,14,16,22,27],[1,1,1,6,13,20,26,33,1,1,1]];
+    var kl20=[[1,1,1,1,2,7,13,18,19,19,19,19],[1,7,13,20,26,32,32,26,1,7,13,20]];
+    var kl21=[[1,3,4,6,8,11,13,15,17,19,21],[1,8,15,21,27,33,27,21,15,8,1]];
+    var kl22=[[1,3,5,8,10,12,13,15,15,17,18,20,22,23,25,26,27,29,31,33,34,36,37,39],[1,9,15,22,27,1,33,6,27,12,22,17,12,22,6,27,1,33,27,22,16,10,6,1]];
+    var kl23=[[1,1,4,4,7,7,11,14,14,17,17,20,21],[1,33,6,27,11,22,17,11,22,6,27,1,33]];
+    var kl24=[[1,4,8,11,11,11,11,15,18,21],[1,7,12,17,22,27,33,12,6,1]];
+    var kl25=[[1,1,3,6,7,7,9,12,13,13,15,18,19],[1,34,27,21,1,34,16,11,1,34,6,1,34]];
+    var klp=[[2],[34]];
+    var klc=[[2,3],[35,34]];
+    var kle=[[1,1,1,1,1,1],[1,7,13,19,25,34]];
+    var klhi=[[1,7,13],[17,17,17]];
+    var def=[[1,1,1,1,1,1,6,6,11,11,16,16,21,21,26,26,26,26,26,26],[6,11,16,21,26,31,6,31,6,31,6,31,6,31,6,11,16,21,26,31]];
+    var ms00=[[3,7,11,13,13,13,13,14,16,18],[21,19,17,20,24,29,34,14,10,5]];
+    var ms01=[[3,4,5,7,9,9,11,15,19,23],[29,15,6,29,9,17,26,24,21,16]];
+    var ms02=[[3,4,5,7,9,10,10,14,15,18,19,19,21,22,23],[29,10,26,21,15,5,10,32,10,30,10,26,21,16,10]];
+    var ms03=[[2,5,8,10,23,27,29,30],[20,16,13,10,10,13,16,20]];
+    var ms04=[[4,4,7,7,9,9,11,11,14,16,17,19,21],[15,29,11,27,8,24,3,21,17,14,4,9,5]];
+    var ms05=[[4,5,9,9,10,12,14,15,15,17,19,19,20],[10,3,10,30,3,26,10,3,22,18,3,14,10]];
+    var ms06=[[3,4,5,7,7,8,11,15,19,22],[26,11,2,13,25,4,22,20,16,13]];
+    var ms07=[[1,5,8,9,9,9,9,14,16,18,19,19,19,19,23,28],[15,15,24,5,10,15,19,14,30,24,4,8,14,19,13,12]];
+    var ms08=[[3,7,12,12,14,17,17,17,20,22,23,26],[7,7,7,15,18,6,15,22,12,5,9,5]];
+    var ms09=[[3,4,7,8,11,11,12,13,14,15,16,17,17,18,19,20,23,27],[22,14,21,12,3,20,6,10,15,19,24,9,29,34,18,8,17,16]];
+    var ms10=[[2,7,8,11,12,12,13,15,15,16,16,16,20,24,28],[19,19,10,34,6,18,30,11,26,2,16,21,15,15,15]];
+    var ms11=[[2,5,8,9,9,9,11,12,13,14,15,15,19,23],[17,14,10,2,6,30,26,10,22,19,9,14,9,8]];
+    var ms12=[[1,6,9,13,15,16],[24,20,17,13,8,3]];
+    var ms13=[[2,6,8,11,11,14,16,17,19,20,25,27,28,30],[8,8,31,8,28,23,8,19,14,8,2,5,1,3]];
+    var ms14=[[2,2,2,2,2,6,9,13,16,19,22,25],[4,8,12,15,20,19,17,15,12,9,5,2]];
+    var ms15=[[2,5,7,21,24,25,27,30,30,33,33],[20,17,13,11,14,17,20,3,8,5,8]];
+    var ms16=[[3,4,7,8,10,13,13,15,16,18,18,21],[5,24,20,3,16,2,11,16,7,1,19,22]];
+    var ms17=[[3,9,11,14,14,17,18,19,21,23,27,29,30,32],[10,10,33,10,29,25,10,20,16,10,5,3,8,6]];
+    var ms18=[[1,2,4,6,7,10,11,11,15,15,15,15,15,15,15,19],[27,10,24,9,21,17,8,31,3,8,14,19,24,29,34,8]];
+    var ms19=[[3,3,6,8,9,12,16,19,22,25],[5,25,7,23,9,20,18,16,13,10]];
+    var ms20=[[2,5,5,8,8,10,11,12,14,15,16,17,18,20,29,31,32,34],[19,15,35,10,32,29,20,26,22,9,18,24,14,9,3,6,1,5]];
+    var ms21=[[3,4,4,6,9,9,14,14,14,15,15,15,15,19,21,24,25,26,28,31],[17,4,28,13,3,27,2,8,15,21,27,32,38,1,26,1,10,25,15,25]];
+    var ms22=[[3,4,8,8,11,14,15,18,20,22,27],[20,6,5,19,5,18,4,17,3,16,15]];
+    var ms23=[[1,3,5,12,14,16,16,17,17,20,20,22,24,25],[15,19,23,2,15,6,10,13,27,11,23,19,14,10]];
+    var ms24=[[4,6,8,9,11,13,14,16,17,18,20,21,22,22,22,22],[7,32,20,6,31,19,5,31,18,5,31,26,5,10,17,22]];
+    var ms25=[[1,1,3,4,5,5,6,7,8,9,10,11,11,12,13,14,17,17,19,19],[5,19,16,13,5,9,1,21,5,23,20,5,17,13,9,5,1,2,1,2]];
+    var ms26=[[1,7,10,11,12,12,13,14,14,15,16,20,21,24,25,27,30],[11,10,1,5,9,15,20,25,29,33,8,7,18,15,6,11,5]];
+    var ms27=[[1,5,9,9,10,10,10,11,11,11,11,15,15,19,20,24],[1,1,1,5,10,15,20,25,29,33,37,1,14,17,1,1]];
+    var ms28=[[3,5,6,8,9,11,11,13,15,15,17,18,18,20],[12,7,28,1,25,11,22,18,1,14,9,5,16,1]];
+    var ms29=[[1,1,2,3,6,10,12,13,13,16,16,18,20,20,21,22,23],[7,11,14,17,10,9,1,4,8,7,27,23,7,19,15,12,7]];
+    str+="";
+    var code = [];
+    for (var int = 0; int < str.length; int++){
+    var key=str.substring(int,int+1);//i番目の文字を描画
+    switch(key){
+      case " ":blank();break;
+      case '　':blank();break;
+      case 'A':draw(kl00);break;
+      case 'B':draw(kl01);break;
+      case 'C':draw(kl02);break;
+      case 'D':draw(kl03);break;
+      case 'E':draw(kl04);break;
+      case 'F':draw(kl05);break;
+      case 'G':draw(kl06);break;
+      case 'H':draw(kl07);break;
+      case 'I':draw(kl08);break;
+      case 'J':draw(kl09);break;
+      case 'K':draw(kl10);break;
+      case 'L':draw(kl11);break;
+      case 'M':draw(kl12);break;
+      case 'N':draw(kl13);break;
+      case 'O':draw(kl14);break;
+      case 'P':draw(kl15);break;
+      case 'Q':draw(kl16);break;
+      case 'R':draw(kl17);break;
+      case 'S':draw(kl18);break;
+      case 'T':draw(kl19);break;
+      case 'U':draw(kl20);break;
+      case 'V':draw(kl21);break;
+      case 'W':draw(kl22);break;
+      case 'X':draw(kl23);break;
+      case 'Y':draw(kl24);break;
+      case 'Z':draw(kl25);break;
+      case 'a':draw(kl00);break;
+      case 'b':draw(kl01);break;
+      case 'c':draw(kl02);break;
+      case 'd':draw(kl03);break;
+      case 'e':draw(kl04);break;
+      case 'f':draw(kl05);break;
+      case 'g':draw(kl06);break;
+      case 'h':draw(kl07);break;
+      case 'i':draw(kl08);break;
+      case 'j':draw(kl09);break;
+      case 'k':draw(kl10);break;
+      case 'l':draw(kl11);break;
+      case 'm':draw(kl12);break;
+      case 'n':draw(kl13);break;
+      case 'o':draw(kl14);break;
+      case 'p':draw(kl15);break;
+      case 'q':draw(kl16);break;
+      case 'r':draw(kl17);break;
+      case 's':draw(kl18);break;
+      case 't':draw(kl19);break;
+      case 'u':draw(kl20);break;
+      case 'v':draw(kl21);break;
+      case 'w':draw(kl22);break;
+      case 'x':draw(kl23);break;
+      case 'y':draw(kl24);break;
+      case 'z':draw(kl25);break;
+      case '.':draw(klp);break;
+      case ',':draw(klc);break;
+      case '!':draw(kle);break;
+      case '-':draw(klhi);break;
+      case 'イ':draw(ms00);break;
+      case 'シ':draw(ms01);break;
+      case 'カ':draw(ms02);break;
+      case 'ハ':draw(ms03);break;
+      case 'ク':draw(ms04);break;
+      case 'ラ':draw(ms05);break;
+      case 'シ':draw(ms06);break;
+      case 'サ':draw(ms07);break;
+      case 'マ':draw(ms08);break;
+      case 'キ':draw(ms09);break;
+      case 'チ':draw(ms10);break;
+      case 'ケ':draw(ms11);break;
+      case 'ノ':draw(ms12);break;
+      case 'ブ':draw(ms13);break;
+      case 'レ':draw(ms14);break;
+      case 'バ':draw(ms15);break;
+      case 'ス':draw(ms16);break;
+      case 'ブ':draw(ms17);break;
+      case 'オ':draw(ms18);break;
+      case 'ン':draw(ms19);break;
+      case 'ダ':draw(ms20);break;
+      case '平':draw(ms21);break;
+      case 'ニ':draw(ms22);break;
+      case '御':draw(ms23);break;
+      case 'ヨ':draw(ms24);break;
+      case 'ガ':draw(ms25);break;
+      case 'ヤ':draw(ms26);break;
+      case '下':draw(ms27);break;
+      case 'タ':draw(ms28);break;
+      case 'ウ':draw(ms29);break;
+      case "\n":CR();break;
+      default:draw(def);break
+    }
+  }
+    function draw(id) {
+      var sp = 5;
+      var num=Math.max.apply(null, id[0]) + sp;
+      if(pos+num>returnX){CR()}          //改行チェック
+      for (var int = 0; int < id[0].length; int++){
+        var X=id[0][int];
+        var Y=id[1][int];
+        code.push([X+pos, Y+line]);
+      }
+      pos=pos+num+sp;
+    }
+    function SP(){ //空白
+      pos+=50;
+    }
+    function CR(){ //改行
+      var lh=50;
+      pos=posx;
+      line += lh;
+    }
+    for(var i=0; i<code.length; i++){  //配列の描画
+      this.drawDot(code[i][0],code[i][1]);
+    }
+    },///////////////////////////////////////////////////////////////////
 
   drawLine:function(x1, y1, x2, y2) {     ////点線の描画処理///
     if(y2 === undefined)return this.drawLine(fromX, fromY, x1, y1);
@@ -553,7 +842,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
   },
 
   strokeRect:function(x, y, w, h) {   ////長方形の描画処理①///
-    this.drawDot(x + w, y + h);
+    this.drawDot(x+w,y+h);
     this.drawLine(x, y , x+w, y);
     this.drawLine(x, y , x, y+h);
     this.drawLine(x+w, y , x+w, y+h);
@@ -570,13 +859,48 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     }
   },
 
+  strokeRhombus:function(x, y, w, h) {   ////菱形の描画処理///
+    this.drawLine(x, y-h/2 , x-w/2, y);
+    this.drawLine(x, y+h/2);
+    this.drawLine(x+w/2, y);
+    this.drawLine(x, y-h/2);
+  },
+
+  strokeTable:function(x, y, w, h, col, row) {   ////表組の描画///
+    for(var i=0; i<col; i++){
+      for(var j=0; j<row; j++){
+        this.strokeRect(x+w*i,y+h*j,w,h);
+      }
+    }
+  },
+
   strokeCircle:function(x, y, r) {     ////円の描画処理///
+    var cir = 2 * Math.PI * r;
+    var a = 360 / Math.round(cir / interval); // 角度（度)
+    for(var i=0; a*i < 360; i++){
+      var X = x + r * Math.cos(a*i / 180 * Math.PI); // X座標
+      var Y = y + r * Math.sin(a*i / 180 * Math.PI); // Y座標
+      this.drawDot(X, Y);
+    }
+  },
+
+  strokeArc:function(x, y, r,s,e) {     ////円弧の描画処理///
+    var cir = 2 * Math.PI * r;
+    var a = 360 / Math.round(cir / interval); // 角度（度)
+    for(var i=0; a*i < e-s; i++){
+      var X = x + r * Math.cos((s-90+a*i) / 180 * Math.PI); // X座標
+      var Y = y + r * Math.sin((s-90+a*i) / 180 * Math.PI); // Y座標
+      this.drawDot(X, Y);
+    }
+  }, 
+
+  strokeOval:function(x, y, r) {     ////円の描画処理///
     var cir = 2 * Math.PI * r;
     var a = 360 / Math.round(cir / interval); // 角度（度)
     
     for(var i=0; a*i < 360; i++){
-      var X = x + r * Math.cos(a*i / 180 * Math.PI); // X座標
-      var Y = y + r * Math.sin(a*i / 180 * Math.PI); // Y座標
+      var X = x + r * Math.cos(a*i / 180 * Math.PI)*0.8; // X座標
+      var Y = y + r * Math.sin(a*i / 180 * Math.PI)*1.2; // Y座標
       this.drawDot(X, Y);
     }
   }, 
