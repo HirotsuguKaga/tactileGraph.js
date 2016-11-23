@@ -4,7 +4,7 @@
 
 # tactileGraph.js
 
-#Updated methods
+#New and Updated Methods
 ## Drawing
 ### drawBrailleRight(string str, int x, int y);
 ### drawBrailleMath(string str, int x, int y , int returnX);
@@ -14,14 +14,14 @@
 ### drawLineTilt(int x, int y, int length, int angle);
 ### strokeRectTilt(int x, int y, int width, int height, int angle);
 ### strokeRhombus(int x, int y, int width, int height);
-
+### strokeTable(int x, int y, int width, int height, int rows, int columns);
 ### arr2braille(Array, x, y);
 
 ### clear();
  
 
 ## Setting
-  
+### setColor(String);
 ## Output
   
 ## Misc
