@@ -8,10 +8,18 @@
  * @copyright      Copyright (c) Hirotsugu Kaga
  * @license        licensed under the MIT license.
  */
-
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
-  var tactileGraphic = function() {
+// consoleが使えない場合は空のオブジェクトを設定
+if( typeof window.console === "undefined" ){
+ window.console = {};
+}
+// console.errorがメソッドでない場合は空のメソッドを指定
+if( typeof window.console.error !== "function" ){
+ window.console.error = function(){};
+}
+
+var tactileGraphic = function() {
   var arr = [];
   var size = "A4"; //Paper size
   var sizeX = 599;
@@ -107,7 +115,6 @@
     ['ビ','濁ヒ'],['ブ','濁フ'],['ベ','濁ヘ'],['ボ','濁ホ'],['パ','半ホ'],
     ['ピ','半ヒ'],['プ','半フ'],['ペ','半ヘ'],['ポ','半ホ']
     ];
-
     str += "";  //引数を文字列として扱わせる
     str = str.replace(/([0-9０１２３４５６７８９])/g, "数$1");  //全てのアラビア数字の直前に数符を置く
     str = str.replace(/([0-9０１２３４５６７８９])数/g, "$1");  //数符の直前に数字があったら、その数符を取り除く
@@ -158,7 +165,6 @@
     ['＿_「」-‐継～：:','36'],['七＝=','2356'],
     ['斜‡ぴピﾋﾟ≠','46'],['？?＋+五疑','26'],
     ['二；;','23'],['！!！感六','235'],['｜|拡','456']];
-
     str += "";
     str = this.convertText(str);
     var arr = [];
@@ -183,19 +189,19 @@
         }
       }
       //alert("文字列に点字に変換出来ない文字が含まれています。");
-      console.log("文字列に点字に変換出来ない文字が含まれています。");
+      console.error("文字列に点字に変換出来ない文字が含まれています。");
       return "none";
     }
-    
-    this.arr2braille(arr,x,y);
+    return this.arr2braille(arr,x,y,returnX);
   },
 
   arr2braille:function(arr,x,y,returnX){ //点字の描画処理/
+    var endX, endY;
     if(right===true){  //右寄せ
       x -= arr.length * r-8;
       right = false;
     }
-    var j = k = 0;
+    var j = k = 0; //j:字数　k:行数
     for(var i = 0 ; i < arr.length ; i++){         //>
       if(returnX < x + r * j + w){j = 0; k++;}//改行
       if(arr[i].match("1"))this.drawDot(x + r * j , y + l*k);
@@ -204,9 +210,12 @@
       if(arr[i].match("4"))this.drawDot(x + w + r * j , y + l*k);
       if(arr[i].match("5"))this.drawDot(x + w + r * j , y + h + l*k);
       if(arr[i].match("6"))this.drawDot(x + w + r * j , y + h*2 + l*k);
+      if(arr[i].match("\n")){j = -1; k++;}//改行
+      endX = x + r * j;
+      endY = y + l*k;
       j++
-      if(arr[i].match("\n")){j = 0; k++;}//改行
     }
+    return {x:endX, y:endY};
   },
 
   drawBrailleRight:function(str, x, y){  //
@@ -278,8 +287,6 @@
     var pos = posx;
     var line = posy;
     returnX = returnX || sizeX;
-var a=[[4,2,3,4,1,4,1,4,2,3,5],[3,4,4,4,5,5,6,6,7,7,7]];
-var b=[[1,1,1,1,2,3,1,4,1,4,1,2,3],[1,2,3,4,4,4,5,5,6,6,7,7,7]];
 var c=[[2,3,1,1,2,3],[4,4,5,6,7,7]];
 var d=[[2,3,4,4,2,3,4,1,4,1,4,2,3],[1,1,2,3,4,4,4,5,5,6,6,7,7]];
 var e=[[2,3,1,2,3,1,2,3],[4,4,5,5,5,6,7,7]];
@@ -566,7 +573,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       case 'ぅ':draw(h54);break;case 'ぇ':draw(h55);break;case 'ぉ':draw(h56);break;case 'ゃ':draw(h57);break;
       case 'ゅ':draw(h58);break;case 'ょ':draw(h59);break;case 'っ':draw(h60);break;case '木':draw(c01);break;
       case '日':draw(c02);break;case '月':draw(c03);break;case '水':draw(c04);break;case '火':draw(c05);break;
-      case '金':draw(c06);break;case '土':draw(c07);break;default:draw(def);break
+      case '金':draw(c06);break;case '土':draw(c07);break;default:draw(def);break;
     }
   }
     function draw(id) {
