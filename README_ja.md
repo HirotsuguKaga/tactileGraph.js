@@ -29,9 +29,9 @@ tg.drawLine(0,20,50,20);
 ```
 3. 出力
 ```javascript
-hoge.href = loadEdl();
+hoge.href = tg.loadEdl();
 　and/or
-hoge.href = map2esa();
+hoge.href = tg.map2esa();
 ```
 　　
 ***
