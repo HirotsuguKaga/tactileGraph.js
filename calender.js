@@ -26,37 +26,31 @@ function drawGraph(){///////////////////////////////////////////////////////
 // ***********************	
 //      カレンダーの表示	
 // ***********************	
-document.write("<table border='1'>");	// 表の作成開始
-document.write("<tr><td colspan='7' bgcolor='#7fffd4'>");	// 見出し行セット
-document.write("<strong>",myYear, "年", (myMonth+1), "月カレンダー</strong>");	
-document.write("</td></tr>");	
- 	
-document.write("<tr>");	// 曜日見出しセット
-for(i=0; i<7; i++){	// 一行(１週間)ループ
-document.write("<td align='center' ");	
-if(i==0)document.write("bgcolor='#fa8072'>");	// 日曜のセルの色
-else document.write("bgcolor='#ffebcd'>");	// 月～土のセルの色
-document.write("<strong>",myWeekTbl[i],"</strong>");	// '日'から'土'の表示
-document.write("</td>");	
-}	
-document.write("</tr>");	
- 	
-for(i=0; i<myTblLine; i++){	// 表の「行」のループ
-document.write("<tr>");	// 行の開始
-for(j=0; j<7; j++){	// 表の「列」のループ
-document.write("<td align='center' ");	// 列(セル)の作成
-myDat = myTable[j+(i*7)];	// 書きこむ内容の取得
-if (myDat==myToday)document.write("bgcolor='#00ffff'>");	// 今日のセルの色
-else if(j==0) document.write("bgcolor='#ffb6c1'>");	// 日曜のセルの色
-else document.write("bgcolor='#ffffe0'>");	// 平日のセルの色
-document.write("<strong>",myDat,"</strong>");	// 日付セット
-document.write("</td>");	// 列(セル)の終わり
-}	
-document.write("</tr>");	// 行の終わり
-}	
-document.write("</table>");	// 表の終わり
-}
 
+var month = myMonth + 1 ;
+tg.drawBraille(myYear + "ねん　" + month + "がつ"); //document.write("<strong>",myYear, "年", (myMonth+1), "月カレンダー</strong>");	
+//document.write("</td></tr>");	
+ 	
+//document.write("<tr>");	// 曜日見出しセット
+//for(i=0; i<7; i++){	// 一行(１週間)ループ
+//document.write("<td align='center' ");	
+//if(i==0)document.write("bgcolor='#fa8072'>");	// 日曜のセルの色
+//else document.write("bgcolor='#ffebcd'>");	// 月～土のセルの色
+//document.write("<strong>",myWeekTbl[i],"</strong>");	// '日'から'土'の表示
+//document.write("</td>");	
+//}	
+//document.write("</tr>");	
+ 	
+//for(i=0; i<myTblLine; i++){	// 表の「行」のループ
+//document.write("<tr>");	// 行の開始
+//for(j=0; j<7; j++){	// 表の「列」のループ
+//document.write("<td align='center' ");	// 列(セル)の作成
+//myDat = myTable[j+(i*7)];	// 書きこむ内容の取得
+//if (myDat==myToday)document.write("bgcolor='#00ffff'>");	// 今日のセルの色
+//else if(j==0) document.write("bgcolor='#ffb6c1'>");	// 日曜のセルの色
+//else document.write("bgcolor='#ffffe0'>");	// 平日のセルの色
+//document.write("<strong>",myDat,"</strong>");	// 日付セット
+}
                   ///////////download///////////
 var filename = "Graph";
 
