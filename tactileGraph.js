@@ -160,11 +160,11 @@
     ['斜‡ぴピﾋﾟ≠','46'],['？?＋+五疑','26'],
     ['二；;','23'],['！!！感六','235'],['｜|拡','456']];
 
-    str += "";
-    str=str.replace(/\0/g,"￥0");str=str.replace(/\1/g,"￥1");str=str.replace(/\2/g,"￥2");
-    str=str.replace(/\3/g,"￥3");str=str.replace(/\4/g,"￥4");str=str.replace(/\5/g,"￥5");
-    str=str.replace(/\6/g,"￥6");str=str.replace(/\7/g,"￥7");str=str.replace(/\8/g,"￥8");
-    str=str.replace(/\9/g,"￥9");
+      str += "";
+   // str=str.replace(/\0/g,"￥0");str=str.replace(/\1/g,"￥1");str=str.replace(/\2/g,"￥2");
+   // str=str.replace(/\3/g,"￥3");str=str.replace(/\4/g,"￥4");str=str.replace(/\5/g,"￥5");
+   // str=str.replace(/\6/g,"￥6");str=str.replace(/\7/g,"￥7");str=str.replace(/\8/g,"￥8");
+   // str=str.replace(/\9/g,"￥9");
     
     str=str.replace(/&yen;[a-z]/g,"￥a");
     str = this.convertText(str);
