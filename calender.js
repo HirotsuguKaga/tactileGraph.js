@@ -44,8 +44,6 @@ for(i=0; i<myTblLine; i++){
   }
 }
 
-    tg.drawBraille("9",j*60,400);
-
 //document.write("<strong>",myYear, "年", (myMonth+1), "月カレンダー</strong>");	
 //document.write("</td></tr>");	
 //document.write("<tr>");	// 曜日見出しセット
