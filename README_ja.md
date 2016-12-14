@@ -60,14 +60,23 @@ hoge.href = tg.map2esa();
 ### drawBraille(string str, int x, int y , int returnX);
  点字文字列を描画します。点字に変換できない文字が含まれる場合はアラートを表示します。座標は1文字目の1の点の位置を表し、 第一、第二引数を省略した場合はデフォルトを(0,0)として描画します。
  第五引数はオプションで改行位置の座標を指定します。省略した場合は用紙の端で改行します。
-  
+
+####arr2braille(Array, int x, int y, int returnX);
+ 点字の打点を数字を羅列した配列を指定し、点字文を描画します。  
+ ex. arr2braille(['123','145','123456','356'],10,100);
+
 ### drawLine(int x1, int y1, int x2, int y2 );
  始点座標(x1, y1)から終点座標(x2, y2)に点線を描画します。第三、第四引数を省略いた場合、前回の描画の終点から第一、第二引数の座標へ線を描画します。
  （デフォルトは(0,0)）
   
 ### strokeRect(int x, int y, int width, int height);
  左上の角(x,y)を起点に指定した幅と高さの長方形の枠線を点線で描画します。長方形のサイズは点の間隔の倍数に設定すると角がうまく収まります。
-  
+#### strokeRect(int x, int y, int width, int height, int angle);
+ 四つ目の引数に角度を指定し、長方形を時計回りに回転させます。
+ 
+### strokeRhombus(int x, int y, w, h);
+ 菱形を描画します。
+
 ### fillRect(int x, int y, width, height);
  左上の角(int x, int y)を起点に指定した幅と高さの長方形を点線と同じ間隔の点で埋めます。
   
