@@ -640,42 +640,42 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     str+="";
     var code = [];
     for (var int = 0; int < str.length; int++){
-    var key=str.substring(int,int+1);//i番目の文字を描画
-    switch(key){
-      case " ":blank();break;
-      case '　':blank();break;
-      case 'A':draw(kl00);break; case 'B':draw(kl01);break;
-      case 'C':draw(kl02);break; case 'D':draw(kl03);break;
-      case 'E':draw(kl04);break; case 'F':draw(kl05);break;
-      case 'G':draw(kl06);break; case 'H':draw(kl07);break;
-      case 'I':draw(kl08);break; case 'J':draw(kl09);break;
-      case 'K':draw(kl10);break; case 'L':draw(kl11);break;
-      case 'M':draw(kl12);break; case 'N':draw(kl13);break;
-      case 'O':draw(kl14);break; case 'P':draw(kl15);break;
-      case 'Q':draw(kl16);break; case 'R':draw(kl17);break;
-      case 'S':draw(kl18);break; case 'T':draw(kl19);break;
-      case 'U':draw(kl20);break; case 'V':draw(kl21);break;
-      case 'W':draw(kl22);break; case 'X':draw(kl23);break;
-      case 'Y':draw(kl24);break; case 'Z':draw(kl25);break;
-      case 'a':draw(kl00);break; case 'b':draw(kl01);break;
-      case 'c':draw(kl02);break; case 'd':draw(kl03);break;
-      case 'e':draw(kl04);break; case 'f':draw(kl05);break;
-      case 'g':draw(kl06);break; case 'h':draw(kl07);break;
-      case 'i':draw(kl08);break; case 'j':draw(kl09);break;
-      case 'k':draw(kl10);break; case 'l':draw(kl11);break;
-      case 'm':draw(kl12);break; case 'n':draw(kl13);break;
-      case 'o':draw(kl14);break; case 'p':draw(kl15);break;
-      case 'q':draw(kl16);break; case 'r':draw(kl17);break;
-      case 's':draw(kl18);break; case 't':draw(kl19);break;
-      case 'u':draw(kl20);break; case 'v':draw(kl21);break;
-      case 'w':draw(kl22);break; case 'x':draw(kl23);break;
-      case 'y':draw(kl24);break; case 'z':draw(kl25);break;
-      case '.':draw(klp);break; case ',':draw(klc);break;
-      case '!':draw(kle);break; case '-':draw(klhi);break;
-      case "\n":CR();break;
-      default:draw(def);break
+     var key=str.substring(int,int+1);//i番目の文字を描画
+      switch(key){
+        case " ":blank();break;
+        case '　':blank();break;
+        case 'A':draw(kl00);break; case 'B':draw(kl01);break;
+        case 'C':draw(kl02);break; case 'D':draw(kl03);break;
+        case 'E':draw(kl04);break; case 'F':draw(kl05);break;
+        case 'G':draw(kl06);break; case 'H':draw(kl07);break;
+        case 'I':draw(kl08);break; case 'J':draw(kl09);break;
+        case 'K':draw(kl10);break; case 'L':draw(kl11);break;
+        case 'M':draw(kl12);break; case 'N':draw(kl13);break;
+        case 'O':draw(kl14);break; case 'P':draw(kl15);break;
+        case 'Q':draw(kl16);break; case 'R':draw(kl17);break;
+        case 'S':draw(kl18);break; case 'T':draw(kl19);break;
+        case 'U':draw(kl20);break; case 'V':draw(kl21);break;
+        case 'W':draw(kl22);break; case 'X':draw(kl23);break;
+        case 'Y':draw(kl24);break; case 'Z':draw(kl25);break;
+        case 'a':draw(kl00);break; case 'b':draw(kl01);break;
+        case 'c':draw(kl02);break; case 'd':draw(kl03);break;
+        case 'e':draw(kl04);break; case 'f':draw(kl05);break;
+        case 'g':draw(kl06);break; case 'h':draw(kl07);break;
+        case 'i':draw(kl08);break; case 'j':draw(kl09);break;
+        case 'k':draw(kl10);break; case 'l':draw(kl11);break;
+        case 'm':draw(kl12);break; case 'n':draw(kl13);break;
+        case 'o':draw(kl14);break; case 'p':draw(kl15);break;
+        case 'q':draw(kl16);break; case 'r':draw(kl17);break;
+        case 's':draw(kl18);break; case 't':draw(kl19);break;
+        case 'u':draw(kl20);break; case 'v':draw(kl21);break;
+        case 'w':draw(kl22);break; case 'x':draw(kl23);break;
+        case 'y':draw(kl24);break; case 'z':draw(kl25);break;
+        case '.':draw(klp);break; case ',':draw(klc);break;
+        case '!':draw(kle);break; case '-':draw(klhi);break;
+        case "\n":CR();break;
+        default:draw(def);break
+      }
     }
-  }
     function draw(id) {
       var sp = 5;
       var num=Math.max.apply(null, id[0]) + sp;
@@ -698,7 +698,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     for(var i=0; i<code.length; i++){  //配列の描画
       this.drawDot(code[i][0],code[i][1]);
     }
-    },
+  },
 
   drawLine:function(x1, y1, x2, y2) {     ///////点線の描画処理//////
     if(y2 === undefined)return this.drawLine(fromX, fromY, x1, y1);
