@@ -1,3 +1,109 @@
+var file = document.querySelector('#getfile');
+var edl = document.querySelector('#edl');
+var png = document.querySelector('#png');
+var esa = document.querySelector('#esa');
+var title = document.querySelector('#title');
+var filename;
+
+var Braille = tactileGraphic();
+Braille.setCanvas('a');
+
+          // ブラウザのUAを小文字で取得
+var userAgent = navigator.userAgent.toLowerCase();
+if (userAgent.indexOf('chrome') != -1) {
+  //document.getElementById('ie').style.display = "none"; //Chromeのみの処理
+}
+
+file.onchange = function (){   //ファイル選択後
+  var fileList = file.files;
+  title.innerHTML="";
+  load(fileList, 0);
+};
+
+function load(fileList, k){
+  if(k < fileList.length){  //>
+    var reader = new FileReader();
+    reader.readAsArrayBuffer(fileList[k]);//読み込み  Uncaught TypeError: Failed to execute
+    reader.onload = function  () {
+      filename =fileList[k].name;
+      title.innerHTML += "<br>" + filename;
+      
+      var reg=/(.*)(?:\.([^.]+$))/; //ファイル名から拡張子を取り除く正規表現
+      filename = filename.match(reg)[1];//[0]がフルネーム、[2]が拡張子のみ
+      
+      var array = new Uint8Array(reader.result);
+      var uniArray = Encoding.convert(array, 'UNICODE','AUTO');//配列を「ユニコード」に変換
+      var result = Encoding.codeToString(uniArray);
+      document.querySelector('#before').textContent = result;
+      var koma = fen2arr(result);     ///置換
+      draw4edel(koma);
+      var img = draw4swell(koma);
+	  
+	  edl.href = img;
+	  image.src = img;
+	  if (userAgent.indexOf('chrome') != -1) {
+        edl.click();           ///Chromeのみの処理
+      }  
+      k++; 
+      load(fileList, k);  //再帰呼び出し
+    }
+  }
+}
+
+                  ///////////ダウンロード処理///////////
+edl.onclick = function() {
+  var blob = new Blob([ Braille.loadEdl() ], { "type" : "text/plain" });
+  if (window.navigator.msSaveBlob) { 
+    window.navigator.msSaveBlob(blob, filename + ".edl"); 
+  } else {
+    edl.download =  filename + ".edl";  //ダウンロードするファイル名を設定
+    edl.href = window.URL.createObjectURL(blob);
+  }
+}
+
+png.onclick = function() {
+  // DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+  var bin = atob(imgURL.split(',')[1]);
+  // 空の Uint8Array ビューを作る
+  var buffer = new Uint8Array(bin.length);
+  // Uint8Array ビューに 1 バイトずつ値を埋める
+  for (var i = 0; i < bin.length; i++) {
+    buffer[i] = bin.charCodeAt(i);
+  }
+  // Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+  var blob = new Blob([buffer.buffer], {type: 'image/png'});
+  
+  if (window.navigator.msSaveBlob) {
+  // for IE
+  window.navigator.msSaveBlob(blob, filename + '.png'); 
+  } else {
+    png.download =  filename + ".png";  //ダウンロードするファイル名を設定
+    png.href = window.URL.createObjectURL(blob);
+  }
+}
+
+esa.onclick = function(){
+  imgURL = Braille.map2esa();
+  // DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+  var bin = atob(imgURL.split(',')[1]);
+  // 空の Uint8Array ビューを作る
+  var buffer = new Uint8Array(bin.length);
+  // Uint8Array ビューに 1 バイトずつ値を埋める
+  for (var i = 0; i < bin.length; i++) {
+    buffer[i] = bin.charCodeAt(i);
+  }
+  // Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+  var blob = new Blob([buffer.buffer], {type: 'image/png'});
+  
+  if (window.navigator.msSaveBlob) {
+  // for IE
+  window.navigator.msSaveBlob(blob, filename + '.png'); 
+  } else {
+    esa.download =  filename + ".png";  //ダウンロードするファイル名を設定
+    esa.href = window.URL.createObjectURL(blob);
+  }
+}
+
 /////////////////////////////////////////キーボード操作の検出/////////////////////////////
 document.onkeydown = function(e) {
   if(e.keyCode == 13){		//インターキーの押下を取得
@@ -10,8 +116,8 @@ document.onkeydown = function(e) {
 function fen2arr(str){          //CSVに変換
   str = str.replace(/\#.*/g,"");		//不要行を削除
   
-  arr=str.split( /(?:\r\n|[\r\n,])/ );/////////持駒墨字配列の生成/////
-
+  arr=str.split( /(\/ )/ );/////////持駒墨字配列の生成/////
+  console.log(arr);
 ///////////////まで
 
   gote[0] = sumi2ten(gote[0]);
