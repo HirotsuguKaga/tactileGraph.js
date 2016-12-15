@@ -113,91 +113,11 @@ document.onkeydown = function(e) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////棋譜を配列に変換///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function fen2arr(str){          //CSVに変換
-  str = str.replace(/\#.*/g,"");		//不要行を削除
-  
-  arr=str.split( /(\/ )/ );/////////持駒墨字配列の生成/////
+function fen2arr(str){          //配列に変換
+  str = str.replace(/ /g, "/");
+  arr=str.split( /\// );/////////
   console.log(arr);
-///////////////まで
-
-  gote[0] = sumi2ten(gote[0]);
-  mtg=gote[0].split( /(?:\r\n|[\r\n,])/ );/////////持駒点字配列の生成/////
-  
-  var sente = str.match(/先手の持駒.*/);
-  sente[0] = sente[0].replace(/　/g, ",");
-  sente[0] = sente[0].replace(/先手の持駒：/g,"");/////先手持駒の処理
-  mss=sente[0].split( /(?:\r\n|[\r\n,])/ );/////////持駒墨字先手配列の生成/////
-  sente[0] = sumi2ten(sente[0]);
-  mts=sente[0].split( /(?:\r\n|[\r\n,])/ );/////////持駒点字先手配列の生成/////
-  
-  var ban = str.match(/\|.*/g);
-  for(i=1; i < ban.length; i++){
-    ban[0] += " " + ban[i];
-  }  
-  str = ban[0];
-  str = str.replace(/  .*/g,"");
-  var rgexp = new RegExp(/^\s*$\r/gm);	//空行の削除
-  str = str.replace(rgexp, "");
-  str = str.replace(/　/g,"＠");
-  str = str.replace( /\|[一二三四五六七八九]/g , "" ) ;
-  str = str.replace( /\| /g , "" ) ;
-  str = str.replace( /  ９ ８ ７ ６ ５ ４ ３ ２ １/g , "" ) ;
-  str = str.replace( /\|v/g , "w" ) ;		//行頭のvをエスケープ
-  str = str.replace( /[+,\-,|]/g , "" ) ;
-  str = str.replace( /^\n/g , "" ) ;
-  str = str.replace( /\n\n/g , "\n" ) ;
-  str = str.replace( /^\r/g , "" ) ;
-  str = str.replace( / /g , "," ) ;
-  str = str.replace( /v/g , ",v" ) ;
-  str = str.replace( /w/g , "＿" ) ;
-  str = str.replace( /・/g , "　" ) ;
-  str = str.replace(/＠/g,",");
-  str = str.replace(/先手の持駒：/g,"持駒,");	//持駒の処理
-  str = str.replace(/＠/g,",");
-  str = str.replace(/全/g,"成銀");
-  str = str.replace(/圭/g,"成桂");
-  str = str.replace(/杏/g,"成香");
-  str = str.replace(/竜/g,"龍");
-  str = str.replace(/王/g,"玉");
-  
-  function sumi2ten(str){
-    str = str.replace( /w/g , "＿" ) ;//////////////////点字に変換/////////
-    str = str.replace( /v/g , "＿" ) ;
-    str = str.replace( /と金/g , "と" ) ;
-    str = str.replace( /成香/g , "そ" ) ;
-    str = str.replace( /成桂/g , "せ" ) ;
-    str = str.replace( /成銀/g , "み" ) ;
-    str = str.replace( /玉/g , "め" ) ;
-    str = str.replace( /金/g , "き" ) ;
-    str = str.replace( /銀/g , "し" ) ;
-    str = str.replace( /飛/g , "ひ" ) ;
-    str = str.replace( /角/g , "か" ) ;
-    str = str.replace( /桂/g , "け" ) ;
-    str = str.replace( /香/g , "こ" ) ;
-    str = str.replace( /歩/g , "ふ" ) ;
-    str = str.replace( /馬/g , "ま" ) ;
-    str = str.replace( /龍/g , "る" ) ;
-    str = str.replace( /一/g , "数１" ) ;
-    str = str.replace( /二/g , "数２" ) ;
-    str = str.replace( /三/g , "数３" ) ;
-    str = str.replace( /四/g , "数４" ) ;
-    str = str.replace( /五/g , "数５" ) ;
-    str = str.replace( /六/g , "数６" ) ;
-    str = str.replace( /七/g , "数７" ) ;
-    str = str.replace( /八/g , "数８" ) ;
-    str = str.replace( /九/g , "数９" ) ;
-    str = str.replace( /十数(.)/g , "数１$1" ) ;
-    return str;
-  }
-  
-  var arr2 = str.split( /(?:\r\n|[\r\n,])/ );/////////墨字配列の生成/////
-  str = sumi2ten(str);
-  var arr = str.split( /(?:\r\n|[\r\n,])/ );//////////点字配列の生成//////
-  ten = arr.slice(0,81);
-  sumi = arr2.slice(0,81);
-  //draw4edel();
-  //draw4swell();
-  return [ten,mts,mtg,sumi,mss,msg];
+  return arr;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,9 +126,6 @@ function fen2arr(str){          //CSVに変換
 
 function draw4edel(koma){
   Braille.clear();
-  ten = koma[0];
-  mts = koma[1];
-  mtg = koma[2];
   var canvase = document.getElementById('a');
   var ctx = canvase.getContext('2d');
   var sw = 60; var sh = 60;
@@ -217,23 +134,13 @@ function draw4edel(koma){
   ctx.fillRect(0,0,599,744);
   ctx.fillStyle = "rgb(0, 0, 0)";
     
-  for(var i = 0 ; i < 10 ; i++){          //盤面の描画
-    Braille.drawLine(bx+sw*i, by, bx+sw*i, by+sh*9);
-    Braille.drawLine(bx, by+sh*i, bx+sw*9, by+sh*i);
+  for(var i = 0 ; i < 9 ; i++){          //盤面の描画
+    Braille.drawLine(bx+sw*i, by, bx+sw*i, by+sh*8);
+    Braille.drawLine(bx, by+sh*i, bx+sw*8, by+sh*i);
   }
  
   var mx = 60; var sentey = 740; var gotey = 35; var mw = sw*8;var mh =48;
   
-  Braille.drawLine(mx, gotey, mx + mw, gotey);  //先手の枠
-  Braille.drawLine(mx, gotey + mh, mx + mw, gotey + mh);
-  Braille.drawLine(mx, gotey, mx, gotey + mh);
-  Braille.drawLine(mx + mw, gotey, mx + mw, gotey + mh);
-  Braille.drawLine(mx, sentey - mh, mx + mw, sentey - mh);  //後手の枠
-  Braille.drawLine(mx, sentey, mx + mw, sentey);
-  Braille.drawLine(mx, sentey - mh, mx, sentey);
-  Braille.drawLine(mx + mw, sentey - mh, mx + mw, sentey);
-  Braille.drawBraille("ごて", mx - 57, gotey + 17);   //盤外の点字
-  Braille.drawBraille("せんて", mx-57, sentey -31);
   Braille.drawBraille("９", bx + 20 + sw*0, by-25);
   Braille.drawBraille("８", bx + 20 + sw*1, by-25);
   Braille.drawBraille("７", bx + 20 + sw*2, by-25);
@@ -242,23 +149,21 @@ function draw4edel(koma){
   Braille.drawBraille("４", bx + 20 + sw*5, by-25);
   Braille.drawBraille("３", bx + 20 + sw*6, by-25);
   Braille.drawBraille("２", bx + 20 + sw*7, by-25);
-  Braille.drawBraille("１", bx + 20 + sw*8, by-25);
-  Braille.drawBraille("１", bx + 16 + sw*9, by + sh*0 + 22);
-  Braille.drawBraille("２", bx + 16 + sw*9, by + sh*1 + 22);
-  Braille.drawBraille("３", bx + 16 + sw*9, by + sh*2 + 22);
-  Braille.drawBraille("４", bx + 16 + sw*9, by + sh*3 + 22);
-  Braille.drawBraille("５", bx + 16 + sw*9, by + sh*4 + 22);
-  Braille.drawBraille("６", bx + 16 + sw*9, by + sh*5 + 22);
-  Braille.drawBraille("７", bx + 16 + sw*9, by + sh*6 + 22);
-  Braille.drawBraille("８", bx + 16 + sw*9, by + sh*7 + 22);
-  Braille.drawBraille("９", bx + 16 + sw*9, by + sh*8 + 22);
+  Braille.drawBraille("１", bx + 16 + sw*8, by + sh*0 + 22);
+  Braille.drawBraille("２", bx + 16 + sw*8, by + sh*1 + 22);
+  Braille.drawBraille("３", bx + 16 + sw*8, by + sh*2 + 22);
+  Braille.drawBraille("４", bx + 16 + sw*8, by + sh*3 + 22);
+  Braille.drawBraille("５", bx + 16 + sw*8, by + sh*4 + 22);
+  Braille.drawBraille("６", bx + 16 + sw*8, by + sh*5 + 22);
+  Braille.drawBraille("７", bx + 16 + sw*8, by + sh*6 + 22);
+  Braille.drawBraille("８", bx + 16 + sw*8, by + sh*7 + 22);
   
   Braille.drawBraille(filename, 10, 0);  /////////EDEL/////////
   
   var i = 0;
   for( var y = 0; y < 9; y++){           //盤面の駒の描画
     for( var x = 0; x < 9; x++){
-      Braille.drawBraille(ten[i], bx + sw*x + 20, by + sh*y + 23 );  //////EDEL//
+      Braille.drawBraille(arr[i], bx + sw*x + 20, by + sh*y + 23 );  //////EDEL//
       i++;
     }
   }
