@@ -116,12 +116,17 @@ document.onkeydown = function(e) {
 function fen2arr(str){          //配列に変換
   str = str.replace(/ /g, "/");
   arr=str.split( /\// );/////////
+  
+  for(var i=0; i<arr.length; i++){
+    arr[i] = arr[i].split("");    //split one
+  }
+  
   console.log(arr);
   return arr;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////// EDELの描画////////////////////////////////////////////////////////
+/////////////////////////////////////////// draw EDEL////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function draw4edel(koma){
@@ -129,63 +134,66 @@ function draw4edel(koma){
   var canvase = document.getElementById('a');
   var ctx = canvase.getContext('2d');
   var sw = 60; var sh = 60;
-  var bx = 0; var by = 130;
-  ctx.fillStyle = "rgb(255,245,230)";  //エーデル用のcanvasの初期化
+  var bx = 60; var by = 130;
+  ctx.fillStyle = "rgb(255,245,230)";                //initialize canvas for edel
   ctx.fillRect(0,0,599,744);
   ctx.fillStyle = "rgb(0, 0, 0)";
     
-  for(var i = 0 ; i < 9 ; i++){          //盤面の描画
+  for(var i = 0 ; i < 9 ; i++){                      //draw board
     Braille.drawLine(bx+sw*i, by, bx+sw*i, by+sh*8);
     Braille.drawLine(bx, by+sh*i, bx+sw*8, by+sh*i);
   }
- 
-  var mx = 60; var sentey = 740; var gotey = 35; var mw = sw*8;var mh =48;
-  
-  Braille.drawBraille("９", bx + 20 + sw*0, by-25);
-  Braille.drawBraille("８", bx + 20 + sw*1, by-25);
-  Braille.drawBraille("７", bx + 20 + sw*2, by-25);
-  Braille.drawBraille("６", bx + 20 + sw*3, by-25);
-  Braille.drawBraille("５", bx + 20 + sw*4, by-25);
-  Braille.drawBraille("４", bx + 20 + sw*5, by-25);
-  Braille.drawBraille("３", bx + 20 + sw*6, by-25);
-  Braille.drawBraille("２", bx + 20 + sw*7, by-25);
-  Braille.drawBraille("１", bx + 16 + sw*8, by + sh*0 + 22);
-  Braille.drawBraille("２", bx + 16 + sw*8, by + sh*1 + 22);
-  Braille.drawBraille("３", bx + 16 + sw*8, by + sh*2 + 22);
-  Braille.drawBraille("４", bx + 16 + sw*8, by + sh*3 + 22);
-  Braille.drawBraille("５", bx + 16 + sw*8, by + sh*4 + 22);
-  Braille.drawBraille("６", bx + 16 + sw*8, by + sh*5 + 22);
-  Braille.drawBraille("７", bx + 16 + sw*8, by + sh*6 + 22);
-  Braille.drawBraille("８", bx + 16 + sw*8, by + sh*7 + 22);
+  Braille.drawDot(bx+sw*8, by+sh*8);
+    
+  Braille.drawBraille("a", bx + 20 + sw*0, by+sh*8+18); //draw scale
+  Braille.drawBraille("b", bx + 20 + sw*1, by+sh*8+18);
+  Braille.drawBraille("c", bx + 20 + sw*2, by+sh*8+18);
+  Braille.drawBraille("d", bx + 20 + sw*3, by+sh*8+18);
+  Braille.drawBraille("e", bx + 20 + sw*4, by+sh*8+18);
+  Braille.drawBraille("f", bx + 20 + sw*5, by+sh*8+18);
+  Braille.drawBraille("g", bx + 20 + sw*6, by+sh*8+18);
+  Braille.drawBraille("h", bx + 20 + sw*7, by+sh*8+18);
+  Braille.drawBraille("8", 20, by + sh*0 + 22);
+  Braille.drawBraille("7", 20, by + sh*1 + 22);
+  Braille.drawBraille("6", 20, by + sh*2 + 22);
+  Braille.drawBraille("5", 20, by + sh*3 + 22);
+  Braille.drawBraille("4", 20, by + sh*4 + 22);
+  Braille.drawBraille("3", 20, by + sh*5 + 22);
+  Braille.drawBraille("2", 20, by + sh*6 + 22);
+  Braille.drawBraille("1", 20, by + sh*7 + 22);
+  Braille.drawBraille("a", bx + 20 + sw*0, by-25); //draw scale oposite
+  Braille.drawBraille("b", bx + 20 + sw*1, by-25);
+  Braille.drawBraille("c", bx + 20 + sw*2, by-25);
+  Braille.drawBraille("d", bx + 20 + sw*3, by-25);
+  Braille.drawBraille("e", bx + 20 + sw*4, by-25);
+  Braille.drawBraille("f", bx + 20 + sw*5, by-25);
+  Braille.drawBraille("g", bx + 20 + sw*6, by-25);
+  Braille.drawBraille("h", bx + 20 + sw*7, by-25);
+  Braille.drawBraille("8", bx + sw*8 +15, by + sh*0 + 22);
+  Braille.drawBraille("7", bx + sw*8 +15, by + sh*1 + 22);
+  Braille.drawBraille("6", bx + sw*8 +15, by + sh*2 + 22);
+  Braille.drawBraille("5", bx + sw*8 +15, by + sh*3 + 22);
+  Braille.drawBraille("4", bx + sw*8 +15, by + sh*4 + 22);
+  Braille.drawBraille("3", bx + sw*8 +15, by + sh*5 + 22);
+  Braille.drawBraille("2", bx + sw*8 +15, by + sh*6 + 22);
+  Braille.drawBraille("1", bx + sw*8 +15, by + sh*7 + 22);
   
   Braille.drawBraille(filename, 10, 0);  /////////EDEL/////////
   
-  var i = 0;
-  for( var y = 0; y < 9; y++){           //盤面の駒の描画
-    for( var x = 0; x < 9; x++){
-      Braille.drawBraille(arr[i], bx + sw*x + 20, by + sh*y + 23 );  //////EDEL//
+  for( var y = 0; y < 8; y++){           //draw pieces
+    for( var x = 0; x < 8; x++){
+      Braille.drawBraille(arr[y][x], bx + sw*x + 20, by + sh*y + 23 );  //////EDEL//
       i++;
     }
   }
 
-  var gote = "";
-  for( var y = 0; y < mtg.length ; y++){  //横置き用持ち駒の文字列
-    gote += mtg[y] + "　";
-  }
-  
-  var sente = "";
-  for( var y = 0; y < mts.length ; y++){
-    sente += mts[y] + "　";
-  }
-
-  Braille.drawBraille(gote,  mx+20, gotey + 17);  //後手の持駒
-  Braille.drawBraille(sente, mx+20, sentey -31);  //先手の持駒
 };
  
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////立体コピー用の描画////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function draw4swell(koma) {
+/*
   var ten = koma[0];
   var mts = koma[1];
   var mtg = koma[2];
@@ -341,6 +349,7 @@ function draw4swell(koma) {
   ctx.lineTo(bx -20, by + sh*-1);
   ctx.lineTo(bx -20, by + sh*-2);
   ctx.stroke();
+  */
     ///////////画像に変換////////////////////////
   imgURL = cvs.toDataURL();
   return imgURL;
