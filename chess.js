@@ -112,24 +112,12 @@ document.onkeydown = function(e) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////棋譜を配列に変換///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+var arr;
 function fen2arr(str){          //配列に変換
-  var arr=str.split( / / );/////////
+  arr=str.split( / / );/////////
 
+  console.log(arr);
   var barr=arr[0];
-
-  barr=barr.replace(/r/g,"12356");
-  barr=barr.replace(/n/g,"2346");
-  barr=barr.replace(/b/g,"1236");
-  barr=barr.replace(/q/g,"123456");
-  barr=barr.replace(/k/g,"136");
-  barr=barr.replace(/p/g,"12346");
-  barr=barr.replace(/R/g,"1235");
-  barr=barr.replace(/N/g,"234");
-  barr=barr.replace(/B/g,"123");
-  barr=barr.replace(/Q/g,"12345");
-  barr=barr.replace(/K/g,"13");
-  barr=barr.replace(/P/g,"1234");
 
   barr=barr.replace(/1/g," ,");
   barr=barr.replace(/2/g," , ,");
@@ -139,6 +127,19 @@ function fen2arr(str){          //配列に変換
   barr=barr.replace(/6/g," , , , , , ,");
   barr=barr.replace(/7/g," , , , , , , ,");
   barr=barr.replace(/8/g," , , , , , , , ,");
+
+  barr=barr.replace(/r/g,"12356,");
+  barr=barr.replace(/n/g,"2346,");
+  barr=barr.replace(/b/g,"1236,");
+  barr=barr.replace(/q/g,"123456,");
+  barr=barr.replace(/k/g,"136,");
+  barr=barr.replace(/p/g,"12346,");
+  barr=barr.replace(/R/g,"1235,");
+  barr=barr.replace(/N/g,"234,");
+  barr=barr.replace(/B/g,"123,");
+  barr=barr.replace(/Q/g,"12345,");
+  barr=barr.replace(/K/g,"13,");
+  barr=barr.replace(/P/g,"1234,");
   barr=barr.split( /\// );/////////
   
   for(var i=0; i<barr.length; i++){
@@ -158,7 +159,7 @@ function draw4edel(barr){
   var canvase = document.getElementById('a');
   var ctx = canvase.getContext('2d');
   var sw = 60; var sh = 60;
-  var bx = 60; var by = 130;
+  var bx = 60; var by = 70;
   ctx.fillStyle = "rgb(255,245,230)";                //initialize canvas for edel
   ctx.fillRect(0,0,599,744);
   ctx.fillStyle = "rgb(0, 0, 0)";
@@ -169,14 +170,14 @@ function draw4edel(barr){
   }
   Braille.drawDot(bx+sw*8, by+sh*8);
     
-  Braille.drawBraille("a", bx + 20 + sw*0, by+sh*8+18); //draw scale
-  Braille.drawBraille("b", bx + 20 + sw*1, by+sh*8+18);
-  Braille.drawBraille("c", bx + 20 + sw*2, by+sh*8+18);
-  Braille.drawBraille("d", bx + 20 + sw*3, by+sh*8+18);
-  Braille.drawBraille("e", bx + 20 + sw*4, by+sh*8+18);
-  Braille.drawBraille("f", bx + 20 + sw*5, by+sh*8+18);
-  Braille.drawBraille("g", bx + 20 + sw*6, by+sh*8+18);
-  Braille.drawBraille("h", bx + 20 + sw*7, by+sh*8+18);
+  Braille.drawBraille("a", bx + 20 + sw*0, by+sh*8+15); //draw scale
+  Braille.drawBraille("b", bx + 20 + sw*1, by+sh*8+15);
+  Braille.drawBraille("c", bx + 20 + sw*2, by+sh*8+15);
+  Braille.drawBraille("d", bx + 20 + sw*3, by+sh*8+15);
+  Braille.drawBraille("e", bx + 20 + sw*4, by+sh*8+15);
+  Braille.drawBraille("f", bx + 20 + sw*5, by+sh*8+15);
+  Braille.drawBraille("g", bx + 20 + sw*6, by+sh*8+15);
+  Braille.drawBraille("h", bx + 20 + sw*7, by+sh*8+15);
   Braille.drawBraille("8", 20, by + sh*0 + 22);
   Braille.drawBraille("7", 20, by + sh*1 + 22);
   Braille.drawBraille("6", 20, by + sh*2 + 22);
@@ -203,10 +204,13 @@ function draw4edel(barr){
   Braille.drawBraille("1", bx + sw*8 +15, by + sh*7 + 22);
   
   Braille.drawBraille(filename, 10, 0);  /////////EDEL/////////
+  Braille.drawBraille(arr[1] + " " + arr[2] + " " + arr[3] + " " + arr[4] + " " + arr[5], 20, 610);  /////////EDEL/////////
   
   for( var y = 0; y < 8; y++){           //draw pieces
     for( var x = 0; x < 8; x++){
-      Braille.arr2braille(barr[y][x], bx + sw*x + 20, by + sh*y + 23 );  //////EDEL//
+      var ar=[]; 
+      ar.push(barr[y][x]);
+      Braille.arr2braille(ar, bx + sw*x + 25, by + sh*y + 23 );  //////EDEL//
       i++;
     }
   }
