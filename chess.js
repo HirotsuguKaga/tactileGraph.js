@@ -114,22 +114,46 @@ document.onkeydown = function(e) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////棋譜を配列に変換///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function fen2arr(str){          //配列に変換
-  str = str.replace(/ /g, "/");
-  arr=str.split( /\// );/////////
+  var arr=str.split( / / );/////////
+
+  var barr=arr[0];
+
+  barr=barr.replace(/r/g,"12356");
+  barr=barr.replace(/n/g,"2346");
+  barr=barr.replace(/b/g,"1236");
+  barr=barr.replace(/q/g,"123456");
+  barr=barr.replace(/k/g,"136");
+  barr=barr.replace(/p/g,"12346");
+  barr=barr.replace(/R/g,"1235");
+  barr=barr.replace(/N/g,"234");
+  barr=barr.replace(/B/g,"123");
+  barr=barr.replace(/Q/g,"12345");
+  barr=barr.replace(/K/g,"13");
+  barr=barr.replace(/P/g,"1234");
+
+  barr=barr.replace(/1/g," ,");
+  barr=barr.replace(/2/g," , ,");
+  barr=barr.replace(/3/g," , , ,");
+  barr=barr.replace(/4/g," , , , ,");
+  barr=barr.replace(/5/g," , , , , ,");
+  barr=barr.replace(/6/g," , , , , , ,");
+  barr=barr.replace(/7/g," , , , , , , ,");
+  barr=barr.replace(/8/g," , , , , , , , ,");
+  barr=barr.split( /\// );/////////
   
-  for(var i=0; i<arr.length; i++){
-    arr[i] = arr[i].split("");    //split one
+  for(var i=0; i<barr.length; i++){
+    barr[i] = barr[i].split(",");    //split one
   }
   
-  console.log(arr);
-  return arr;
+  console.log(barr);
+  return barr;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////// draw EDEL////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function draw4edel(koma){
+function draw4edel(barr){
   Braille.clear();
   var canvase = document.getElementById('a');
   var ctx = canvase.getContext('2d');
@@ -182,7 +206,7 @@ function draw4edel(koma){
   
   for( var y = 0; y < 8; y++){           //draw pieces
     for( var x = 0; x < 8; x++){
-      Braille.drawBraille(arr[y][x], bx + sw*x + 20, by + sh*y + 23 );  //////EDEL//
+      Braille.arr2braille(barr[y][x], bx + sw*x + 20, by + sh*y + 23 );  //////EDEL//
       i++;
     }
   }
