@@ -169,43 +169,19 @@ function draw4edel(barr){
     Braille.drawLine(bx, by+sh*i, bx+sw*8, by+sh*i);
   }
   Braille.drawDot(bx+sw*8, by+sh*8);
-    
-  Braille.drawBraille("a", bx + 20 + sw*0, by+sh*8+15); //draw scale
-  Braille.drawBraille("b", bx + 20 + sw*1, by+sh*8+15);
-  Braille.drawBraille("c", bx + 20 + sw*2, by+sh*8+15);
-  Braille.drawBraille("d", bx + 20 + sw*3, by+sh*8+15);
-  Braille.drawBraille("e", bx + 20 + sw*4, by+sh*8+15);
-  Braille.drawBraille("f", bx + 20 + sw*5, by+sh*8+15);
-  Braille.drawBraille("g", bx + 20 + sw*6, by+sh*8+15);
-  Braille.drawBraille("h", bx + 20 + sw*7, by+sh*8+15);
-  Braille.drawBraille("8", 20, by + sh*0 + 22);
-  Braille.drawBraille("7", 20, by + sh*1 + 22);
-  Braille.drawBraille("6", 20, by + sh*2 + 22);
-  Braille.drawBraille("5", 20, by + sh*3 + 22);
-  Braille.drawBraille("4", 20, by + sh*4 + 22);
-  Braille.drawBraille("3", 20, by + sh*5 + 22);
-  Braille.drawBraille("2", 20, by + sh*6 + 22);
-  Braille.drawBraille("1", 20, by + sh*7 + 22);
-  Braille.drawBraille("a", bx + 20 + sw*0, by-25); //draw scale oposite
-  Braille.drawBraille("b", bx + 20 + sw*1, by-25);
-  Braille.drawBraille("c", bx + 20 + sw*2, by-25);
-  Braille.drawBraille("d", bx + 20 + sw*3, by-25);
-  Braille.drawBraille("e", bx + 20 + sw*4, by-25);
-  Braille.drawBraille("f", bx + 20 + sw*5, by-25);
-  Braille.drawBraille("g", bx + 20 + sw*6, by-25);
-  Braille.drawBraille("h", bx + 20 + sw*7, by-25);
-  Braille.drawBraille("8", bx + sw*8 +15, by + sh*0 + 22);
-  Braille.drawBraille("7", bx + sw*8 +15, by + sh*1 + 22);
-  Braille.drawBraille("6", bx + sw*8 +15, by + sh*2 + 22);
-  Braille.drawBraille("5", bx + sw*8 +15, by + sh*3 + 22);
-  Braille.drawBraille("4", bx + sw*8 +15, by + sh*4 + 22);
-  Braille.drawBraille("3", bx + sw*8 +15, by + sh*5 + 22);
-  Braille.drawBraille("2", bx + sw*8 +15, by + sh*6 + 22);
-  Braille.drawBraille("1", bx + sw*8 +15, by + sh*7 + 22);
+
+  var rank=["8","7","6","5","4","3","2","1"];
+  var file=["a", "b", "c", "d", "e", "f", "g", "h"];
+  for(var i=0; i<8; i++){
+    Braille.drawBraille(file[i], bx + 20 + sw*i, by+sh*8+15); //draw scale
+    Braille.drawBraille(rank[i], 20, by + sh*i + 22);
+    Braille.drawBraille(file[i], bx + 20 + sw*i, by-25); //draw scale oposite
+    Braille.drawBraille(rank[i], bx + sw*8 +15, by + sh*i + 22);
+  }
   
   Braille.drawBraille(filename, 10, 0);  /////////EDEL/////////
   Braille.drawBraille(arr[1] + " " + arr[2] + " " + arr[3] + " " + arr[4] + " " + arr[5], 20, 610);  /////////EDEL/////////
-  
+
   for( var y = 0; y < 8; y++){           //draw pieces
     for( var x = 0; x < 8; x++){
       var ar=[]; 
