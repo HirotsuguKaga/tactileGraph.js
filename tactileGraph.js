@@ -906,6 +906,11 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     var data = element.toDataURL();
     return data;
   },
+  
+  
+  loadArr:function(){
+    return arr;
+  },
 
   readEdl:function(str){              //////////// エーデルファイルの読み込み//////
     str+=""

@@ -15,8 +15,8 @@ tg.strokeRect(100,500,90,-150,290);
 tg.strokeRect(100,500,-90,150,290);
 tg.strokeRect(100,500,-90,-150,290);
 
-
-
+var str = tg.loadArr();
+console.log(str);
 
 
 
