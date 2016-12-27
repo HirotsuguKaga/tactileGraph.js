@@ -13,6 +13,7 @@
 
   var tactileGraphic = function() {
   var arr = [];
+  var dot = 1;
   var size = "A4"; //Paper size
   var sizeX = 599;
   var sizeY = 744;
@@ -28,6 +29,10 @@
   return {
 
           /////////////////////設定系メソッド///////////////////////
+  setDot:function(num){
+    dot=num;
+  },
+  
   setCanvas:function(id){
     canvas = document.getElementById(id);
     ctx = canvas.getContext('2d');
@@ -168,10 +173,10 @@
     
     str=str.replace(/&yen;[a-z]/g,"￥a");
     str = this.convertText(str);
-    var arr = [];
+    var arrA = [];
     for(i=0;i<str.length;i++){  //>1文字毎に配列を作成
       var letter = str.charAt(i);
-      arr.push(seek(letter));
+      arrA.push(seek(letter));
     }
     
     function seek(letter){        //数字コードを取得
@@ -189,31 +194,30 @@
           return arrLetter[j][1];
         }
       }
-      //alert("文字列に点字に変換出来ない文字が含まれています。");
       console.log("文字列に点字に変換出来ない文字が含まれています。");
       return "none";
     }
-    
-    this.arr2braille(arr,x,y);
+    this.arr2braille(arrA,x,y,returnX);
   },
 
-  arr2braille:function(arr,x,y,returnX){ //点字の描画処理/
+  arr2braille:function(ARR,x,y,returnX){ //点字の描画処理/
     if(right===true){  //右寄せ
-      x -= arr.length * r-8;
+      x -= ARR.length * r-8;
       right = false;
     }
     var j = k = 0;
-    for(var i = 0 ; i < arr.length ; i++){         //>
+    for(var i = 0 ; i < ARR.length ; i++){         //>
       if(returnX < x + r * j + w){j = 0; k++;}//改行
-      if(arr[i].match("1"))this.drawDot(x + r * j , y + l*k);
-      if(arr[i].match("2"))this.drawDot(x + r * j , y + h + l*k);
-      if(arr[i].match("3"))this.drawDot(x + r * j , y + h*2 + l*k);
-      if(arr[i].match("4"))this.drawDot(x + w + r * j , y + l*k);
-      if(arr[i].match("5"))this.drawDot(x + w + r * j , y + h + l*k);
-      if(arr[i].match("6"))this.drawDot(x + w + r * j , y + h*2 + l*k);
+      if(ARR[i].match("1"))this.drawDot(x + r * j , y + l*k);
+      if(ARR[i].match("2"))this.drawDot(x + r * j , y + h + l*k);
+      if(ARR[i].match("3"))this.drawDot(x + r * j , y + h*2 + l*k);
+      if(ARR[i].match("4"))this.drawDot(x + w + r * j , y + l*k);
+      if(ARR[i].match("5"))this.drawDot(x + w + r * j , y + h + l*k);
+      if(ARR[i].match("6"))this.drawDot(x + w + r * j , y + h*2 + l*k);
       j++
-      if(arr[i].match("\n")){j = 0; k++;}//改行
+      if(ARR[i].match("\n")){j = 0; k++;}//改行
     }
+    return (x + r * j , y + l*k);
   },
 
   drawBrailleRight:function(str, x, y){  //

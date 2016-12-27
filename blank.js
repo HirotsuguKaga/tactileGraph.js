@@ -9,14 +9,12 @@ function drawGraph(){///////////////////////////////////////////////////////
 
 
 
-tg.strokeRect(100,500,90,150);
-tg.strokeRect(100,500,90,150,290);
-tg.strokeRect(100,500,90,-150,290);
-tg.strokeRect(100,500,-90,150,290);
-tg.strokeRect(100,500,-90,-150,290);
+tg.drawBraille("okjsdgfhwdaghifal4ruegwbhfvlyrafruqwhrodjgbhfal9qwro;dhhfvwegytflgheuwrgdFWHQVIGlu",0,90,200);
+//tg.strokeRect(100,500,90,150,290);
+//tg.strokeRect(100,500,90,-150,290);
+//tg.strokeRect(100,500,-90,150,290);
+//tg.strokeRect(100,500,-90,-150,290);
 
-var str = tg.loadArr();
-console.log(str);
 
 
 
