@@ -9,7 +9,11 @@ function drawGraph(){///////////////////////////////////////////////////////
 
 
 
-tg.drawBraille("okjsdgfhwdaghifal4ruegwbhfvlyrafruqwhrodjgbhfal9qwro;dhhfvwegytflgheuwrgdFWHQVIGlu",0,90,200);
+var xy = tg.drawBraille("okjsdgfhwdaghifal4ruegwbhfvlyrafruqwhrodjgbhfal9qwro;dhhfvwegytflgheuwrgdFWHQVIGlu",0,90,300);
+
+console.log(xy);
+tg.drawBraille("a",xy[0],xy[1]);
+
 //tg.strokeRect(100,500,90,150,290);
 //tg.strokeRect(100,500,90,-150,290);
 //tg.strokeRect(100,500,-90,150,290);

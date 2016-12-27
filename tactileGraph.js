@@ -197,7 +197,7 @@
       console.log("文字列に点字に変換出来ない文字が含まれています。");
       return "none";
     }
-    this.arr2braille(arrA,x,y,returnX);
+    return this.arr2braille(arrA,x,y,returnX);
   },
 
   arr2braille:function(ARR,x,y,returnX){ //点字の描画処理/
@@ -217,7 +217,7 @@
       j++
       if(ARR[i].match("\n")){j = 0; k++;}//改行
     }
-    return (x + r * j , y + l*k);
+    return [x + r * j , y + l*k];
   },
 
   drawBrailleRight:function(str, x, y){  //
