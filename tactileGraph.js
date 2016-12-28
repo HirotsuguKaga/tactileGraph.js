@@ -40,13 +40,13 @@
   },
   
   drawCanvas:function(){
-    var len = coo[dot].length;
-    for(i=0; i<len; i++){
-      var x = coo[dot][i] % 1000;
-      var y = (coo[dot][i] - X) / 1000;
-      ctx.beginPath();
-      ctx.arc(x, y, 1, 0, Math.PI*2, false);
-      ctx.fill();
+    for(var i=0; i<coo.length; i++){
+      var len = coo[dot].length;
+      for(j=0; j<len; j++){
+        var x = coo[dot][j] % 1000;
+        var y = (coo[dot][j] - X) / 1000;
+        this.dot2preview(x,y);
+      }
     }
   },
 
@@ -834,11 +834,11 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
   drawDot:function(x,y) {               /////点の描画///////
     x = Math.round(x);
     y = Math.round(y);
-    this.dot2canvas(x,y);
+    this.dot2preview(x,y);
     coo[dot].push(y*1000 + x);
   },
   
-  dot2canvas:function(x,y){
+  dot2preview:function(x,y){
     if(ctx){
       ctx.beginPath();
       switch(dot){
