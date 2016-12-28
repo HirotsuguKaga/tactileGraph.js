@@ -843,11 +843,11 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       ctx.beginPath();
       switch(dot){
         case 0:
-          ctx.arc(x, y, 0.8, 0, Math.PI*2, false);break;
+          ctx.arc(x, y, 0.5, 0, Math.PI*2, false);break;
         case 1:
-          ctx.arc(x, y, 1.3, 0, Math.PI*2, false);break;
+          ctx.arc(x, y, 1.0, 0, Math.PI*2, false);break;
         case 2:
-          ctx.arc(x, y, 1.8, 0, Math.PI*2, false);break;
+          ctx.arc(x, y, 1.5, 0, Math.PI*2, false);break;
       }
       ctx.fill();
     }
