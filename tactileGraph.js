@@ -12,7 +12,7 @@
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
   var tactileGraphic = function() {
-  var arr = [];
+  var coo = [[],[],[]];
   var dot = 1;
   var size = "A4"; //Paper size
   var sizeX = 599;
@@ -36,10 +36,10 @@
   setCanvas:function(id){
     canvas = document.getElementById(id);
     ctx = canvas.getContext('2d');
-    var len = arr.length;
+    var len = coo[dot].length;
     for(i=0; i<len; i++){
-      var x = arr[i] % 1000;
-      var y = (arr[i] - X) / 1000;
+      var x = coo[dot][i] % 1000;
+      var y = (coo[dot][i] - X) / 1000;
       ctx.beginPath();
       ctx.arc(x, y, 1, 0, Math.PI*2, false);
       ctx.fill();
@@ -70,7 +70,7 @@
          ///////////////////////描画系メソッド//////////////////////
 
   convertText:function(str){    //拗音などを記号の組み合わせに変換する
-    var arr1 = [
+    var arr = [
     ['きゃ','拗か'],['きゅ','拗く'],['きょ','拗こ'],['しゃ','拗さ'],['しゅ','拗す'],
     ['しょ','拗そ'],['ちゃ','拗た'],['ちゅ','拗つ'],['ちょ','拗と'],['にゃ','拗な'],
     ['にゅ','拗ぬ'],['にょ','拗の'],['ひゃ','拗は'],['ひゅ','拗ふ'],['ひょ','拗ほ'],
@@ -121,9 +121,9 @@
         //数字の直後にア行とラ行、AからJまでのアルファベットがあったら間に繋ぎ符を挿入する
     str = str.replace(/([0-9０１２３４５６７８９])([ろロﾛＪJｊjあアｱＡAａaいイｲＢBｂbうウｳＣCｃcるルﾙＤDｄdらラﾗＥEｅeれレﾚＧGｇgえエｴＦFｆfりリﾘＨHｈhおオｵＩIｉi])/g, "$1_$2");
     
-    for(var i = 0 ; i < arr1.length ; i++){ //>配列の変換
-      var regex = new RegExp(arr1[i][0], 'g');
-      str = str.replace(regex,arr1[i][1]);
+    for(var i = 0 ; i < arr.length ; i++){ //>配列の変換
+      var regex = new RegExp(arr[i][0], 'g');
+      str = str.replace(regex,arr[i][1]);
     }
     return str;
   },
@@ -173,10 +173,10 @@
     
     str=str.replace(/&yen;[a-z]/g,"￥a");
     str = this.convertText(str);
-    var arrA = [];
+    var arr = [];
     for(i=0;i<str.length;i++){  //>1文字毎に配列を作成
       var letter = str.charAt(i);
-      arrA.push(seek(letter));
+      arr.push(seek(letter));
     }
     
     function seek(letter){        //数字コードを取得
@@ -197,25 +197,25 @@
       console.log("文字列に点字に変換出来ない文字が含まれています。");
       return "none";
     }
-    return this.arr2braille(arrA,x,y,returnX);
+    return this.arr2braille(arr,x,y,returnX);
   },
 
-  arr2braille:function(ARR,x,y,returnX){ //点字の描画処理/
+  arr2braille:function(arr,x,y,returnX){ //点字の描画処理/
     if(right===true){  //右寄せ
-      x -= ARR.length * r-8;
+      x -= arr.length * r-8;
       right = false;
     }
     var j = k = 0;
-    for(var i = 0 ; i < ARR.length ; i++){         //>
+    for(var i = 0 ; i < arr.length ; i++){         //>
       if(returnX < x + r * j + w){j = 0; k++;}//改行
-      if(ARR[i].match("1"))this.drawDot(x + r * j , y + l*k);
-      if(ARR[i].match("2"))this.drawDot(x + r * j , y + h + l*k);
-      if(ARR[i].match("3"))this.drawDot(x + r * j , y + h*2 + l*k);
-      if(ARR[i].match("4"))this.drawDot(x + w + r * j , y + l*k);
-      if(ARR[i].match("5"))this.drawDot(x + w + r * j , y + h + l*k);
-      if(ARR[i].match("6"))this.drawDot(x + w + r * j , y + h*2 + l*k);
+      if(arr[i].match("1"))this.drawDot(x + r * j , y + l*k);
+      if(arr[i].match("2"))this.drawDot(x + r * j , y + h + l*k);
+      if(arr[i].match("3"))this.drawDot(x + r * j , y + h*2 + l*k);
+      if(arr[i].match("4"))this.drawDot(x + w + r * j , y + l*k);
+      if(arr[i].match("5"))this.drawDot(x + w + r * j , y + h + l*k);
+      if(arr[i].match("6"))this.drawDot(x + w + r * j , y + h*2 + l*k);
       j++
-      if(ARR[i].match("\n")){j = 0; k++;}//改行
+      if(arr[i].match("\n")){j = 0; k++;}//改行
     }
     return [x + r * j , y + l*k];
   },
@@ -835,7 +835,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       ctx.arc(x, y, 1, 0, Math.PI*2, false);
       ctx.fill();
     }
-    arr.push(y*1000 + x);
+    coo[dot].push(y*1000 + x);
   },
 
   clearDot:function(x,y) {               /////点の削除///////
@@ -847,13 +847,13 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       ctx.fillStyle = '#000';
     }
     var target = y*1000 + x;
-    arr = arr.filter(function(v){
+    coo[dot] = coo[dot].filter(function(v){
       return v !== target;
     });
   },
 
   clear:function(){
-    arr=[];
+    coo=[[],[],[]];
     var fromX = 0;
     var fromY = 0;
     ctx.clearRect(0, 0, sizeX, sizeY);
@@ -861,17 +861,17 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
              /////////////入出力系メソッド//////////////////
 
   loadEdl:function() {              //////エーデルファイルの出力///////
-    arr.sort(function(a,b){
+    coo[dot].sort(function(a,b){
       if( a < b ) return -1;
       if( a > b ) return 1;
       return 0;
     });
     var str = "";
-    var len = arr.length;
+    var len = coo[dot].length;
     for(i=0; i<len; i++){
-      var X = arr[i] % 1000;
-      var Y = (arr[i] - X) / 1000;
-      if(arr[i-1] !== arr[i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
+      var X = coo[dot][i] % 1000;
+      var Y = (coo[dot][i] - X) / 1000;
+      if(coo[dot][i-1] !== coo[dot][i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
         str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));
       }
     }
@@ -900,11 +900,11 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     ctx2.fillStyle = '#fff';
     ctx2.fillRect(0, 0, sizeX, sizeY);
     ctx2.fillStyle = '#000';
-    var len = arr.length;
+    var len = coo[dot].length;
     
     for(var i = 0; i<len; i++){
-      var X = arr[i] % 1000;
-      var Y = (arr[i] - X) / 1000;
+      var X = coo[dot][i] % 1000;
+      var Y = (coo[dot][i] - X) / 1000;
       ctx2.fillRect(X,Y,1,1);
     }
     var data = element.toDataURL();
@@ -913,7 +913,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
   
   
   loadArr:function(){
-    return arr;
+    return coo[dot];
   },
 
   readEdl:function(str){              //////////// エーデルファイルの読み込み//////
