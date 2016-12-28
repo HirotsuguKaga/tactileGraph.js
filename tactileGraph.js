@@ -36,6 +36,10 @@
   setCanvas:function(id){
     canvas = document.getElementById(id);
     ctx = canvas.getContext('2d');
+    this.drawCanvas();
+  },
+  
+  drawCanvas:function(){
     var len = coo[dot].length;
     for(i=0; i<len; i++){
       var x = coo[dot][i] % 1000;
@@ -830,12 +834,23 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
   drawDot:function(x,y) {               /////点の描画///////
     x = Math.round(x);
     y = Math.round(y);
+    this.dot2canvas(x,y);
+    coo[dot].push(y*1000 + x);
+  },
+  
+  dot2canvas:function(x,y){
     if(ctx){
       ctx.beginPath();
-      ctx.arc(x, y, 1, 0, Math.PI*2, false);
+      switch(dot){
+        case 0:
+          ctx.arc(x, y, 0.8, 0, Math.PI*2, false);break;
+        case 1:
+          ctx.arc(x, y, 1.3, 0, Math.PI*2, false);break;
+        case 2:
+          ctx.arc(x, y, 1.8, 0, Math.PI*2, false);break;
+      }
       ctx.fill();
     }
-    coo[dot].push(y*1000 + x);
   },
 
   clearDot:function(x,y) {               /////点の削除///////

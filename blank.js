@@ -9,16 +9,13 @@ function drawGraph(){///////////////////////////////////////////////////////
 
 
 
-var xy = tg.drawBraille("okjsdgfhwdaghifal4ruegwbhfvlyrafruqwhrodjgbhfal9qwro;dhhfvwegytflgheuwrgdFWHQVIGlu",0,90,300);
+tg.drawBraille("abcdefghijklmn",20,300);
 
-console.log(xy);
-tg.drawBraille("a",xy[0],xy[1]);
+tg.setDot(0);
+tg.drawBraille("abcdefghijklmn",20,320);
 
-//tg.strokeRect(100,500,90,150,290);
-//tg.strokeRect(100,500,90,-150,290);
-//tg.strokeRect(100,500,-90,150,290);
-//tg.strokeRect(100,500,-90,-150,290);
-
+tg.setDot(2);
+tg.drawBraille("abcdefghijklmn",20,340);
 
 
 
