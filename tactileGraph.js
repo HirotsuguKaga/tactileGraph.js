@@ -11,7 +11,7 @@
 
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
-  var tactileGraphic = function() {
+var tactileGraphic = function(ID,SIZE) {
   var coo = [[],[],[]];
   var dot = 1;
   var size = "A4"; //Paper size
@@ -26,6 +26,24 @@
   var canvas,ctx;
   var interval = 6;
   var right = false; //右寄せチェック
+
+  if(ID){
+    canvas = document.getElementById(ID);
+    ctx = canvas.getContext('2d');
+  }
+  if(SIZE){
+    size = SIZE;
+    switch(size){
+      case "A4":
+        sizeX = 599;
+        sixeY = 744;
+        break;
+      case "B5":
+        sizeX = 479;
+        sizeY = 725;
+        break;
+    }
+  }
   return {
 
           /////////////////////設定系メソッド///////////////////////
@@ -837,7 +855,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     this.dot2preview(x,y);
     coo[dot].push(y*1000 + x);
   },
-  
+
   dot2preview:function(x,y){
     if(ctx){
       ctx.beginPath();
@@ -882,14 +900,20 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       return 0;
     });
     var str = "";
-    var len = coo[dot].length;
-    for(i=0; i<len; i++){
-      var X = coo[dot][i] % 1000;
-      var Y = (coo[dot][i] - X) / 1000;
-      if(coo[dot][i-1] !== coo[dot][i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
-        str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));
+    for(var j=0; j<coo.length;){
+      var len = coo[j].length;
+      var st="";
+      for(i=0; i<len; i++){
+        var X = coo[j][i] % 1000;
+        var Y = (coo[j][i] - X) / 1000;
+        if(coo[dot][i-1] !== coo[dot][i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
+          st += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));
+        }
       }
+      j++;
+      str = str + j + st;
     }
+    
     function num2edi(num){  //
       var str = num.toString(26);
       str = str.replace(/10(.)/, "Z$1");
@@ -903,7 +927,8 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       }
       return str;
     }
-    str = "EDEL" + size + "0,740\n2" + str;
+    
+    str = "EDEL" + size + "0,740\n" + str;
     return str;
   },
 

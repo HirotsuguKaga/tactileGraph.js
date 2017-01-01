@@ -1,21 +1,18 @@
-var tg = tactileGraphic();
-tg.setCanvas('a');
+var tg = tactileGraphic("a","B5");
 function drawGraph(){///////////////////////////////////////////////////////
   tg.clear();
-  tg.setSize("B5");
-  
   ///////ここから下に描画メソッドを記述します//////////////
 
 
 
 
-tg.drawBraille("abcdefghijklmn",20,300);
+tg.drawBraille("abc",20,300);
 
 tg.setDot(0);
-tg.drawBraille("abcdefghijklmn",20,320);
+tg.drawBraille("abc",20,320);
 
 tg.setDot(2);
-tg.drawBraille("abcdefghijklmn",20,340);
+tg.drawBraille("abc",20,340);
 
 
 
