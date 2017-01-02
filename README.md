@@ -10,57 +10,47 @@ Just a 'canvas like' tactile graphic drawing library.:octocat:
 ***
 Gh-Pages & DEMO: https://hirotsugukaga.github.io/tactileGraph.js/
 ***
+
+### REQUREMENT
+  ECMA-262 3rd edition or above.
+  
 ### INSTALL
 ```html
 <script src="tactileGraph.js"></script>
-　or
+  or
 <script src="tactileGraph.min.js"></script>
 ```
 ### USAGE
 ```javascript
 ex.
-　var tg = tactileGraph;  //initial
+  var tg = tactileGraph;  //initial
  
-　tg.drawBraille("ABCDEF", 0, 10);  //drawing
-　tg.drawLine(0,20,50,20);
+  tg.drawBraille("ABCDEF", 0, 10);  //drawing
+  tg.drawLine(0,20,50,20);
 
-　hoge.href = tg.map2esa();  //output
+  hoge.href = tg.map2esa();  //output
 ```
 
    
 ## Methods
-* drawDot(x, y);
-* drawBraille(str, x, y );
-* drawLine(x1, y1, x2, y2 );
-* strokeRect(x, y, w, h );
-* fillRect(x, y, w, h );
-* strokeCircle(r, x, y);
-* setCanvas(id);
-* setSize(str);
-* setInterval(num);
-* loadEdl();
-* map2esa();
-* clear();
-* convertText(str);
+### Drawing
+#### drawDot(int x, int y);
   
+#### drawBraille(string str, int x, int y , int returnX);
   
+#### drawLine(int x1, int y1, int x2, int y2 );
+  
+#### strokeRect(int x, int y, int width, int height);
+  
+#### fillRect(int x, int y, width, height);
+  
+#### strokeCircle(int r, int x, int y);
+  
+#### strokeRhombus(int x, int y, int width, int height);
+  
+#### clearDot(int x, int y);
 
-## Drawing
-### drawDot(int x, int y);
-  
-### drawBraille(string str, int x, int y , int returnX);
-  
-### drawLine(int x1, int y1, int x2, int y2 );
-  
-### strokeRect(int x, int y, int width, int height);
-  
-### fillRect(int x, int y, width, height);
-  
-### strokeCircle(int r, int x, int y);
-
-### clearDot(int x, int y);
-
-### clear();
+#### clear();
  
 
 ## Setting
