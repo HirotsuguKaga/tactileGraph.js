@@ -23,51 +23,46 @@ Gh-Pages & DEMO: https://hirotsugukaga.github.io/tactileGraph.js/
 ### USAGE
 ```javascript
 ex.
-  var tg = tactileGraph;  //initial
+  var tg = tactileGraph(id, "A4");  //initial
  
   tg.drawBraille("ABCDEF", 0, 10);  //drawing
   tg.drawLine(0,20,50,20);
 
   hoge.href = tg.map2esa();  //output
 ```
-
-   
 ## Methods
 ### Drawing
 #### drawDot(int x, int y);
-  
 #### drawBraille(string str, int x, int y , int returnX);
-  
 #### drawLine(int x1, int y1, int x2, int y2 );
-  
 #### strokeRect(int x, int y, int width, int height);
-  
 #### fillRect(int x, int y, width, height);
-  
 #### strokeCircle(int r, int x, int y);
-  
 #### strokeRhombus(int x, int y, int width, int height);
-  
+
 #### clearDot(int x, int y);
 
 #### clear();
  
 
-## Setting
-### setCanvas(String id);
+### Setting
+#### setCanvas(String id);
 set a canvas ID for screen preview(option).
-### setSize(String size);
+#### setSize(String size);
 set paper size(A4 or B5).
-### setInterval(int num)
+#### setInterval(int num)
 set a distance between dots in a line. (strokeCircle(), drawLine(), strokeRect, etc.)
-  
-## Output
-### loadEdl();
+#### setAdjust(boolean);
+#### setDot(int num);
+#### setColor(Color);
+### Output
+#### loadEdl();
 return string.
-### readEdl(String);
-### map2esa();
+#### readEdl(String);
+#### map2esa();
 return PNG.
-  
-## Misc
-### convertText(String str);
+#### loadArr();
+return array.
+### Misc
+#### convertText(String str);
 return converted string.
