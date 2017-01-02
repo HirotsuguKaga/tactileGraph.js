@@ -31,17 +31,29 @@ ex.
   hoge.href = tg.map2esa();  //output
 ```
 ## Methods
-### Drawing
-#### drawDot(int x, int y);
+### Draw Braille
 #### drawBraille(string str, int x, int y , int returnX);
+#### arr2braille(arr, x,y);
+#### drawBrailleMath(string str, int x, int y , int returnX);
+#### drawBrailleRight(string str, int x, int y);
+#### drawBrailleMathRight(string str, int x, int y);
+#### drawDecapoint(string str, int x, int y);
+#### drawKleintype(string str, int x, int y);
+### Draw Graph
+#### drawDot(int x, int y);
 #### drawLine(int x1, int y1, int x2, int y2 );
 #### strokeRect(int x, int y, int width, int height);
 #### fillRect(int x, int y, width, height);
 #### strokeCircle(int r, int x, int y);
 #### strokeRhombus(int x, int y, int width, int height);
-
+#### drawLineTilt(int x1, int y1, int length, int angle);
+#### strokeRectTilt(int x, int y, int width, int height, int angle);
+#### strokeRhombusTilt(int x, int y, int width, int height, int angle);
+#### fillRectTilt(int x, int y, int width, int height, int angle);
+#### strokeTable(int x, int y, int width, int height, int cols, int rows);
+#### drawPattern(array, int x, int y);
+### Clear
 #### clearDot(int x, int y);
-
 #### clear();
  
 
