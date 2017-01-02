@@ -26,7 +26,7 @@ var tactileGraphic = function(ID,SIZE) {
   var canvas,ctx;
   var interval = 6;
   var right = false; //右寄せチェック
-
+  var Adjust=false;
   if(ID){
     canvas = document.getElementById(ID);
     ctx = canvas.getContext('2d');
@@ -88,6 +88,10 @@ var tactileGraphic = function(ID,SIZE) {
 
   setColor:function(color){
     ctx.fillStyle = color;
+  },
+
+  setAdjust(bool){
+    Adjust=bool;
   },
          ///////////////////////描画系メソッド//////////////////////
 
@@ -732,10 +736,16 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     fromY = y2;
     var d = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     var rad = Math.atan2(y2 - y1, x2 - x1);
-    var dotted = Math.round(d / interval );
-    for (var i = 0; i < dotted; i++) {
-      var x3 = Math.cos(rad) * interval * i + x1;
-      var y3 = Math.sin(rad) * interval * i + y1;
+    var dotted = Math.floor(d / interval);
+    var int;
+    if(Adjust){
+      var int = d/dotted;
+    }else{
+      var int = interval;
+    }
+    for (var i = 0; i <= dotted; i++) {
+      var x3 = Math.cos(rad) * int * i + x1;
+      var y3 = Math.sin(rad) * int * i + y1;
       this.drawDot(x3, y3);
     }
   },
@@ -787,7 +797,6 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
   },
 
   strokeRhombusTilt:function(x, y, w, h, ang) {   ////菱形の描画処理 傾き///
-  
     var x1 = x + w*Math.cos(ang/180*Math.PI)/2;
     var y1 = y + w*Math.sin(ang/180*Math.PI)/2;
     
@@ -831,7 +840,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     }
   }, 
 
-  strokeOval:function(x, y, r) {     ////円の描画処理///
+  strokeOval:function(x, y, r) {     ////楕円の描画処理///未処理
     var cir = 2 * Math.PI * r;
     var a = 360 / Math.round(cir / interval); // 角度（度)
     
@@ -939,21 +948,29 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     var ctx2 = element.getContext('2d');
     ctx2.fillStyle = '#fff';
     ctx2.fillRect(0, 0, sizeX, sizeY);
-    ctx2.fillStyle = '#000';
-    var len = coo[dot].length;
     
-    for(var i = 0; i<len; i++){
-      var X = coo[dot][i] % 1000;
-      var Y = (coo[dot][i] - X) / 1000;
-      ctx2.fillRect(X,Y,1,1);
+    ctx2.fillStyle = '#00F';
+    draw(0);
+    ctx2.fillStyle = '#000';
+    draw(1);
+    ctx2.fillStyle = '#F00';
+    draw(2);
+    
+    function draw(dot){
+      var len = coo[dot].length;
+      for(var i = 0; i<len; i++){
+        var X = coo[dot][i] % 1000;
+        var Y = (coo[dot][i] - X) / 1000;
+        ctx2.fillRect(X,Y,1,1);
+      }
     }
+    
     var data = element.toDataURL();
     return data;
   },
-  
-  
+
   loadArr:function(){
-    return coo[dot];
+    return coo;
   },
 
   readEdl:function(str){              //////////// エーデルファイルの読み込み//////

@@ -60,7 +60,7 @@ var canvas = document.getElementById('b');
 var pr = tactileGraphic();
 pr.setCanvas('b');
 pr.setColor("red");
-
+pr.setAdjust(true);
 function hypo(a,b){return Math.sqrt(a*a + b*b)} //hypotenuse
 
 
@@ -122,6 +122,7 @@ function draw() {
 var txt = document.querySelector('#txt');
 var tg = tactileGraphic();
 tg.setCanvas('a');
+tg.setAdjust(true);
 
 canvas.addEventListener('click', onClick, false);
 

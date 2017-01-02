@@ -6,13 +6,22 @@ function drawGraph(){///////////////////////////////////////////////////////
 
 
 
-tg.drawBraille("abc",20,300);
+tg.drawLine(100,100,120,100);
+tg.drawDot(120,105);
 
-tg.setDot(0);
-tg.drawBraille("abc",20,320);
+tg.drawLine(100,200,125,200);
+tg.drawDot(125,205);
+tg.drawLine(100,250,140,250);
+tg.drawDot(140,255);
 
-tg.setDot(2);
-tg.drawBraille("abc",20,340);
+tg.setRounding(true);
+
+tg.drawLine(100,300,120,300);
+tg.drawDot(120,305);
+tg.drawLine(100,400,125,400);
+tg.drawDot(125,405);
+tg.drawLine(100,500,140,500);
+tg.drawDot(140,505);
 
 
 
