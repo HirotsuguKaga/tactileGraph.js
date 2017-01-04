@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [![Code Climate](https://codeclimate.com/github/HirotsuguKaga/Braille.js/badges/gpa.svg)](https://codeclimate.com/github/HirotsuguKaga/Braille.js)
 [![GitHub version](https://badge.fury.io/gh/HirotsuguKaga%2FtactileGraph.js.svg)](https://badge.fury.io/gh/HirotsuguKaga%2FtactileGraph.js)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
@@ -24,8 +23,8 @@ Gh-Pages & DEMO: https://hirotsugukaga.github.io/tactileGraph.js/
 ### USAGE
 ```javascript
 ex.
-  var tg = tactileGraph(id, "A4");  //initial
- 
+  var tg = tactileGraph("canvas", "A4");  //initial. tactileGraph("[id]","[paper size]")
+
   tg.drawBraille("ABCDEF", 0, 10);  //drawing
   tg.drawLine(0,20,50,20);
 
@@ -65,9 +64,11 @@ ex.
 #### setInterval(int num)
   set a distance between dots in a line. (strokeCircle(), drawLine(), strokeRect, etc.)
 #### setAdjust(boolean);
-  dot interval adjustment.
+  set dot interval adjustment from start position to end position.
 #### setDot(int num);
+  set dot size. 0: small, 1: middle, 2: large.
 #### setColor(Color);
+  set dot color on preview.
 ### Output
 #### loadEdl();
 return string.
