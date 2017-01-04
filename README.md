@@ -23,8 +23,8 @@ Gh-Pages & DEMO: https://hirotsugukaga.github.io/tactileGraph.js/
 ### USAGE
 ```javascript
 ex.
-  var tg = tactileGraph(id, "A4");  //initial
- 
+  var tg = tactileGraph("canvas", "A4");  //initial. tactileGraph("[id]","[paper size]")
+
   tg.drawBraille("ABCDEF", 0, 10);  //drawing
   tg.drawLine(0,20,50,20);
 
@@ -64,9 +64,11 @@ ex.
 #### setInterval(int num)
   set a distance between dots in a line. (strokeCircle(), drawLine(), strokeRect, etc.)
 #### setAdjust(boolean);
-  dot interval adjustment.
+  set dot interval adjustment from start position to end position.
 #### setDot(int num);
+  set dot size. 0: small, 1: middle, 2: large.
 #### setColor(Color);
+  set dot color on preview.
 ### Output
 #### loadEdl();
 return string.
