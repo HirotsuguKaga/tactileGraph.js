@@ -6,7 +6,14 @@ function drawGraph(){///////////////////////////////////////////////////////
 
 
 
-tg.drawLine(100,100,120,100);
+tg.drawLine(100,100,100,100);
+tg.drawLine(120,100,120,500);
+tg.setDot(0);
+tg.drawLine(140,100,140,800);
+tg.drawLine(160,100,160,900);
+tg.setDot(2);
+tg.drawLine(180,100,180,1000);
+
 tg.drawDot(120,105);
 
 tg.drawLine(100,200,125,200);

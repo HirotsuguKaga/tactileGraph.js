@@ -901,46 +901,6 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     ctx.clearRect(0, 0, sizeX, sizeY);
   },
              /////////////入出力系メソッド//////////////////
-
-  loadEdl:function() {              //////エーデルファイルの出力///////
-    coo[dot].sort(function(a,b){
-      if( a < b ) return -1;
-      if( a > b ) return 1;
-      return 0;
-    });
-    var str = "";
-    for(var j=0; j<coo.length;){
-      var len = coo[j].length;
-      var st="";
-      for(i=0; i<len; i++){
-        var X = coo[j][i] % 1000;
-        var Y = (coo[j][i] - X) / 1000;
-        if(coo[dot][i-1] !== coo[dot][i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
-          st += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));
-        }
-      }
-      j++;
-      str = str + j + st;
-    }
-    
-    function num2edi(num){  //
-      var str = num.toString(26);
-      str = str.replace(/10(.)/, "Z$1");
-      str = str.replace(/11(.)/, "\[$1");
-      str = str.replace(/12(.)/, "\\$1");
-      var js26 = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'];
-      var ed26 = ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'];
-      for(var i=0; i<26; i++){
-        str = str.replace(new RegExp(js26[i],"g"),ed26[i]);
-        str= ("@"+str).slice(-2);  //ゼロ埋め
-      }
-      return str;
-    }
-    
-    str = "EDEL" + size + "0,740\n" + str;
-    return str;
-  },
-
   map2esa:function(){
     var element = document.createElement("canvas");
     element.setAttribute("width", 599);
@@ -949,11 +909,11 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     ctx2.fillStyle = '#fff';
     ctx2.fillRect(0, 0, sizeX, sizeY);
     
-    ctx2.fillStyle = '#00F';
+    ctx2.fillStyle = '#00F'; //小点　青
     draw(0);
-    ctx2.fillStyle = '#000';
+    ctx2.fillStyle = '#000'; //中点　黒
     draw(1);
-    ctx2.fillStyle = '#F00';
+    ctx2.fillStyle = '#0F0'; //大点　緑
     draw(2);
     
     function draw(dot){
@@ -1012,5 +972,44 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     }
   }
 
+  loadEdl:function() {              //////エーデルファイルの出力///////
+    coo[dot].sort(function(a,b){
+      if( a < b ) return -1;
+      if( a > b ) return 1;
+      return 0;
+    });
+    var str = "";
+    for(var j=0; j<coo.length;){
+      var len = coo[j].length;
+      var st="";
+      for(i=0; i<len; i++){
+        var X = coo[j][i] % 1000;
+        var Y = (coo[j][i] - X) / 1000;
+        if(coo[dot][i-1] !== coo[dot][i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
+          st += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));
+        }
+      }
+      j++;
+      str = str + j + st;
+    }
+    
+    function num2edi(num){  //
+      var str = num.toString(26);
+      str = str.replace(/10(.)/, "Z$1");
+      str = str.replace(/11(.)/, "\[$1");
+      str = str.replace(/12(.)/, "\\$1");
+      var code = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'],
+                 ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'];
+      for(var i=0; i<26; i++){
+        str = str.replace(new RegExp(code[0][i],"g"),code[1][i]);
+        str= ("@"+str).slice(-2);  //ゼロ埋め
+      }
+      return str;
+    }
+    
+    str = "EDEL" + size + "0,740\n" + str;
+    return str;
+  },
+  
   };
 };
