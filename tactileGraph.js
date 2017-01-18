@@ -970,36 +970,48 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
         if(letter===ed26[i])return i;
       }
     }
-  }
+  },
+
 
   loadEdl:function() {              //////エーデルファイルの出力///////
-    coo[dot].sort(function(a,b){
+    var tempArr=[];  //一次元配列に変換
+    for(var j=0; j<coo.length; j++){
+      var len = coo[j].length;
+      for(var i=0; i< len; i++){
+        tempArr.push(coo[j][i]*10 + j);
+      }
+    }
+  
+    tempArr.sort(function(a,b){
       if( a < b ) return -1;
       if( a > b ) return 1;
       return 0;
     });
+  
+    console.log(tempArr);
+    var s = 0;
     var str = "";
-    for(var j=0; j<coo.length;){
-      var len = coo[j].length;
-      var st="";
-      for(i=0; i<len; i++){
-        var X = coo[j][i] % 1000;
-        var Y = (coo[j][i] - X) / 1000;
-        if(coo[dot][i-1] !== coo[dot][i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
-          st += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));
-        }
+    var len = tempArr.length;
+    for(i=0; i<len; i++){
+      var x = tempArr[i] % 10000;
+      var Y = (tempArr[i] - x) / 10000;
+      var S = x % 10 + 1;
+      var X = (x-S) /10;
+      console.log(Y);
+      if(tempArr[i-1] !== tempArr[i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
+        if(S===s){str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10))}
+        else{str += "\n" + S + num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));}
+        s=S;
       }
-      j++;
-      str = str + j + st;
     }
-    
-    function num2edi(num){  //
-      var str = num.toString(26);
-      str = str.replace(/10(.)/, "Z$1");
-      str = str.replace(/11(.)/, "\[$1");
-      str = str.replace(/12(.)/, "\\$1");
-      var code = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'],
-                 ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y'];
+  
+    function num2edi(num){  //10進数をエーデルの26進数に変換
+      var str = num.toString(26); //26進数に変換
+      str = str.replace(/10(.)/, "Z$1");  //26進数の3桁を置換
+      str = str.replace(/11(.)/, "\[$1"); //26進数の3桁を置換
+      str = str.replace(/12(.)/, "\\$1"); //26進数の3桁を置換
+      var code = [['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'],
+                  ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y']];
       for(var i=0; i<26; i++){
         str = str.replace(new RegExp(code[0][i],"g"),code[1][i]);
         str= ("@"+str).slice(-2);  //ゼロ埋め
@@ -1007,9 +1019,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       return str;
     }
     
-    str = "EDEL" + size + "0,740\n" + str;
+    str = "EDEL" + size + "0,740" + str;
     return str;
-  },
-  
-  };
+  }}
 };

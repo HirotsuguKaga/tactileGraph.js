@@ -6,29 +6,13 @@ function drawGraph(){///////////////////////////////////////////////////////
 
 
 
-tg.drawLine(100,100,100,100);
-tg.drawLine(120,100,120,500);
+tg.drawLine(120,80,150,80);
+tg.drawLine(120,100,120,110);
 tg.setDot(0);
-tg.drawLine(140,100,140,800);
-tg.drawLine(160,100,160,900);
+tg.drawLine(140,100,140,110);
+tg.drawLine(160,100,160,110);
 tg.setDot(2);
-tg.drawLine(180,100,180,1000);
-
-tg.drawDot(120,105);
-
-tg.drawLine(100,200,125,200);
-tg.drawDot(125,205);
-tg.drawLine(100,250,140,250);
-tg.drawDot(140,255);
-
-tg.setRounding(true);
-
-tg.drawLine(100,300,120,300);
-tg.drawDot(120,305);
-tg.drawLine(100,400,125,400);
-tg.drawDot(125,405);
-tg.drawLine(100,500,140,500);
-tg.drawDot(140,505);
+tg.drawLine(180,100,180,110);
 
 
 
