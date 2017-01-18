@@ -994,13 +994,13 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     var len = tempArr.length;
     for(i=0; i<len; i++){
       var x = tempArr[i] % 10000;
-      var Y = (tempArr[i] - x) / 10000;
-      var S = x % 10 + 1;
-      var X = (x-S) /10;
+      var Y = (tempArr[i] - x) / 10000; //Y座標を取得
+      var S = x % 10 + 1; //点種を取得
+      var X = (x-S) /10; //X座標を取得
       console.log(Y);
       if(tempArr[i-1] !== tempArr[i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
-        if(S===s){str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10))}
-        else{str += "\n" + S + num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));}
+        if(S===s){str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10))}        //前の点と点種が同じ場合
+        else{str += "\n" + S + num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));} //異なる場合は改行して行頭に数字を置く
         s=S;
       }
     }
