@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [![Code Climate](https://codeclimate.com/github/HirotsuguKaga/Braille.js/badges/gpa.svg)](https://codeclimate.com/github/HirotsuguKaga/Braille.js)
 [![GitHub version](https://badge.fury.io/gh/HirotsuguKaga%2FtactileGraph.js.svg)](https://badge.fury.io/gh/HirotsuguKaga%2FtactileGraph.js)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
@@ -62,7 +61,7 @@ hoge.href = tg.map2esa();
  点字文字列を描画します。点字に変換できない文字が含まれる場合はアラートを表示します。座標は1文字目の1の点の位置を表し、 第一、第二引数を省略した場合はデフォルトを(0,0)として描画します。
  第五引数はオプションで改行位置の座標を指定します。省略した場合は用紙の端で改行します。
 
-####arr2braille(Array, int x, int y, int returnX);
+### arr2braille(Array, int x, int y, int returnX);
  点字の打点を数字を羅列した配列を指定し、点字文を描画します。  
  ex. arr2braille(['123','145','123456','356'],10,100);
 
@@ -104,13 +103,13 @@ hoge.href = tg.map2esa();
 ### setInterval(int num)
 　直線や長方形、円形等を描画する際の点の間隔を設定します。（デフォルトは6）
 
-#### setAdjust(boolean);
+### setAdjust(boolean);
 　直線や図形描画時に、点の間隔を終点の位置に合わせて調整するかを設定します。デフォルトはfalseです。
 
-#### setDot(int num);
+### setDot(int num);
 　点種を指定します。（小点：0，中点：1，大点：2）
 
-####setLetterSize(LineHeight, Width, Height, Inter-character);
+### setLetterSize(LineHeight, Width, Height, Inter-character);
   行の高さ、点字の横の点間隔、縦の点間隔、文字間の間隔を指定します。デフォルトは(30,6,7,15)です。
 
 ### setColor(color)
