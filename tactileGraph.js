@@ -122,7 +122,6 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
         sizeY = 670;
         break;
       case "IJA3":
-      
         sizeX = 536;
         sizeY = 790;
         break;
