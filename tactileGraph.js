@@ -1072,7 +1072,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       return str;
     }
     
-    str = "EDEL" + size + "0,740" + str;
+    str = "EDEL" + size + ",0,740" + str;
     return str;
   }}
 };

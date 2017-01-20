@@ -1,4 +1,4 @@
-var tg = tactileGraphic("a","B5");
+var tg = tactileGraphic("a","IJB5","edi");
 function drawGraph(){///////////////////////////////////////////////////////
   tg.clear();
   ///////ここから下に描画メソッドを記述します//////////////
