@@ -11,7 +11,7 @@
 
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
-var tactileGraphic = function(ID,SIZE) {
+var tactileGraphic = function(ID, SIZE, TYPE) {
   var coo = [[],[],[]];
   var dot = 1;
   var size = "A4"; //Paper size
@@ -43,6 +43,12 @@ var tactileGraphic = function(ID,SIZE) {
         sizeY = 725;
         break;
     }
+  }
+  if(TYPE==="edi"){
+    l = 38; // Line height
+    w = 5;
+    h = 5;
+    r = 12; //
   }
   return {
 
@@ -92,6 +98,13 @@ var tactileGraphic = function(ID,SIZE) {
 
   setAdjust(bool){
     Adjust=bool;
+  },
+
+  setLetterSize:function(L,W,H,R){
+    l = L; // Line height
+    w = W;
+    h = H;
+    r = R; //
   },
          ///////////////////////描画系メソッド//////////////////////
 
