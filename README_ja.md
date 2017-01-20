@@ -19,8 +19,8 @@ html5のキャンバスライクなシンプルな命令で、エーデルやMAP
 ### JavaScript
 1. 初期設定 
 ```javascript
-var tg = tactileGraph;
-tg.setCanvas('hoge'); //プレビュー用CanvasのIDを指定（任意）
+var tg = tactileGraph("canvas", "A4", "edl");
+   //tactileGraph("[id]","[paper size]", "[EDL or EDI]");
 ```
 2. 描画 
 ```javascript
@@ -99,10 +99,19 @@ hoge.href = tg.map2esa();
 　スクリーン上でのプレビューやｙ立体コピー用紙用の触図を表示するためのcanvas要素のidを指定します（任意）。
   
 ### setSize(String size);
-　用紙サイズを設定します。現在はA4とB5の二種類（デフォルトはA4）です。
+　用紙サイズを設定します。edlファイルで用いる"A4"と"B5"、ediファイルで用い "IJB6", "IJB5", "IJA4", "IJB4", "IJA3"の7種類があります。（デフォルトはA4）
   
 ### setInterval(int num)
 　直線や長方形、円形等を描画する際の点の間隔を設定します。（デフォルトは6）
+
+#### setAdjust(boolean);
+　直線や図形描画時に、点の間隔を終点の位置に合わせて調整するかを設定します。デフォルトはfalseです。
+
+#### setDot(int num);
+　点種を指定します。（小点：0，中点：1，大点：2）
+
+####setLetterSize(LineHeight, Width, Height, Inter-character);
+  行の高さ、点字の横の点間隔、縦の点間隔、文字間の間隔を指定します。デフォルトは(30,6,7,15)です。
 
 ### setColor(color)
 　プレビュー用canvasの描画色を指定します。（デフォルトは黒）
