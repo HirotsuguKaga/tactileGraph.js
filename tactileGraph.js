@@ -42,6 +42,26 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
         sizeX = 479;
         sizeY = 725;
         break;
+      case "IJB6":
+        sizeX = 176;
+        sizeY = 272;
+        break;
+      case "IJB5":
+        sizeX = 320;
+        sizeY = 460;
+        break;
+      case "IJA4":
+        sizeX = 360;
+        sizeY = 540;
+        break;
+      case "IJB4":
+        sizeX = 456;
+        sizeY = 670;
+        break;
+      case "IJA3":
+        sizeX = 536;
+        sizeY = 790;
+        break;
     }
   }
   if(TYPE==="edi"){
@@ -84,6 +104,27 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
       case "B5":
         sizeX = 479;
         sizeY = 725;
+        break;
+      case "IJB6":
+        sizeX = 176;
+        sizeY = 272;
+        break;
+      case "IJB5":
+        sizeX = 320;
+        sizeY = 460;
+        break;
+      case "IJA4":
+        sizeX = 360;
+        sizeY = 540;
+        break;
+      case "IJB4":
+        sizeX = 456;
+        sizeY = 670;
+        break;
+      case "IJA3":
+      
+        sizeX = 536;
+        sizeY = 790;
         break;
       }
   },
