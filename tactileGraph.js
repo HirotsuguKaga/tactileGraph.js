@@ -65,7 +65,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     }
   }
   if(TYPE==="edi"){
-    l = 38; // Line height
+    l = 28; // Line height
     w = 5;
     h = 5;
     r = 12; //
@@ -145,6 +145,17 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     w = W;
     h = H;
     r = R; //
+  },
+
+  setType(TYPE){
+    switch(TYPE){
+    case "edi":
+      this.setLetterSize(38,5,5,12);
+      break;
+    default:
+      this.setLetterSize(30,6,7,15);
+      break;
+    }
   },
          ///////////////////////描画系メソッド//////////////////////
 

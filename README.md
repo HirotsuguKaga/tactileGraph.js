@@ -69,6 +69,7 @@ ex.
   set dot size. 0: small, 1: middle, 2: large.
 ####setLetterSize(LineHeight, Width, Height, Inter-character);
   default is (30,6,7,15).
+#### setType(edl or edi);
 #### setColor(Color);
   set dot color on preview.
 ### Output
