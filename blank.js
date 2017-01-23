@@ -5,8 +5,9 @@ function drawGraph(){///////////////////////////////////////////////////////
 
 
 
-
-tg.drawLine(120,80,150,80);
+var hoge;
+hoge= tg.drawBraille("asdafsadgsagaet",150,80);
+console.log(hoge);
 tg.drawLine(120,100,120,110);
 tg.setDot(0);
 tg.drawLine(140,100,140,110);
