@@ -141,16 +141,16 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
   },
 
   setLetterSize:function(L,W,H,R){
-    l = L; // Line height
+    l = L;
     w = W;
     h = H;
-    r = R; //
+    r = R;
   },
 
   setType(TYPE){
     switch(TYPE){
     case "edi":
-      this.setLetterSize(38,5,5,12);
+      this.setLetterSize(28,5,5,12);
       break;
     default:
       this.setLetterSize(30,6,7,15);

@@ -1,4 +1,4 @@
-var tg = tactileGraphic("a","IJB5","edi");
+var tg = tactileGraphic("a","IJB5","edl");
 function drawGraph(){///////////////////////////////////////////////////////
   tg.clear();
   ///////ここから下に描画メソッドを記述します//////////////
@@ -6,14 +6,15 @@ function drawGraph(){///////////////////////////////////////////////////////
 
 
 var hoge;
-hoge= tg.drawBraille("asdafsadgsagaet",150,80);
+hoge= tg.drawBraille("nsd",150,180);
+tg.setType("edi");
+hoge= tg.drawBraille("nsd",hoge[0],hoge[1]);
 console.log(hoge);
 tg.drawLine(120,100,120,110);
 tg.setDot(0);
 tg.drawLine(140,100,140,110);
 tg.drawLine(160,100,160,110);
 tg.setDot(2);
-tg.drawLine(180,100,180,110);
 
 
 
