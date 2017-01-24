@@ -140,7 +140,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     Adjust=bool;
   },
 
-  setLetterSize:function(L,W,H,R){
+  setBraille:function(L,W,H,R){
     l = L; // Line height
     w = W;
     h = H;
@@ -150,10 +150,10 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
   setType(TYPE){
     switch(TYPE){
     case "edi":
-      this.setLetterSize(38,5,5,12);
+      this.setBraille(38,5,5,12);
       break;
     default:
-      this.setLetterSize(30,6,7,15);
+      this.setBraille(30,6,7,15);
       break;
     }
   },
