@@ -36,7 +36,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     switch(size){
       case "A4":
         sizeX = 599;
-        sixeY = 744;
+        sizeY = 744;
         break;
       case "B5":
         sizeX = 479;
@@ -70,8 +70,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     h = 5;
     r = 12; //
   }
-  return {
-
+ return {
           /////////////////////設定系メソッド///////////////////////
   setDot:function(num){
     dot=num;
@@ -86,7 +85,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
   drawCanvas:function(){
     for(var i=0; i<coo.length; i++){
       var len = coo[dot].length;
-      for(j=0; j<len; j++){
+      for(var j=0; j<len; j++){
         var x = coo[dot][j] % 1000;
         var y = (coo[dot][j] - X) / 1000;
         this.dot2preview(x,y);
@@ -99,7 +98,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     switch(str){
       case "A4":
         sizeX = 599;
-        sixeY = 744;
+        sizeY = 744;
         break;
       case "B5":
         sizeX = 479;
@@ -264,7 +263,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     str=str.replace(/&yen;[a-z]/g,"￥a");
     str = this.convertText(str);
     var arr = [];
-    for(i=0;i<str.length;i++){  //>1文字毎に配列を作成
+    for(var i=0;i<str.length;i++){  //>1文字毎に配列を作成
       var letter = str.charAt(i);
       arr.push(seek(letter));
     }
@@ -274,7 +273,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
       ["\n","\n"], [".","256"], ["\,","2"],["\(","2356"], ["\)","2356"],
       ["\[","2356"], ["\]","2356"], ["\\","4"], ["\*","16"], ["\;","23"],
       ["?","26"], ["\{","2356"], ["\}","2356"], ["\^"," "],
-      ["$","56"], ["-","36"], ["\|","456"], ["\/","34"]]
+      ["$","56"], ["-","36"], ["\|","456"], ["\/","34"]];
       for(var i= 0 ; i < a.length ; i++){ //エスケープが必要な文字を先に文字列として比較
         if(letter === a[i][0]){console.log(letter);return a[i][1];}
       }
@@ -295,7 +294,8 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
       x -= arr.length * r-8;
       right = false;
     }
-    var j = k = 0;
+    var j = k;
+    var k = 0;
     for(var i = 0 ; i < arr.length ; i++){         //>
       if(returnX < x + r * j + w){j = 0; k++;}//改行
       if(arr[i].match("1"))this.drawDot(x + r * j , y + l*k);
@@ -304,7 +304,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
       if(arr[i].match("4"))this.drawDot(x + w + r * j , y + l*k);
       if(arr[i].match("5"))this.drawDot(x + w + r * j , y + h + l*k);
       if(arr[i].match("6"))this.drawDot(x + w + r * j , y + h*2 + l*k);
-      j++
+      j++;
       if(arr[i].match("\n")){j = 0; k++;}//改行
     }
     return [x + r * j , y + l*k];
@@ -353,7 +353,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     str=str.replace(/≒/g,"中ー"); str=str.replace(/≠/g,"‡ー");
     str=str.replace(/=/g,"ーー"); str=str.replace(/＞/g,"？？");
     str=str.replace(/＜/g,"をを"); str=str.replace(/\>/g,"？？");
-    str=str.replace(/\</g,"をを"); str=str.replace(/≧/g,"ヱヱ");
+    str=str.replace(/</g,"をを"); str=str.replace(/≧/g,"ヱヱ");
     str=str.replace(/≦/g,"語語"); str=str.replace(/（/g,"語");
     str=str.replace(/\(/g,"語"); str=str.replace(/）/g,"ん");
     str=str.replace(/\)/g,"ん"); str=str.replace(/｛/g,"半き");
@@ -667,13 +667,13 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       case "ぅ":draw(h54);break;case "ぇ":draw(h55);break;case "ぉ":draw(h56);break;case "ゃ":draw(h57);break;
       case "ゅ":draw(h58);break;case "ょ":draw(h59);break;case "っ":draw(h60);break;case "木":draw(c01);break;
       case "日":draw(c02);break;case "月":draw(c03);break;case "水":draw(c04);break;case "火":draw(c05);break;
-      case "金":draw(c06);break;case "土":draw(c07);break;default:draw(def);break
+      case "金":draw(c06);break;case "土":draw(c07);break;default:draw(def);break;
     }
   }
     function draw(id) {
       var sp = 2;
       var num=Math.max.apply(null, id[0]) + sp;
-      if(pos+num*7>returnX){CR()}          //改行チェック
+      if(pos+num*7>returnX){CR();}          //改行チェック
       for (var int = 0; int < id[0].length; int++){
         var X=id[0][int];
         var Y=id[1][int];
@@ -767,13 +767,13 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
         case ".":draw(klp);break; case ",":draw(klc);break;
         case "!":draw(kle);break; case "-":draw(klhi);break;
         case "\n":CR();break;
-        default:draw(def);break
+        default:draw(def);break;
       }
     }
     function draw(id) {
       var sp = 5;
       var num=Math.max.apply(null, id[0]) + sp;
-      if(pos+num>returnX){CR()}          //改行チェック
+      if(pos+num>returnX){CR();}          //改行チェック
       for (var int = 0; int < id[0].length; int++){
         var X=id[0][int];
         var Y=id[1][int];
@@ -829,7 +829,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     this.drawLine(x, y+h , x+w, y+h);
   },
 
-  strokeRectTilt:function(x, y, w, h, ang) {   ////長方形の描画処理 傾き///
+  strokeRectTilt:function(x, y, w, h, ang) {  ////長方形の描画処理 傾き///
     var x1 = x + w*Math.cos(ang/180*Math.PI);
     var y1 = y + w*Math.sin(ang/180*Math.PI);
     var x3 = x + h*Math.cos((ang+90)/180*Math.PI);
@@ -844,7 +844,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
 
   fillRect:function(x, y, w, h) {     ////長方形の描画処理  塗りつぶし///
     if(w<0){w*=-1; x-=w;}
-    if(h<0){h*=-1; y-=h}
+    if(h<0){h*=-1; y-=h;}
     var s = 3;
     var j = Math.round(h /s /2 );
     for (var i = 0; i <= j; i++) {
@@ -894,7 +894,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     }
   },
 
-  strokeArc:function(x, y, r,s,e) {     ////円弧の描画処理///
+  strokeArc:function(x, y, r,s,e) {    ////円弧の描画処理///
     var cir = 2 * Math.PI * r;
     var a = 360 / Math.round(cir / interval); // 角度（度)
     for(var i=0; a*i < e-s; i++){
@@ -915,14 +915,14 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     }
   }, 
 
-  drawPattern:function(code, x, y) {     ////図形の描画処理///
+  drawPattern:function(code, x, y) {   ////図形の描画処理///
     var len = code.length;
     for(var i=0; i < len; i++){
       this.drawDot(code[i][0]+x, code[i][1]+y);
     }
   },
 
-  drawDot:function(x,y) {               /////点の描画///////
+  drawDot:function(x,y) {              /////点の描画///////
     x = Math.round(x);
     y = Math.round(y);
     this.dot2preview(x,y);
@@ -960,8 +960,8 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
 
   clear:function(){
     coo=[[],[],[]];
-    var fromX = 0;
-    var fromY = 0;
+    fromX = 0;
+    fromY = 0;
     ctx.clearRect(0, 0, sizeX, sizeY);
   },
              /////////////入出力系メソッド//////////////////
@@ -998,7 +998,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
   },
 
   readEdl:function(str){              //////////// エーデルファイルの読み込み//////
-    str+=""
+    str+="";
     str = str.replace(/^.+?[\n\r]/,"");
     str = str.replace(/[\n\r]/,"");
     str = str.replace(/[0-9]/g,"");
@@ -1036,7 +1036,6 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     }
   },
 
-
   loadEdl:function() {              //////エーデルファイルの出力///////
     var tempArr=[];  //一次元配列に変換
     for(var j=0; j<coo.length; j++){
@@ -1056,14 +1055,14 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     var s = 0;
     var str = "";
     var len = tempArr.length;
-    for(i=0; i<len; i++){
+    for(var i=0; i<len; i++){
       var x = tempArr[i] % 10000;
       var Y = (tempArr[i] - x) / 10000; //Y座標を取得
       var S = x % 10 + 1; //点種を取得
       var X = (x-S) /10; //X座標を取得
       console.log(Y);
       if(tempArr[i-1] !== tempArr[i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
-        if(S===s){str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10))}        //前の点と点種が同じ場合
+        if(S===s){str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));}        //前の点と点種が同じ場合
         else{str += "\n" + S + num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));} //異なる場合は改行して行頭に数字を置く
         s=S;
       }
@@ -1082,8 +1081,8 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       }
       return str;
     }
-
     str = "EDEL" + size + ",0,740" + str;
     return str;
-  }}
+  },
+ };
 };
