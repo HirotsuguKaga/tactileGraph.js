@@ -29,14 +29,14 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
   var Adjust=false;
   if(ID){
     canvas = document.getElementById(ID);
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext("2d");
   }
   if(SIZE){
     size = SIZE;
     switch(size){
       case "A4":
         sizeX = 599;
-        sixeY = 744;
+        sizeY = 744;
         break;
       case "B5":
         sizeX = 479;
@@ -70,23 +70,22 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     h = 5;
     r = 12; //
   }
-  return {
-
+ return {
           /////////////////////設定系メソッド///////////////////////
   setDot:function(num){
     dot=num;
   },
-  
+
   setCanvas:function(id){
     canvas = document.getElementById(id);
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext("2d");
     this.drawCanvas();
   },
-  
+
   drawCanvas:function(){
     for(var i=0; i<coo.length; i++){
       var len = coo[dot].length;
-      for(j=0; j<len; j++){
+      for(var j=0; j<len; j++){
         var x = coo[dot][j] % 1000;
         var y = (coo[dot][j] - X) / 1000;
         this.dot2preview(x,y);
@@ -99,7 +98,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     switch(str){
       case "A4":
         sizeX = 599;
-        sixeY = 744;
+        sizeY = 744;
         break;
       case "B5":
         sizeX = 479;
@@ -141,16 +140,16 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
   },
 
   setBraille:function(L,W,H,R){
-    l = L; // Line height
+    l = L;
     w = W;
     h = H;
-    r = R; //
+    r = R;
   },
 
   setType(TYPE){
     switch(TYPE){
     case "edi":
-      this.setBraille(38,5,5,12);
+      this.setBraille(28,5,5,12);
       break;
     default:
       this.setBraille(30,6,7,15);
@@ -161,46 +160,46 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
 
   convertText:function(str){    //拗音などを記号の組み合わせに変換する
     var arr = [
-    ['きゃ','拗か'],['きゅ','拗く'],['きょ','拗こ'],['しゃ','拗さ'],['しゅ','拗す'],
-    ['しょ','拗そ'],['ちゃ','拗た'],['ちゅ','拗つ'],['ちょ','拗と'],['にゃ','拗な'],
-    ['にゅ','拗ぬ'],['にょ','拗の'],['ひゃ','拗は'],['ひゅ','拗ふ'],['ひょ','拗ほ'],
-    ['みゃ','拗ま'],['みゅ','拗む'],['みょ','拗も'],['りゃ','拗ら'],['りゅ','拗る'],
-    ['りょ','拗ろ'],['いぇ','拗え'],['きぇ','拗け'],['しぇ','拗せ'],['ちぇ','拗て'],
-    ['にぇ','拗ね'],['ひぇ','拗へ'],['すぃ','拗し'],['てぃ','拗ち'],['ぎゃ','小か'],
-    ['ぎゅ','小く'],['ぎょ','小こ'],['じゃ','小さ'],['じゅ','小す'],['じょ','小そ'],
-    ['ぢゃ','小た'],['ぢゅ','小つ'],['ぢょ','小と'],['びゃ','小は'],['びゅ','小ふ'],
-    ['びょ','小ほ'],['うぃ','+い'],['うぇ','+え'],['うぉ','+お'],['くぁ','+か'],
-    ['くぃ','+き'],['くぇ','+け'],['くぉ','+こ'],['つぁ','+た'],['つぃ','+ち'],
-    ['つぇ','+て'],['つぉ','+と'],['ふぁ','+は'],['ふぃ','+ひ'],['ふぇ','+へ'],
-    ['ふぉ','+ほ'],['ぐぁ','。か'],['ぐぃ','。き'],['ぐぇ','。け'],['ぐぉ','。こ'],
-    ['ヴぁ','。は'],['ヴぃ','。ひ'],['ヴぇ','。へ'],['ヴぉ','。ほ'],['とぅ','+つ'],
-    ['ずぃ','小し'],['でぃ','小ち'],['どぅ','。つ'],['てゅ','斜つ'],['ふゅ','斜ゆ'],
-    ['ふょ','斜よ'],['でゅ','拡つ'],['ヴゅ','拡ゆ'],['ヴゅ','拡よ'],['が','濁か'],
-    ['ぎ','濁き'],['ぐ','濁く'],['げ','濁け'],['ご','濁こ'],['ざ','濁さ'],
-    ['じ','濁し'],['ず','濁す'],['ぜ','濁せ'],['ぞ','濁そ'],['だ','濁た'],
-    ['ぢ','濁ち'],['づ','濁つ'],['で','濁て'],['ど','濁と'],['ば','濁は'],
-    ['び','濁ひ'],['ぶ','濁ふ'],['べ','濁へ'],['ぼ','濁ほ'],['ぱ','半ほ'],
-    ['ぴ','半ひ'],['ぷ','半ふ'],['ぺ','半へ'],['ぽ','半ほ'],['キャ','拗カ'],
-    ['キュ','拗ク'],['キョ','拗コ'],['シャ','拗サ'],['シュ','拗ス'],['ショ','拗ソ'],
-    ['チャ','拗タ'],['チュ','拗ツ'],['チョ','拗ト'],['ニャ','拗ナ'],['ニュ','拗ヌ'],
-    ['ニョ','拗ノ'],['ヒャ','拗ハ'],['ヒュ','拗フ'],['ヒョ','拗ホ'],['ミャ','拗マ'],
-    ['ミュ','拗ム'],['ミョ','拗モ'],['リャ','拗ラ'],['リュ','拗ル'],['リョ','拗ロ'],
-    ['イェ','拗エ'],['キェ','拗ケ'],['シェ','拗セ'],['チェ','拗テ'],['ニェ','拗ネ'],
-    ['ヒェ','拗ヘ'],['スィ','拗シ'],['ティ','拗チ'],['ギャ','小カ'],['ギュ','小ク'],
-    ['ギョ','小コ'],['ジャ','小サ'],['ジュ','小ス'],['ジョ','小ソ'],['ヂャ','小タ'],
-    ['ヂュ','小ツ'],['ヂョ','小ト'],['ビャ','小ハ'],['ビュ','小フ'],['ビョ','小ホ'],
-    ['ウィ','+イ'],['ウェ','+エ'],['ウォ','+オ'],['クァ','+カ'],['クィ','+キ'],
-    ['クェ','+ケ'],['クォ','+コ'],['ツァ','+タ'],['ツィ','+チ'],['ツェ','+テ'],
-    ['ツォ','+ト'],['ファ','+ハ'],['フィ','+ヒ'],['フェ','+ヘ'],['フォ','+ホ'],
-    ['グァ','。カ'],['グィ','。キ'],['グェ','。ケ'],['グォ','。コ'],['ヴァ','。ハ'],
-    ['ヴィ','。ヒ'],['ヴェ','。ヘ'],['ヴォ','。ホ'],['トゥ','+ツ'],['ズィ','小シ'],
-    ['ディ','小チ'],['ドゥ','。ツ'],['テュ','斜ツ'],['フュ','斜ユ'],['フョ','斜ヨ'],
-    ['デュ','拡ツ'],['ヴュ','拡ユ'],['ヴュ','拡ヨ'],['ヴ','濁ウ'],['ガ','濁カ'],
-    ['ギ','濁キ'],['グ','濁ク'],['ゲ','濁ケ'],['ゴ','濁コ'],['ザ','濁サ'],
-    ['ジ','濁シ'],['ズ','濁ス'],['ゼ','濁セ'],['ゾ','濁ソ'],['ダ','濁タ'],
-    ['ヂ','濁チ'],['ヅ','濁ツ'],['デ','濁テ'],['ド','濁ト'],['バ','濁ハ'],
-    ['ビ','濁ヒ'],['ブ','濁フ'],['ベ','濁ヘ'],['ボ','濁ホ'],['パ','半ホ'],
-    ['ピ','半ヒ'],['プ','半フ'],['ペ','半ヘ'],['ポ','半ホ']
+    ["きゃ","拗か"],["きゅ","拗く"],["きょ","拗こ"],["しゃ","拗さ"],["しゅ","拗す"],
+    ["しょ","拗そ"],["ちゃ","拗た"],["ちゅ","拗つ"],["ちょ","拗と"],["にゃ","拗な"],
+    ["にゅ","拗ぬ"],["にょ","拗の"],["ひゃ","拗は"],["ひゅ","拗ふ"],["ひょ","拗ほ"],
+    ["みゃ","拗ま"],["みゅ","拗む"],["みょ","拗も"],["りゃ","拗ら"],["りゅ","拗る"],
+    ["りょ","拗ろ"],["いぇ","拗え"],["きぇ","拗け"],["しぇ","拗せ"],["ちぇ","拗て"],
+    ["にぇ","拗ね"],["ひぇ","拗へ"],["すぃ","拗し"],["てぃ","拗ち"],["ぎゃ","小か"],
+    ["ぎゅ","小く"],["ぎょ","小こ"],["じゃ","小さ"],["じゅ","小す"],["じょ","小そ"],
+    ["ぢゃ","小た"],["ぢゅ","小つ"],["ぢょ","小と"],["びゃ","小は"],["びゅ","小ふ"],
+    ["びょ","小ほ"],["うぃ","+い"],["うぇ","+え"],["うぉ","+お"],["くぁ","+か"],
+    ["くぃ","+き"],["くぇ","+け"],["くぉ","+こ"],["つぁ","+た"],["つぃ","+ち"],
+    ["つぇ","+て"],["つぉ","+と"],["ふぁ","+は"],["ふぃ","+ひ"],["ふぇ","+へ"],
+    ["ふぉ","+ほ"],["ぐぁ","。か"],["ぐぃ","。き"],["ぐぇ","。け"],["ぐぉ","。こ"],
+    ["ヴぁ","。は"],["ヴぃ","。ひ"],["ヴぇ","。へ"],["ヴぉ","。ほ"],["とぅ","+つ"],
+    ["ずぃ","小し"],["でぃ","小ち"],["どぅ","。つ"],["てゅ","斜つ"],["ふゅ","斜ゆ"],
+    ["ふょ","斜よ"],["でゅ","拡つ"],["ヴゅ","拡ゆ"],["ヴゅ","拡よ"],["が","濁か"],
+    ["ぎ","濁き"],["ぐ","濁く"],["げ","濁け"],["ご","濁こ"],["ざ","濁さ"],
+    ["じ","濁し"],["ず","濁す"],["ぜ","濁せ"],["ぞ","濁そ"],["だ","濁た"],
+    ["ぢ","濁ち"],["づ","濁つ"],["で","濁て"],["ど","濁と"],["ば","濁は"],
+    ["び","濁ひ"],["ぶ","濁ふ"],["べ","濁へ"],["ぼ","濁ほ"],["ぱ","半ほ"],
+    ["ぴ","半ひ"],["ぷ","半ふ"],["ぺ","半へ"],["ぽ","半ほ"],["キャ","拗カ"],
+    ["キュ","拗ク"],["キョ","拗コ"],["シャ","拗サ"],["シュ","拗ス"],["ショ","拗ソ"],
+    ["チャ","拗タ"],["チュ","拗ツ"],["チョ","拗ト"],["ニャ","拗ナ"],["ニュ","拗ヌ"],
+    ["ニョ","拗ノ"],["ヒャ","拗ハ"],["ヒュ","拗フ"],["ヒョ","拗ホ"],["ミャ","拗マ"],
+    ["ミュ","拗ム"],["ミョ","拗モ"],["リャ","拗ラ"],["リュ","拗ル"],["リョ","拗ロ"],
+    ["イェ","拗エ"],["キェ","拗ケ"],["シェ","拗セ"],["チェ","拗テ"],["ニェ","拗ネ"],
+    ["ヒェ","拗ヘ"],["スィ","拗シ"],["ティ","拗チ"],["ギャ","小カ"],["ギュ","小ク"],
+    ["ギョ","小コ"],["ジャ","小サ"],["ジュ","小ス"],["ジョ","小ソ"],["ヂャ","小タ"],
+    ["ヂュ","小ツ"],["ヂョ","小ト"],["ビャ","小ハ"],["ビュ","小フ"],["ビョ","小ホ"],
+    ["ウィ","+イ"],["ウェ","+エ"],["ウォ","+オ"],["クァ","+カ"],["クィ","+キ"],
+    ["クェ","+ケ"],["クォ","+コ"],["ツァ","+タ"],["ツィ","+チ"],["ツェ","+テ"],
+    ["ツォ","+ト"],["ファ","+ハ"],["フィ","+ヒ"],["フェ","+ヘ"],["フォ","+ホ"],
+    ["グァ","。カ"],["グィ","。キ"],["グェ","。ケ"],["グォ","。コ"],["ヴァ","。ハ"],
+    ["ヴィ","。ヒ"],["ヴェ","。ヘ"],["ヴォ","。ホ"],["トゥ","+ツ"],["ズィ","小シ"],
+    ["ディ","小チ"],["ドゥ","。ツ"],["テュ","斜ツ"],["フュ","斜ユ"],["フョ","斜ヨ"],
+    ["デュ","拡ツ"],["ヴュ","拡ユ"],["ヴュ","拡ヨ"],["ヴ","濁ウ"],["ガ","濁カ"],
+    ["ギ","濁キ"],["グ","濁ク"],["ゲ","濁ケ"],["ゴ","濁コ"],["ザ","濁サ"],
+    ["ジ","濁シ"],["ズ","濁ス"],["ゼ","濁セ"],["ゾ","濁ソ"],["ダ","濁タ"],
+    ["ヂ","濁チ"],["ヅ","濁ツ"],["デ","濁テ"],["ド","濁ト"],["バ","濁ハ"],
+    ["ビ","濁ヒ"],["ブ","濁フ"],["ベ","濁ヘ"],["ボ","濁ホ"],["パ","半ホ"],
+    ["ピ","半ヒ"],["プ","半フ"],["ペ","半ヘ"],["ポ","半ホ"]
     ];
     str += "";  //引数を文字列として扱わせる
     ///str = str.replace(/\/g,"\\$1");
@@ -210,9 +209,9 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     str = str.replace(/数数/g, "数");  //数符の連続があればそれを解消する
         //数字の直後にア行とラ行、AからJまでのアルファベットがあったら間に繋ぎ符を挿入する
     str = str.replace(/([0-9０１２３４５６７８９])([ろロﾛＪJｊjあアｱＡAａaいイｲＢBｂbうウｳＣCｃcるルﾙＤDｄdらラﾗＥEｅeれレﾚＧGｇgえエｴＦFｆfりリﾘＨHｈhおオｵＩIｉi])/g, "$1_$2");
-    
+
     for(var i = 0 ; i < arr.length ; i++){ //>配列の変換
-      var regex = new RegExp(arr[i][0], 'g');
+      var regex = new RegExp(arr[i][0], "g");
       str = str.replace(regex,arr[i][1]);
     }
     return str;
@@ -223,37 +222,37 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     y = y || 0;
     returnX = returnX || sizeX;
     var arrLetter = [
-    ['あアｱ１1ＡAａa','1'],['いイｲ２2ＢBｂb','12'],
-    ['うウｳ３3ＣCｃc','14'],['えエｴ６6ＦFｆf','124'],
-    ['おオｵ９9ＩIｉi','24'],['かカｶ＊*','16'],
-    ['きキｷ｛{','126'],['くクｸ','146'],
-    ['けケｹ','1246'],['こコｺ＠@','246'],
-    ['さサｻ','156'],['しシｼ','1256'],
-    ['すスｽ','1456'],['せセｾ','12456'],
-    ['そソｿＷWｗw','2456'],['たタﾀＯoｏo','135'],
-    ['ちチﾁＲRｒr','1235'],['つツﾂＮNｎn','1345'],
-    ['てテﾃＱQｑq','12345'],['とトﾄＴTｔt','2345'],
-    ['なナﾅＫKｋk','13'],['にニﾆＬLｌl','123'],
-    ['ぬヌﾇＭMｍm','134'],['ねネﾈＰPｐp％%','1234'],
-    ['のノﾉＳSｓs','234'],['はハﾊＵUｕu','136'],
-    ['ひヒﾋＶVｖv','1236'],['ふフﾌＸXｘx','1346'],
-    ['へヘﾍ＆&','12346'],['ほホﾎ','2346'],
-    ['まマﾏＺZｚz','1356'],['みミﾐ[','12356'],
-    ['むムﾑＹYｙy','13456'],['めメﾒ','123456'],
-    ['もモﾓ]','23456'],['やヤﾔ／/分','34'],
-    ['ゆユﾕ〒郵','346'],['よヨﾖ√根｝}','345'],
-    ['らラﾗ5５ＥEｅe','15'],['りリﾘ8８ＨHｈh','125'],
-    ['るルﾙ4４ＤDｄd','145'],['れレﾚ７7ＧGｇg','1245'],
-    ['ろロﾛ０0ＪJｊj','245'],['わワﾜ’\'','3'],
-    ['ゐヰ、，外＄$↓','56'],['ゑヱ、。．.句∋','256'],
-    ['をヲｦ－','35'],['をヲｦ－','35'],
-    ['んンﾝ零閉','356'],['八語','236'],
-    ['濁・〃中','5'],['数','3456'],['　 &nbsp;無',''],['ーー三','25'],
-    ['小＾^ぎギｷﾞじジｼﾞぢヂﾁﾞびビﾋﾞ↑','45'],['拗†￥\´','4'],
-    ['半πΠ¶?ぱパﾊﾟ大','6'],['促っッｯ一','2'],
-    ['＿_「」-‐継～：:','36'],['七＝=','2356'],
-    ['斜‡ぴピﾋﾟ≠','46'],['？?＋+五疑','26'],
-    ['二；;','23'],['！!！感六','235'],['｜|拡','456']];
+    ["あアｱ１1ＡAａa","1"],["いイｲ２2ＢBｂb","12"],
+    ["うウｳ３3ＣCｃc","14"],["えエｴ６6ＦFｆf","124"],
+    ["おオｵ９9ＩIｉi","24"],["かカｶ＊*","16"],
+    ["きキｷ｛{","126"],["くクｸ","146"],
+    ["けケｹ","1246"],["こコｺ＠@","246"],
+    ["さサｻ","156"],["しシｼ","1256"],
+    ["すスｽ","1456"],["せセｾ","12456"],
+    ["そソｿＷWｗw","2456"],["たタﾀＯoｏo","135"],
+    ["ちチﾁＲRｒr","1235"],["つツﾂＮNｎn","1345"],
+    ["てテﾃＱQｑq","12345"],["とトﾄＴTｔt","2345"],
+    ["なナﾅＫKｋk","13"],["にニﾆＬLｌl","123"],
+    ["ぬヌﾇＭMｍm","134"],["ねネﾈＰPｐp％%","1234"],
+    ["のノﾉＳSｓs","234"],["はハﾊＵUｕu","136"],
+    ["ひヒﾋＶVｖv","1236"],["ふフﾌＸXｘx","1346"],
+    ["へヘﾍ＆&","12346"],["ほホﾎ","2346"],
+    ["まマﾏＺZｚz","1356"],["みミﾐ[","12356"],
+    ["むムﾑＹYｙy","13456"],["めメﾒ","123456"],
+    ["もモﾓ]","23456"],["やヤﾔ／/分","34"],
+    ["ゆユﾕ〒郵","346"],["よヨﾖ√根｝}","345"],
+    ["らラﾗ5５ＥEｅe","15"],["りリﾘ8８ＨHｈh","125"],
+    ["るルﾙ4４ＤDｄd","145"],["れレﾚ７7ＧGｇg","1245"],
+    ["ろロﾛ０0ＪJｊj","245"],["わワﾜ’\"","3"],
+    ["ゐヰ、，外＄$↓","56"],["ゑヱ、。．.句∋","256"],
+    ["をヲｦ－","35"],["をヲｦ－","35"],
+    ["んンﾝ零閉","356"],["八語","236"],
+    ["濁・〃中","5"],["数","3456"],["　 &nbsp;無",""],["ーー三","25"],
+    ["小＾^ぎギｷﾞじジｼﾞぢヂﾁﾞびビﾋﾞ↑","45"],["拗†￥\´","4"],
+    ["半πΠ¶?ぱパﾊﾟ大","6"],["促っッｯ一","2"],
+    ["＿_「」-‐継～：:","36"],["七＝=","2356"],
+    ["斜‡ぴピﾋﾟ≠","46"],["？?＋+五疑","26"],
+    ["二；;","23"],["！!！感六","235"],["｜|拡","456"]];
 
       str += "";
    // str=str.replace(/\0/g,"￥0");str=str.replace(/\1/g,"￥1");str=str.replace(/\2/g,"￥2");
@@ -264,17 +263,17 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
     str=str.replace(/&yen;[a-z]/g,"￥a");
     str = this.convertText(str);
     var arr = [];
-    for(i=0;i<str.length;i++){  //>1文字毎に配列を作成
+    for(var i=0;i<str.length;i++){  //>1文字毎に配列を作成
       var letter = str.charAt(i);
       arr.push(seek(letter));
     }
-    
+
     function seek(letter){        //数字コードを取得
       var a = [
-      ['\n','\n'], ['.','256'], ['\,','2'],['\(','2356'], ['\)','2356'],
-      ['\[','2356'], ['\]','2356'], ['\\','4'], ['\*','16'], ['\;','23'],
-      ['?','26'], ['\{','2356'], ['\}','2356'], ['\^',' '],
-      ['$','56'], ['-','36'], ['\|','456'], ['\/','34']]
+      ["\n","\n"], [".","256"], ["\,","2"],["\(","2356"], ["\)","2356"],
+      ["\[","2356"], ["\]","2356"], ["\\","4"], ["\*","16"], ["\;","23"],
+      ["?","26"], ["\{","2356"], ["\}","2356"], ["\^"," "],
+      ["$","56"], ["-","36"], ["\|","456"], ["\/","34"]];
       for(var i= 0 ; i < a.length ; i++){ //エスケープが必要な文字を先に文字列として比較
         if(letter === a[i][0]){console.log(letter);return a[i][1];}
       }
@@ -295,7 +294,8 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
       x -= arr.length * r-8;
       right = false;
     }
-    var j = k = 0;
+    var j = k;
+    var k = 0;
     for(var i = 0 ; i < arr.length ; i++){         //>
       if(returnX < x + r * j + w){j = 0; k++;}//改行
       if(arr[i].match("1"))this.drawDot(x + r * j , y + l*k);
@@ -304,7 +304,7 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
       if(arr[i].match("4"))this.drawDot(x + w + r * j , y + l*k);
       if(arr[i].match("5"))this.drawDot(x + w + r * j , y + h + l*k);
       if(arr[i].match("6"))this.drawDot(x + w + r * j , y + h*2 + l*k);
-      j++
+      j++;
       if(arr[i].match("\n")){j = 0; k++;}//改行
     }
     return [x + r * j , y + l*k];
@@ -321,54 +321,54 @@ var tactileGraphic = function(ID, SIZE, TYPE) {
   },
 
   drawBrailleMath:function(str, x, y){
-    str=str.replace(/Α/g,'‡a'); str=str.replace(/Β/g,'‡b');
-    str=str.replace(/Δ/g,'‡c'); str=str.replace(/Ε/g,'‡e');
-    str=str.replace(/Φ/g,'‡f'); str=str.replace(/Γ/g,'‡g');
-    str=str.replace(/Ι/g,'‡i'); str=str.replace(/Κ/g,'‡k');
-    str=str.replace(/Λ/g,'‡l'); str=str.replace(/Μ/g,'‡m');
-    str=str.replace(/Ν/g,'‡n'); str=str.replace(/Ο/g,'‡o');
-    str=str.replace(/Π/g,'‡p'); str=str.replace(/Ρ/g,'‡r');
-    str=str.replace(/Σ/g,'‡s'); str=str.replace(/Τ/g,'‡t');
-    str=str.replace(/Υ/g,'‡y'); str=str.replace(/Ω/g,'‡w');
-    str=str.replace(/Ξ/g,'‡x'); str=str.replace(/Ψ/g,'‡y');
-    str=str.replace(/Ζ/g,'‡z'); str=str.replace(/Η/g,'‡さ');
-    str=str.replace(/Θ/g,'‡す'); str=str.replace(/Χ/g,'‡へ');
-    str=str.replace(/α/g,'†a'); str=str.replace(/β/g,'†b');
-    str=str.replace(/δ/g,'†c'); str=str.replace(/ε/g,'†e');
-    str=str.replace(/φ/g,'†f'); str=str.replace(/γ/g,'†g');
-    str=str.replace(/ι/g,'†i'); str=str.replace(/κ/g,'†k');
-    str=str.replace(/λ/g,'†l'); str=str.replace(/μ/g,'†m');
-    str=str.replace(/ν/g,'†n'); str=str.replace(/ο/g,'†o');
-    str=str.replace(/π/g,'†p'); str=str.replace(/ρ/g,'†r');
-    str=str.replace(/σ/g,'†s'); str=str.replace(/τ/g,'†ｔ');
-    str=str.replace(/υ/g,'†y'); str=str.replace(/ω/g,'†w');
-    str=str.replace(/ξ/g,'†x'); str=str.replace(/ψ/g,'†y');
-    str=str.replace(/ζ/g,'†z'); str=str.replace(/η/g,'†さ');
-    str=str.replace(/θ/g,'†す'); str=str.replace(/χ/g,'†へ');
-    str=str.replace(/\＋/g,'？'); str=str.replace(/－/g,'を');
-    str=str.replace(/×/g,'＊'); str=str.replace(/÷/g,'分');
-    str=str.replace(/・/g,'わ'); str=str.replace(/／/g,'｜分');
-    str=str.replace(/\//g,'｜分'); str=str.replace(/±/g,'？を');
-    str=str.replace(/：/g,'中促'); str=str.replace(/\＝/g,'ーー');
-    str=str.replace(/≒/g,'中ー'); str=str.replace(/≠/g,'‡ー');
-    str=str.replace(/=/g,'ーー'); str=str.replace(/＞/g,'？？');
-    str=str.replace(/＜/g,'をを'); str=str.replace(/\>/g,'？？');
-    str=str.replace(/\</g,'をを'); str=str.replace(/≧/g,'ヱヱ');
-    str=str.replace(/≦/g,'語語'); str=str.replace(/（/g,'語');
-    str=str.replace(/\(/g,'語'); str=str.replace(/）/g,'ん');
-    str=str.replace(/\)/g,'ん'); str=str.replace(/｛/g,'半き');
-    str=str.replace(/\{/g,'半き'); str=str.replace(/｝/g,'よわ');
-    str=str.replace(/\}/g,'よわ'); str=str.replace(/［/g,'半み');
-    str=str.replace(/\[/g,'半み'); str=str.replace(/］/g,'もわ');
-    str=str.replace(/\］/g,'もわ'); str=str.replace(/｜/g,'し');
-    str=str.replace(/\|/g,'し'); str=str.replace(/∽/g,'半わ');
-    str=str.replace(/⊥/g,'んわ'); str=str.replace(/∠/g,'す');
-    str=str.replace(/⊿/g,'ゆ'); str=str.replace(/⌒/g,'こ');
-    str=str.replace(/平行四辺形/g,'｜分分');
-    str=str.replace(/∪/g,'ゆ'); str=str.replace(/∩/g,'く');
-    str=str.replace(/→/g,'ーた'); str=str.replace(/←/g,'こー');
-    str=str.replace(/√/g,'根'); str=str.replace(/！/g,'外！');
-    str=str.replace(/\!/g,'外！');
+    str=str.replace(/Α/g,"‡a"); str=str.replace(/Β/g,"‡b");
+    str=str.replace(/Δ/g,"‡c"); str=str.replace(/Ε/g,"‡e");
+    str=str.replace(/Φ/g,"‡f"); str=str.replace(/Γ/g,"‡g");
+    str=str.replace(/Ι/g,"‡i"); str=str.replace(/Κ/g,"‡k");
+    str=str.replace(/Λ/g,"‡l"); str=str.replace(/Μ/g,"‡m");
+    str=str.replace(/Ν/g,"‡n"); str=str.replace(/Ο/g,"‡o");
+    str=str.replace(/Π/g,"‡p"); str=str.replace(/Ρ/g,"‡r");
+    str=str.replace(/Σ/g,"‡s"); str=str.replace(/Τ/g,"‡t");
+    str=str.replace(/Υ/g,"‡y"); str=str.replace(/Ω/g,"‡w");
+    str=str.replace(/Ξ/g,"‡x"); str=str.replace(/Ψ/g,"‡y");
+    str=str.replace(/Ζ/g,"‡z"); str=str.replace(/Η/g,"‡さ");
+    str=str.replace(/Θ/g,"‡す"); str=str.replace(/Χ/g,"‡へ");
+    str=str.replace(/α/g,"†a"); str=str.replace(/β/g,"†b");
+    str=str.replace(/δ/g,"†c"); str=str.replace(/ε/g,"†e");
+    str=str.replace(/φ/g,"†f"); str=str.replace(/γ/g,"†g");
+    str=str.replace(/ι/g,"†i"); str=str.replace(/κ/g,"†k");
+    str=str.replace(/λ/g,"†l"); str=str.replace(/μ/g,"†m");
+    str=str.replace(/ν/g,"†n"); str=str.replace(/ο/g,"†o");
+    str=str.replace(/π/g,"†p"); str=str.replace(/ρ/g,"†r");
+    str=str.replace(/σ/g,"†s"); str=str.replace(/τ/g,"†ｔ");
+    str=str.replace(/υ/g,"†y"); str=str.replace(/ω/g,"†w");
+    str=str.replace(/ξ/g,"†x"); str=str.replace(/ψ/g,"†y");
+    str=str.replace(/ζ/g,"†z"); str=str.replace(/η/g,"†さ");
+    str=str.replace(/θ/g,"†す"); str=str.replace(/χ/g,"†へ");
+    str=str.replace(/\＋/g,"？"); str=str.replace(/－/g,"を");
+    str=str.replace(/×/g,"＊"); str=str.replace(/÷/g,"分");
+    str=str.replace(/・/g,"わ"); str=str.replace(/／/g,"｜分");
+    str=str.replace(/\//g,"｜分"); str=str.replace(/±/g,"？を");
+    str=str.replace(/：/g,"中促"); str=str.replace(/\＝/g,"ーー");
+    str=str.replace(/≒/g,"中ー"); str=str.replace(/≠/g,"‡ー");
+    str=str.replace(/=/g,"ーー"); str=str.replace(/＞/g,"？？");
+    str=str.replace(/＜/g,"をを"); str=str.replace(/\>/g,"？？");
+    str=str.replace(/</g,"をを"); str=str.replace(/≧/g,"ヱヱ");
+    str=str.replace(/≦/g,"語語"); str=str.replace(/（/g,"語");
+    str=str.replace(/\(/g,"語"); str=str.replace(/）/g,"ん");
+    str=str.replace(/\)/g,"ん"); str=str.replace(/｛/g,"半き");
+    str=str.replace(/\{/g,"半き"); str=str.replace(/｝/g,"よわ");
+    str=str.replace(/\}/g,"よわ"); str=str.replace(/［/g,"半み");
+    str=str.replace(/\[/g,"半み"); str=str.replace(/］/g,"もわ");
+    str=str.replace(/\］/g,"もわ"); str=str.replace(/｜/g,"し");
+    str=str.replace(/\|/g,"し"); str=str.replace(/∽/g,"半わ");
+    str=str.replace(/⊥/g,"んわ"); str=str.replace(/∠/g,"す");
+    str=str.replace(/⊿/g,"ゆ"); str=str.replace(/⌒/g,"こ");
+    str=str.replace(/平行四辺形/g,"｜分分");
+    str=str.replace(/∪/g,"ゆ"); str=str.replace(/∩/g,"く");
+    str=str.replace(/→/g,"ーた"); str=str.replace(/←/g,"こー");
+    str=str.replace(/√/g,"根"); str=str.replace(/！/g,"外！");
+    str=str.replace(/\!/g,"外！");
     this.drawBraille(str, x,y);
   },
 
@@ -584,7 +584,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
   for (var int = 0; int < str.length; int++){
     var key=str.substring(int,int+1);//i番目の文字を描画
     switch(key){
-      case " ":SP();break;case '　':SP();break;case "a":draw(a);break;case "b":draw(b);break;
+      case " ":SP();break;case "　":SP();break;case "a":draw(a);break;case "b":draw(b);break;
       case "c":draw(c);break;case "d":draw(d);break;case "e":draw(e);break;case "f":draw(f);break;
       case "g":draw(g);break;case "h":draw(h);break;case "i":draw(i);break;case "j":draw(j);break;
       case "k":draw(k);break;case "l":draw(l);break;case "m":draw(m);break;case "n":draw(n);break;
@@ -616,64 +616,64 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
       case "１":draw(n1);break;case "２":draw(n2);break;case "３":draw(n3);break;case "４":draw(n4);break;
       case "５":draw(n5);break;case "６":draw(n6);break;case "７":draw(n7);break;case "８":draw(n8);break;
       case "９":draw(n9);break;case "０":draw(n0);break;case "\.":draw(peri);break;case "\,":draw(con);break;
-      case "\!":draw(ex);break;case "\?":draw(qu);break;case "\-":draw(bar);break;case "\'":draw(apo);break;
+      case "\!":draw(ex);break;case "\?":draw(qu);break;case "\-":draw(bar);break;case "\"":draw(apo);break;
       case "\:":draw(colo);break;case "\;":draw(semi);break;case "\*":draw(asta);break;case "\(":draw(lpar);break;
       case "\)":draw(rpar);break;case "\<":draw(lbra);break;case "\>":draw(rbra);break;case "\n":CR();break;
-      case 'ア':draw(k01);break;case 'イ':draw(k02);break;case 'ヴ':draw(k03);draw(daku);break;case 'ウ':draw(k03);break;
-      case 'エ':draw(k04);break;case 'オ':draw(k05);break;case 'カ':draw(k06);break;case 'キ':draw(k07);break;
-      case 'ク':draw(k08);break;case 'ケ':draw(k09);break;case 'コ':draw(k10);break;case 'サ':draw(k11);break;
-      case 'シ':draw(k12);break;case 'ス':draw(k13);break;case 'セ':draw(k14);break;case 'ソ':draw(k15);break;
-      case 'タ':draw(k16);break;case 'チ':draw(k17);break;case 'ツ':draw(k18);break;case 'テ':draw(k19);break;
-      case 'ト':draw(k20);break;case 'ガ':draw(k06);draw(daku);break;case 'ギ':draw(k07);draw(daku);break;
-      case 'グ':draw(k08);draw(daku);break;case 'ゲ':draw(k09);draw(daku);break;case 'ゴ':draw(k10);draw(daku);break;
-      case 'ザ':draw(k11);draw(daku);break;case 'ジ':draw(k12);draw(daku);break;case 'ズ':draw(k13);draw(daku);break;
-      case 'ゼ':draw(k14);draw(daku);break;case 'ゾ':draw(k15);draw(daku);break;case 'ダ':draw(k16);draw(daku);break;
-      case 'ヂ':draw(k17);draw(daku);break;case 'ヅ':draw(k18);draw(daku);break;case 'デ':draw(k19);draw(daku);break;
-      case 'ド':draw(k20);draw(daku);break;case 'ナ':draw(k21);break;case 'ニ':draw(k22);break;
-      case 'ヌ':draw(k23);break;case 'ネ':draw(k24);break;case 'ノ':draw(k25);break;
-      case 'ハ':draw(k26);break;case 'ヒ':draw(k27);break;case 'フ':draw(k28);break;
-      case 'ヘ':draw(k29);break;case 'ホ':draw(k30);break;case 'パ':draw(k26);draw(han);break;
-      case 'ピ':draw(k27);draw(han);break;case 'プ':draw(k28);draw(han);break;case 'ペ':draw(k29);draw(han);break;
-      case 'ポ':draw(k30);draw(han);break;case 'バ':draw(k26);draw(daku);break;case 'ビ':draw(k27);draw(daku);break;
-      case 'ブ':draw(k28);draw(daku);break;case 'ベ':draw(k29);draw(daku);break;case 'ボ':draw(k30);draw(daku);break;
-      case 'マ':draw(k31);break;case 'ミ':draw(k32);break;case 'ム':draw(k33);break;case 'メ':draw(k34);break;
-      case 'モ':draw(k35);break;case 'ヤ':draw(k36);break;case 'ユ':draw(k38);break;case 'ヨ':draw(k40);break;
-      case 'ラ':draw(k41);break;case 'リ':draw(k42);break;case 'ル':draw(k43);break;case 'レ':draw(k44);break;
-      case 'ロ':draw(k45);break;case 'ワ':draw(k46);break;case 'ヰ':draw(k47);break;case 'ヱ':draw(k49);break;
-      case 'ヲ':draw(k50);break;case 'ン':draw(k51);break;case 'ッ':draw(k52);break;case 'ャ':draw(k53);break;
-      case 'ュ':draw(k54);break;case 'ョ':draw(k55);break;case 'ァ':draw(k56);break;case 'ィ':draw(k57);break;
-      case 'ゥ':draw(k58);break;case 'ェ':draw(k59);break;case 'ォ':draw(k60);break;case 'ー':draw(kch);break;
-      case 'あ':draw(h01);break;case 'い':draw(h02);break;case 'う':draw(h03);break;case 'え':draw(h04);break;
-      case 'お':draw(h05);break;case 'か':draw(h06);break;case 'き':draw(h07);break;case 'く':draw(h08);break;
-      case 'け':draw(h09);break;case 'こ':draw(h10);break;case 'さ':draw(h11);break;case 'し':draw(h12);break;
-      case 'す':draw(h13);break;case 'せ':draw(h14);break;case 'そ':draw(h15);break;case 'た':draw(h16);break;
-      case 'ち':draw(h17);break;case 'つ':draw(h18);break;case 'て':draw(h19);break;case 'と':draw(h20);break;
-      case 'が':draw(h06);draw(daku);break;case 'ぎ':draw(h07);draw(daku);break;case 'ぐ':draw(h08);draw(daku);break;
-      case 'げ':draw(h09);draw(daku);break;case 'ご':draw(h10);draw(daku);break;case 'ざ':draw(h11);draw(daku);break;
-      case 'じ':draw(h12);draw(daku);break;case 'ず':draw(h13);draw(daku);break;case 'ぜ':draw(h14);draw(daku);break;
-      case 'ぞ':draw(h15);draw(daku);break;case 'だ':draw(h16);draw(daku);break;case 'ぢ':draw(h17);draw(daku);break;
-      case 'づ':draw(h18);draw(daku);break;case 'で':draw(h19);draw(daku);break;case 'ど':draw(h20);draw(daku);break;
-      case 'な':draw(h21);break;case 'に':draw(h22);break;case 'ぬ':draw(h23);break;case 'ね':draw(h24);break;
-      case 'の':draw(h25);break;case 'は':draw(h26);break;case 'ひ':draw(h27);break;case 'ふ':draw(h28);break;
-      case 'へ':draw(h29);break;case 'ほ':draw(h30);break;case 'ぱ':draw(h26);draw(han);break;
-      case 'ぴ':draw(h27);draw(han);break;case 'ぷ':draw(h28);draw(han);break;case 'ぺ':draw(h29);draw(han);break;
-      case 'ぽ':draw(h30);draw(han);break;case 'ば':draw(h26);draw(daku);break;case 'び':draw(h27);draw(daku);break;
-      case 'ぶ':draw(h28);draw(daku);break;case 'べ':draw(h29);draw(daku);break;case 'ぼ':draw(h30);draw(daku);break;
-      case 'ま':draw(h31);break;case 'み':draw(h32);break;case 'む':draw(h33);break;case 'め':draw(h34);break;
-      case 'も':draw(h35);break;case 'や':draw(h36);break;case 'ゆ':draw(h38);break;case 'よ':draw(h40);break;
-      case 'ら':draw(h41);break;case 'り':draw(h42);break;case 'る':draw(h43);break;case 'れ':draw(h44);break;
-      case 'ろ':draw(h45);break;case 'わ':draw(h46);break;case 'ゐ':draw(h47);break;case 'ゑ':draw(h49);break;
-      case 'を':draw(h50);break;case 'ん':draw(h51);break;case 'ぁ':draw(h52);break;case 'ぃ':draw(h53);break;
-      case 'ぅ':draw(h54);break;case 'ぇ':draw(h55);break;case 'ぉ':draw(h56);break;case 'ゃ':draw(h57);break;
-      case 'ゅ':draw(h58);break;case 'ょ':draw(h59);break;case 'っ':draw(h60);break;case '木':draw(c01);break;
-      case '日':draw(c02);break;case '月':draw(c03);break;case '水':draw(c04);break;case '火':draw(c05);break;
-      case '金':draw(c06);break;case '土':draw(c07);break;default:draw(def);break
+      case "ア":draw(k01);break;case "イ":draw(k02);break;case "ヴ":draw(k03);draw(daku);break;case "ウ":draw(k03);break;
+      case "エ":draw(k04);break;case "オ":draw(k05);break;case "カ":draw(k06);break;case "キ":draw(k07);break;
+      case "ク":draw(k08);break;case "ケ":draw(k09);break;case "コ":draw(k10);break;case "サ":draw(k11);break;
+      case "シ":draw(k12);break;case "ス":draw(k13);break;case "セ":draw(k14);break;case "ソ":draw(k15);break;
+      case "タ":draw(k16);break;case "チ":draw(k17);break;case "ツ":draw(k18);break;case "テ":draw(k19);break;
+      case "ト":draw(k20);break;case "ガ":draw(k06);draw(daku);break;case "ギ":draw(k07);draw(daku);break;
+      case "グ":draw(k08);draw(daku);break;case "ゲ":draw(k09);draw(daku);break;case "ゴ":draw(k10);draw(daku);break;
+      case "ザ":draw(k11);draw(daku);break;case "ジ":draw(k12);draw(daku);break;case "ズ":draw(k13);draw(daku);break;
+      case "ゼ":draw(k14);draw(daku);break;case "ゾ":draw(k15);draw(daku);break;case "ダ":draw(k16);draw(daku);break;
+      case "ヂ":draw(k17);draw(daku);break;case "ヅ":draw(k18);draw(daku);break;case "デ":draw(k19);draw(daku);break;
+      case "ド":draw(k20);draw(daku);break;case "ナ":draw(k21);break;case "ニ":draw(k22);break;
+      case "ヌ":draw(k23);break;case "ネ":draw(k24);break;case "ノ":draw(k25);break;
+      case "ハ":draw(k26);break;case "ヒ":draw(k27);break;case "フ":draw(k28);break;
+      case "ヘ":draw(k29);break;case "ホ":draw(k30);break;case "パ":draw(k26);draw(han);break;
+      case "ピ":draw(k27);draw(han);break;case "プ":draw(k28);draw(han);break;case "ペ":draw(k29);draw(han);break;
+      case "ポ":draw(k30);draw(han);break;case "バ":draw(k26);draw(daku);break;case "ビ":draw(k27);draw(daku);break;
+      case "ブ":draw(k28);draw(daku);break;case "ベ":draw(k29);draw(daku);break;case "ボ":draw(k30);draw(daku);break;
+      case "マ":draw(k31);break;case "ミ":draw(k32);break;case "ム":draw(k33);break;case "メ":draw(k34);break;
+      case "モ":draw(k35);break;case "ヤ":draw(k36);break;case "ユ":draw(k38);break;case "ヨ":draw(k40);break;
+      case "ラ":draw(k41);break;case "リ":draw(k42);break;case "ル":draw(k43);break;case "レ":draw(k44);break;
+      case "ロ":draw(k45);break;case "ワ":draw(k46);break;case "ヰ":draw(k47);break;case "ヱ":draw(k49);break;
+      case "ヲ":draw(k50);break;case "ン":draw(k51);break;case "ッ":draw(k52);break;case "ャ":draw(k53);break;
+      case "ュ":draw(k54);break;case "ョ":draw(k55);break;case "ァ":draw(k56);break;case "ィ":draw(k57);break;
+      case "ゥ":draw(k58);break;case "ェ":draw(k59);break;case "ォ":draw(k60);break;case "ー":draw(kch);break;
+      case "あ":draw(h01);break;case "い":draw(h02);break;case "う":draw(h03);break;case "え":draw(h04);break;
+      case "お":draw(h05);break;case "か":draw(h06);break;case "き":draw(h07);break;case "く":draw(h08);break;
+      case "け":draw(h09);break;case "こ":draw(h10);break;case "さ":draw(h11);break;case "し":draw(h12);break;
+      case "す":draw(h13);break;case "せ":draw(h14);break;case "そ":draw(h15);break;case "た":draw(h16);break;
+      case "ち":draw(h17);break;case "つ":draw(h18);break;case "て":draw(h19);break;case "と":draw(h20);break;
+      case "が":draw(h06);draw(daku);break;case "ぎ":draw(h07);draw(daku);break;case "ぐ":draw(h08);draw(daku);break;
+      case "げ":draw(h09);draw(daku);break;case "ご":draw(h10);draw(daku);break;case "ざ":draw(h11);draw(daku);break;
+      case "じ":draw(h12);draw(daku);break;case "ず":draw(h13);draw(daku);break;case "ぜ":draw(h14);draw(daku);break;
+      case "ぞ":draw(h15);draw(daku);break;case "だ":draw(h16);draw(daku);break;case "ぢ":draw(h17);draw(daku);break;
+      case "づ":draw(h18);draw(daku);break;case "で":draw(h19);draw(daku);break;case "ど":draw(h20);draw(daku);break;
+      case "な":draw(h21);break;case "に":draw(h22);break;case "ぬ":draw(h23);break;case "ね":draw(h24);break;
+      case "の":draw(h25);break;case "は":draw(h26);break;case "ひ":draw(h27);break;case "ふ":draw(h28);break;
+      case "へ":draw(h29);break;case "ほ":draw(h30);break;case "ぱ":draw(h26);draw(han);break;
+      case "ぴ":draw(h27);draw(han);break;case "ぷ":draw(h28);draw(han);break;case "ぺ":draw(h29);draw(han);break;
+      case "ぽ":draw(h30);draw(han);break;case "ば":draw(h26);draw(daku);break;case "び":draw(h27);draw(daku);break;
+      case "ぶ":draw(h28);draw(daku);break;case "べ":draw(h29);draw(daku);break;case "ぼ":draw(h30);draw(daku);break;
+      case "ま":draw(h31);break;case "み":draw(h32);break;case "む":draw(h33);break;case "め":draw(h34);break;
+      case "も":draw(h35);break;case "や":draw(h36);break;case "ゆ":draw(h38);break;case "よ":draw(h40);break;
+      case "ら":draw(h41);break;case "り":draw(h42);break;case "る":draw(h43);break;case "れ":draw(h44);break;
+      case "ろ":draw(h45);break;case "わ":draw(h46);break;case "ゐ":draw(h47);break;case "ゑ":draw(h49);break;
+      case "を":draw(h50);break;case "ん":draw(h51);break;case "ぁ":draw(h52);break;case "ぃ":draw(h53);break;
+      case "ぅ":draw(h54);break;case "ぇ":draw(h55);break;case "ぉ":draw(h56);break;case "ゃ":draw(h57);break;
+      case "ゅ":draw(h58);break;case "ょ":draw(h59);break;case "っ":draw(h60);break;case "木":draw(c01);break;
+      case "日":draw(c02);break;case "月":draw(c03);break;case "水":draw(c04);break;case "火":draw(c05);break;
+      case "金":draw(c06);break;case "土":draw(c07);break;default:draw(def);break;
     }
   }
     function draw(id) {
       var sp = 2;
       var num=Math.max.apply(null, id[0]) + sp;
-      if(pos+num*7>returnX){CR()}          //改行チェック
+      if(pos+num*7>returnX){CR();}          //改行チェック
       for (var int = 0; int < id[0].length; int++){
         var X=id[0][int];
         var Y=id[1][int];
@@ -737,43 +737,43 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
      var key=str.substring(int,int+1);//i番目の文字を描画
       switch(key){
         case " ":blank();break;
-        case '　':blank();break;
-        case 'A':draw(kl00);break; case 'B':draw(kl01);break;
-        case 'C':draw(kl02);break; case 'D':draw(kl03);break;
-        case 'E':draw(kl04);break; case 'F':draw(kl05);break;
-        case 'G':draw(kl06);break; case 'H':draw(kl07);break;
-        case 'I':draw(kl08);break; case 'J':draw(kl09);break;
-        case 'K':draw(kl10);break; case 'L':draw(kl11);break;
-        case 'M':draw(kl12);break; case 'N':draw(kl13);break;
-        case 'O':draw(kl14);break; case 'P':draw(kl15);break;
-        case 'Q':draw(kl16);break; case 'R':draw(kl17);break;
-        case 'S':draw(kl18);break; case 'T':draw(kl19);break;
-        case 'U':draw(kl20);break; case 'V':draw(kl21);break;
-        case 'W':draw(kl22);break; case 'X':draw(kl23);break;
-        case 'Y':draw(kl24);break; case 'Z':draw(kl25);break;
-        case 'a':draw(kl00);break; case 'b':draw(kl01);break;
-        case 'c':draw(kl02);break; case 'd':draw(kl03);break;
-        case 'e':draw(kl04);break; case 'f':draw(kl05);break;
-        case 'g':draw(kl06);break; case 'h':draw(kl07);break;
-        case 'i':draw(kl08);break; case 'j':draw(kl09);break;
-        case 'k':draw(kl10);break; case 'l':draw(kl11);break;
-        case 'm':draw(kl12);break; case 'n':draw(kl13);break;
-        case 'o':draw(kl14);break; case 'p':draw(kl15);break;
-        case 'q':draw(kl16);break; case 'r':draw(kl17);break;
-        case 's':draw(kl18);break; case 't':draw(kl19);break;
-        case 'u':draw(kl20);break; case 'v':draw(kl21);break;
-        case 'w':draw(kl22);break; case 'x':draw(kl23);break;
-        case 'y':draw(kl24);break; case 'z':draw(kl25);break;
-        case '.':draw(klp);break; case ',':draw(klc);break;
-        case '!':draw(kle);break; case '-':draw(klhi);break;
+        case "　":blank();break;
+        case "A":draw(kl00);break; case "B":draw(kl01);break;
+        case "C":draw(kl02);break; case "D":draw(kl03);break;
+        case "E":draw(kl04);break; case "F":draw(kl05);break;
+        case "G":draw(kl06);break; case "H":draw(kl07);break;
+        case "I":draw(kl08);break; case "J":draw(kl09);break;
+        case "K":draw(kl10);break; case "L":draw(kl11);break;
+        case "M":draw(kl12);break; case "N":draw(kl13);break;
+        case "O":draw(kl14);break; case "P":draw(kl15);break;
+        case "Q":draw(kl16);break; case "R":draw(kl17);break;
+        case "S":draw(kl18);break; case "T":draw(kl19);break;
+        case "U":draw(kl20);break; case "V":draw(kl21);break;
+        case "W":draw(kl22);break; case "X":draw(kl23);break;
+        case "Y":draw(kl24);break; case "Z":draw(kl25);break;
+        case "a":draw(kl00);break; case "b":draw(kl01);break;
+        case "c":draw(kl02);break; case "d":draw(kl03);break;
+        case "e":draw(kl04);break; case "f":draw(kl05);break;
+        case "g":draw(kl06);break; case "h":draw(kl07);break;
+        case "i":draw(kl08);break; case "j":draw(kl09);break;
+        case "k":draw(kl10);break; case "l":draw(kl11);break;
+        case "m":draw(kl12);break; case "n":draw(kl13);break;
+        case "o":draw(kl14);break; case "p":draw(kl15);break;
+        case "q":draw(kl16);break; case "r":draw(kl17);break;
+        case "s":draw(kl18);break; case "t":draw(kl19);break;
+        case "u":draw(kl20);break; case "v":draw(kl21);break;
+        case "w":draw(kl22);break; case "x":draw(kl23);break;
+        case "y":draw(kl24);break; case "z":draw(kl25);break;
+        case ".":draw(klp);break; case ",":draw(klc);break;
+        case "!":draw(kle);break; case "-":draw(klhi);break;
         case "\n":CR();break;
-        default:draw(def);break
+        default:draw(def);break;
       }
     }
     function draw(id) {
       var sp = 5;
       var num=Math.max.apply(null, id[0]) + sp;
-      if(pos+num>returnX){CR()}          //改行チェック
+      if(pos+num>returnX){CR();}          //改行チェック
       for (var int = 0; int < id[0].length; int++){
         var X=id[0][int];
         var Y=id[1][int];
@@ -829,7 +829,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     this.drawLine(x, y+h , x+w, y+h);
   },
 
-  strokeRectTilt:function(x, y, w, h, ang) {   ////長方形の描画処理 傾き///
+  strokeRectTilt:function(x, y, w, h, ang) {  ////長方形の描画処理 傾き///
     var x1 = x + w*Math.cos(ang/180*Math.PI);
     var y1 = y + w*Math.sin(ang/180*Math.PI);
     var x3 = x + h*Math.cos((ang+90)/180*Math.PI);
@@ -844,7 +844,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
 
   fillRect:function(x, y, w, h) {     ////長方形の描画処理  塗りつぶし///
     if(w<0){w*=-1; x-=w;}
-    if(h<0){h*=-1; y-=h}
+    if(h<0){h*=-1; y-=h;}
     var s = 3;
     var j = Math.round(h /s /2 );
     for (var i = 0; i <= j; i++) {
@@ -894,7 +894,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     }
   },
 
-  strokeArc:function(x, y, r,s,e) {     ////円弧の描画処理///
+  strokeArc:function(x, y, r,s,e) {    ////円弧の描画処理///
     var cir = 2 * Math.PI * r;
     var a = 360 / Math.round(cir / interval); // 角度（度)
     for(var i=0; a*i < e-s; i++){
@@ -915,14 +915,14 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     }
   }, 
 
-  drawPattern:function(code, x, y) {     ////図形の描画処理///
+  drawPattern:function(code, x, y) {   ////図形の描画処理///
     var len = code.length;
     for(var i=0; i < len; i++){
       this.drawDot(code[i][0]+x, code[i][1]+y);
     }
   },
 
-  drawDot:function(x,y) {               /////点の描画///////
+  drawDot:function(x,y) {              /////点の描画///////
     x = Math.round(x);
     y = Math.round(y);
     this.dot2preview(x,y);
@@ -946,11 +946,11 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
 
   clearDot:function(x,y) {               /////点の削除///////
     if(ctx){
-      ctx.fillStyle = '#fff';
+      ctx.fillStyle = "#fff";
       ctx.beginPath();
       ctx.arc(x, y, 1, 0, Math.PI*2, false);
       ctx.fill();
-      ctx.fillStyle = '#000';
+      ctx.fillStyle = "#000";
     }
     var target = y*1000 + x;
     coo[dot] = coo[dot].filter(function(v){
@@ -960,8 +960,8 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
 
   clear:function(){
     coo=[[],[],[]];
-    var fromX = 0;
-    var fromY = 0;
+    fromX = 0;
+    fromY = 0;
     ctx.clearRect(0, 0, sizeX, sizeY);
   },
              /////////////入出力系メソッド//////////////////
@@ -969,15 +969,15 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     var element = document.createElement("canvas");
     element.setAttribute("width", 599);
     element.setAttribute("height", 744);
-    var ctx2 = element.getContext('2d');
-    ctx2.fillStyle = '#fff';
+    var ctx2 = element.getContext("2d");
+    ctx2.fillStyle = "#fff";
     ctx2.fillRect(0, 0, sizeX, sizeY);
     
-    ctx2.fillStyle = '#00F'; //小点　青
+    ctx2.fillStyle = "#00F"; //小点　青
     draw(0);
-    ctx2.fillStyle = '#000'; //中点　黒
+    ctx2.fillStyle = "#000"; //中点　黒
     draw(1);
-    ctx2.fillStyle = '#0F0'; //大点　緑
+    ctx2.fillStyle = "#0F0"; //大点　緑
     draw(2);
     
     function draw(dot){
@@ -998,7 +998,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
   },
 
   readEdl:function(str){              //////////// エーデルファイルの読み込み//////
-    str+=""
+    str+="";
     str = str.replace(/^.+?[\n\r]/,"");
     str = str.replace(/[\n\r]/,"");
     str = str.replace(/[0-9]/g,"");
@@ -1029,13 +1029,12 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     }
     //////////////////////
     function edl2num(letter) {
-      var ed26 = ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','\[','\\','\]','\^','\_'];
+      var ed26 = ["@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","\[","\\","\]","\^","\_"];
       for(var i=0; i<ed26.length; i++){
         if(letter===ed26[i])return i;
       }
     }
   },
-
 
   loadEdl:function() {              //////エーデルファイルの出力///////
     var tempArr=[];  //一次元配列に変換
@@ -1045,45 +1044,45 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
         tempArr.push(coo[j][i]*10 + j);
       }
     }
-  
+
     tempArr.sort(function(a,b){
       if( a < b ) return -1;
       if( a > b ) return 1;
       return 0;
     });
-  
+
     console.log(tempArr);
     var s = 0;
     var str = "";
     var len = tempArr.length;
-    for(i=0; i<len; i++){
+    for(var i=0; i<len; i++){
       var x = tempArr[i] % 10000;
       var Y = (tempArr[i] - x) / 10000; //Y座標を取得
       var S = x % 10 + 1; //点種を取得
       var X = (x-S) /10; //X座標を取得
       console.log(Y);
       if(tempArr[i-1] !== tempArr[i] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
-        if(S===s){str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10))}        //前の点と点種が同じ場合
+        if(S===s){str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));}        //前の点と点種が同じ場合
         else{str += "\n" + S + num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));} //異なる場合は改行して行頭に数字を置く
         s=S;
       }
     }
-  
+
     function num2edi(num){  //10進数をエーデルの26進数に変換
       var str = num.toString(26); //26進数に変換
       str = str.replace(/10(.)/, "Z$1");  //26進数の3桁を置換
       str = str.replace(/11(.)/, "\[$1"); //26進数の3桁を置換
       str = str.replace(/12(.)/, "\\$1"); //26進数の3桁を置換
-      var code = [['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'],
-                  ['@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y']];
+      var code = [["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"],
+                  ["@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y"]];
       for(var i=0; i<26; i++){
         str = str.replace(new RegExp(code[0][i],"g"),code[1][i]);
         str= ("@"+str).slice(-2);  //ゼロ埋め
       }
       return str;
     }
-    
     str = "EDEL" + size + ",0,740" + str;
     return str;
-  }}
+  },
+ };
 };
