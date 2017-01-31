@@ -1,22 +1,25 @@
-var tg = tactileGraphic("a","IJB5","edl");
+var tg = tactileGraphic("a","IJB5","edl", decapoint, kleintype);
 function drawGraph(){///////////////////////////////////////////////////////
   tg.clear();
   ///////ここから下に描画メソッドを記述します//////////////
 
 
+console.log(decapoint);
 
 var hoge;
 hoge= tg.drawBraille("nsd",150,180);
 tg.setType("edi");
 hoge= tg.drawBraille("nsd",hoge[0],hoge[1]);
-console.log(hoge);
-tg.drawLine(120,100,120,110);
+
+tg.setDot(2);
 tg.setDot(0);
+
+function deca(a,b,c,d){tg.AUG2(a,b,c,d);}
+
+deca("abcdedfg",0,0,0);
+tg.drawLine(120,100,120,110);
 tg.drawLine(140,100,140,110);
 tg.drawLine(160,100,160,110);
-tg.setDot(2);
-
-
 
   //////////////ここまで///////////////
 }
