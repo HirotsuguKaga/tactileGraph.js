@@ -38,8 +38,6 @@ ex.
 #### drawBrailleMath(string str, int x, int y , int returnX);
 #### drawBrailleRight(string str, int x, int y);
 #### drawBrailleMathRight(string str, int x, int y);
-#### drawDecapoint(string str, int x, int y);
-#### drawKleintype(string str, int x, int y);
 ### Draw Graph
 #### drawDot(int x, int y);
 #### drawLine(int x1, int y1, int x2, int y2 );
@@ -123,8 +121,6 @@ ex.
 #### drawBrailleMath(string str, int x, int y , int returnX);
 #### drawBrailleRight(string str, int x, int y);
 #### drawBrailleMathRight(string str, int x, int y);
-#### drawDecapoint(string str, int x, int y);
-#### drawKleintype(string str, int x, int y);
 ### Draw Graph
 #### drawDot(int x, int y);
 #### drawLine(int x1, int y1, int x2, int y2 );
@@ -164,4 +160,15 @@ return array.
 ### Misc
 #### convertText(String str);
 return converted string.
+
+#Extension
+### USAGE
+```javascript
+ex.
+  var tg = tactileGraph(id, "A4", edl, decapoint, kleintype);  //(ID, SIZE, TYPE, AUG, AUG2)
+ 
+  tg.AUG("ABCDEF", 0, 10);  //draw decapoint
+  tg.AUG2(0,20,50,20);  //draw kleintype
+## decapoint(string str, int x, int y);
+## kleintype(string str, int x, int y);
 >>>>>>> origin/gh-pages
