@@ -298,54 +298,12 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
   },
 
   drawBrailleMath:function(str, x, y){
-    str=str.replace(/Α/g,"‡a"); str=str.replace(/Β/g,"‡b");
-    str=str.replace(/Δ/g,"‡c"); str=str.replace(/Ε/g,"‡e");
-    str=str.replace(/Φ/g,"‡f"); str=str.replace(/Γ/g,"‡g");
-    str=str.replace(/Ι/g,"‡i"); str=str.replace(/Κ/g,"‡k");
-    str=str.replace(/Λ/g,"‡l"); str=str.replace(/Μ/g,"‡m");
-    str=str.replace(/Ν/g,"‡n"); str=str.replace(/Ο/g,"‡o");
-    str=str.replace(/Π/g,"‡p"); str=str.replace(/Ρ/g,"‡r");
-    str=str.replace(/Σ/g,"‡s"); str=str.replace(/Τ/g,"‡t");
-    str=str.replace(/Υ/g,"‡y"); str=str.replace(/Ω/g,"‡w");
-    str=str.replace(/Ξ/g,"‡x"); str=str.replace(/Ψ/g,"‡y");
-    str=str.replace(/Ζ/g,"‡z"); str=str.replace(/Η/g,"‡さ");
-    str=str.replace(/Θ/g,"‡す"); str=str.replace(/Χ/g,"‡へ");
-    str=str.replace(/α/g,"†a"); str=str.replace(/β/g,"†b");
-    str=str.replace(/δ/g,"†c"); str=str.replace(/ε/g,"†e");
-    str=str.replace(/φ/g,"†f"); str=str.replace(/γ/g,"†g");
-    str=str.replace(/ι/g,"†i"); str=str.replace(/κ/g,"†k");
-    str=str.replace(/λ/g,"†l"); str=str.replace(/μ/g,"†m");
-    str=str.replace(/ν/g,"†n"); str=str.replace(/ο/g,"†o");
-    str=str.replace(/π/g,"†p"); str=str.replace(/ρ/g,"†r");
-    str=str.replace(/σ/g,"†s"); str=str.replace(/τ/g,"†ｔ");
-    str=str.replace(/υ/g,"†y"); str=str.replace(/ω/g,"†w");
-    str=str.replace(/ξ/g,"†x"); str=str.replace(/ψ/g,"†y");
-    str=str.replace(/ζ/g,"†z"); str=str.replace(/η/g,"†さ");
-    str=str.replace(/θ/g,"†す"); str=str.replace(/χ/g,"†へ");
-    str=str.replace(/\＋/g,"？"); str=str.replace(/－/g,"を");
-    str=str.replace(/×/g,"＊"); str=str.replace(/÷/g,"分");
-    str=str.replace(/・/g,"わ"); str=str.replace(/／/g,"｜分");
-    str=str.replace(/\//g,"｜分"); str=str.replace(/±/g,"？を");
-    str=str.replace(/：/g,"中促"); str=str.replace(/\＝/g,"ーー");
-    str=str.replace(/≒/g,"中ー"); str=str.replace(/≠/g,"‡ー");
-    str=str.replace(/=/g,"ーー"); str=str.replace(/＞/g,"？？");
-    str=str.replace(/＜/g,"をを"); str=str.replace(/\>/g,"？？");
-    str=str.replace(/</g,"をを"); str=str.replace(/≧/g,"ヱヱ");
-    str=str.replace(/≦/g,"語語"); str=str.replace(/（/g,"語");
-    str=str.replace(/\(/g,"語"); str=str.replace(/）/g,"ん");
-    str=str.replace(/\)/g,"ん"); str=str.replace(/｛/g,"半き");
-    str=str.replace(/\{/g,"半き"); str=str.replace(/｝/g,"よわ");
-    str=str.replace(/\}/g,"よわ"); str=str.replace(/［/g,"半み");
-    str=str.replace(/\[/g,"半み"); str=str.replace(/］/g,"もわ");
-    str=str.replace(/\］/g,"もわ"); str=str.replace(/｜/g,"し");
-    str=str.replace(/\|/g,"し"); str=str.replace(/∽/g,"半わ");
-    str=str.replace(/⊥/g,"んわ"); str=str.replace(/∠/g,"す");
-    str=str.replace(/⊿/g,"ゆ"); str=str.replace(/⌒/g,"こ");
-    str=str.replace(/平行四辺形/g,"｜分分");
-    str=str.replace(/∪/g,"ゆ"); str=str.replace(/∩/g,"く");
-    str=str.replace(/→/g,"ーた"); str=str.replace(/←/g,"こー");
-    str=str.replace(/√/g,"根"); str=str.replace(/！/g,"外！");
-    str=str.replace(/\!/g,"外！");
+    var code =[["Α",	"Β",	"Δ",	"Ε",	"Φ",	"Γ",	"Ι",	"Κ",	"Λ",	"Μ",	"Ν",	"Ο",	"Π",	"Ρ",	"Σ",	"Τ",	"Υ",	"Ω",	"Ξ",	"Ψ",	"Ζ",	"Η",	"Θ",	"Χ",	"α",	"β",	"δ",	"ε",	"φ",	"γ",	"ι",	"κ",	"λ",	"μ",	"ν",	"ο",	"π",	"ρ",	"σ",	"τ",	"υ",	"ω",	"ξ",	"ψ",	"ζ",	"η",	"θ",	"χ",	"\＋",	"－",	"×",	"÷",	"・",	"／",	"\/",	"±",	"：",	"\＝",	"≒",	"≠",	"=",	"＞",	"＜",	"\>",	"<",	"≧",	"≦",	"（",	"\(",	"）",	"\)",	"｛",	"\{",	"｝",	"\}",	"［",	"\[",	"］",	"\］",	"｜",	"\|",	"∽",	"⊥",	"∠",	"⊿",	"⌒",	"平行四辺形",	"∪",	"∩",	"→",	"←",	"√",	"！",	"\!"],
+["‡a",	"‡b",	"‡c",	"‡e",	"‡f",	"‡g",	"‡i",	"‡k",	"‡l",	"‡m",	"‡n",	"‡o",	"‡p",	"‡r",	"‡s",	"‡t",	"‡y",	"‡w",	"‡x",	"‡y",	"‡z",	"‡さ",	"‡す",	"‡へ",	"†a",	"†b",	"†c",	"†e",	"†f",	"†g",	"†i",	"†k",	"†l",	"†m",	"†n",	"†o",	"†p",	"†r",	"†s",	"†ｔ",	"†y",	"†w",	"†x",	"†y",	"†z",	"†さ",	"†す",	"†へ",	"？",	"を",	"＊",	"分",	"わ",	"｜分",	"｜分",	"？を",	"中促",	"ーー",	"中ー",	"‡ー",	"ーー",	"？？",	"をを",	"？？",	"をを",	"ヱヱ",	"語語",	"語",	"語",	"ん",	"ん",	"半き",	"半き",	"よわ",	"よわ",	"半み",	"半み",	"もわ",	"もわ",	"し",	"し",	"半わ",	"んわ",	"す",	"ゆ",	"こ",	"｜分分",	"ゆ",	"く",	"ーた",	"こー",	"根",	"外！",	"外！"]];
+    var len = code[0].length;
+    for(var i=0; i<len; i++){
+      str=str.replace(/code[0]/g,code[1]);
+    }
     this.drawBraille(str, x,y);
   },
 
