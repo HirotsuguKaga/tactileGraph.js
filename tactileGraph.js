@@ -67,7 +67,7 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
   }
 
   if(SIZE){
-    setSize();
+    setsize();
   }
 
   if(TYPE==="edi"){
@@ -271,8 +271,8 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
       x -= arr.length * r-8;
       right = false;
     }
-    var j = k;
     var k = 0;
+    var j = k;
     for(var i = 0 ; i < arr.length ; i++){         //>
       if(returnX < x + r * j + w){j = 0; k++;}//改行
       if(arr[i].match("1"))this.drawDot(x + r * j , y + l*k);
@@ -358,9 +358,9 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
     var dotted = Math.floor(d / interval);
     var int;
     if(Adjust){
-      var int = d/dotted;
+      int = d/dotted;
     }else{
-      var int = interval;
+      int = interval;
     }
     for (var i = 0; i <= dotted; i++) {
       var x3 = Math.cos(rad) * int * i + x1;
@@ -527,14 +527,14 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
     var ctx2 = element.getContext("2d");
     ctx2.fillStyle = "#fff";
     ctx2.fillRect(0, 0, sizeX, sizeY);
-    
+
     ctx2.fillStyle = "#00F"; //小点　青
     draw(0);
     ctx2.fillStyle = "#000"; //中点　黒
     draw(1);
     ctx2.fillStyle = "#0F0"; //大点　緑
     draw(2);
-    
+
     function draw(dot){
       var len = coo[dot].length;
       for(var i = 0; i<len; i++){
@@ -543,7 +543,7 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
         ctx2.fillRect(X,Y,1,1);
       }
     }
-    
+
     var data = element.toDataURL();
     return data;
   },
@@ -565,7 +565,7 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
       var y = edl2num(code.charAt(2)) * 26 + edl2num(code.charAt(3));
       this.drawDot(x,y);
     }
-    //////////////////////
+//////////////////////
     function splitByLength(str, length) {
       var resultArr = [];
       if (!str || !length || length < 1) {
@@ -582,7 +582,7 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
       }
       return resultArr;
     }
-    //////////////////////
+//////////////////////
     function edl2num(letter) {
       var ed26 = ["@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","\[","\\","\]","\^","\_"];
       for(var i=0; i<ed26.length; i++){
