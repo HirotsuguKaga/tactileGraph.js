@@ -4,7 +4,7 @@ function drawGraph(){///////////////////////////////////////////////////////
   ///////ここから下に描画メソッドを記述します//////////////
 
 tg.setDot(2);
- tg.drawBraille("mnmnmnmnmnmnmnmnmnmnmnmnmnmnmnmnmnmmnmnmnmn",0,180);
+ tg.drawBrailleMath("ΑΦ",0,180);
 
 
   //////////////ここまで///////////////
