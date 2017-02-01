@@ -8,13 +8,11 @@
  * @copyright      Copyright (c) Hirotsugu Kaga
  * @license        licensed under the MIT license.
  */
-
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
-var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
+var tactileGraphic = function(ID, size, TYPE, AUG, AUG2) {
   var coo = [[],[],[]];
   var dot = 1;
-  var size = "A4"; //Paper size
   var sizeX = 599;
   var sizeY = 744;
   var l = 30; // Line height
@@ -32,13 +30,11 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
     ctx = canvas.getContext("2d");
   }
   
-  function setsize(){
-    size = SIZE;
+  setsize=function(){
     switch(size){
       case "A4":
         sizeX = 599;
         sizeY = 744;
-        break;
       case "B5":
         sizeX = 479;
         sizeY = 725;
@@ -64,10 +60,6 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
         sizeY = 790;
         break;
     }
-  }
-
-  if(SIZE){
-    setsize();
   }
 
   if(TYPE==="edi"){
@@ -394,8 +386,9 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
     var cir = 2 * Math.PI * r;
     var a = 360 / Math.round(cir / interval); // 角度（度)
     for(var i=0; a*i < 360; i++){
-      var X = x + r * Math.cos(a*i / 180 * Math.PI); // X座標
-      var Y = y + r * Math.sin(a*i / 180 * Math.PI); // Y座標
+      var ang = a*i / 180 * Math.PI;
+      var X = x + r * Math.cos(ang); // X座標
+      var Y = y + r * Math.sin(ang); // Y座標
       this.drawDot(X, Y);
     }
   },
@@ -404,8 +397,9 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
     var cir = 2 * Math.PI * r;
     var a = 360 / Math.round(cir / interval); // 角度（度)
     for(var i=0; a*i < e-s; i++){
-      var X = x + r * Math.cos((s-90+a*i) / 180 * Math.PI); // X座標
-      var Y = y + r * Math.sin((s-90+a*i) / 180 * Math.PI); // Y座標
+      var ang = (s-90+a*i) / 180 * Math.PI;
+      var X = x + r * Math.cos(ang); // X座標
+      var Y = y + r * Math.sin(ang); // Y座標
       this.drawDot(X, Y);
     }
   }, 
@@ -415,8 +409,9 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
     var a = 360 / Math.round(cir / interval); // 角度（度)
     
     for(var i=0; a*i < 360; i++){
-      var X = x + r * Math.cos(a*i / 180 * Math.PI)*0.8; // X座標
-      var Y = y + r * Math.sin(a*i / 180 * Math.PI)*1.2; // Y座標
+      var ang = a*i / 180 * Math.PI;
+      var X = x + r * Math.cos(ang)*0.8; // X座標
+      var Y = y + r * Math.sin(ang)*1.2; // Y座標
       this.drawDot(X, Y);
     }
   }, 
