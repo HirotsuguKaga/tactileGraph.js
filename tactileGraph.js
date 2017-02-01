@@ -31,13 +31,8 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
     ctx = canvas.getContext("2d");
   }
   
-  function setsize(){
-    size = SIZE;
-    switch(size){
-      case "A4":
-        sizeX = 599;
-        sizeY = 744;
-        break;
+  setsize=function(){
+    switch(SIZE){
       case "B5":
         sizeX = 479;
         sizeY = 725;
@@ -62,11 +57,11 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
         sizeX = 536;
         sizeY = 790;
         break;
+      default:
+        sizeX = 599;
+        sizeY = 744;
+        size="A4";
     }
-  }
-
-  if(SIZE){
-    setsize();
   }
 
   if(TYPE==="edi"){
@@ -393,8 +388,9 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
     var cir = 2 * Math.PI * r;
     var a = 360 / Math.round(cir / interval); // 角度（度)
     for(var i=0; a*i < 360; i++){
-      var X = x + r * Math.cos(a*i / 180 * Math.PI); // X座標
-      var Y = y + r * Math.sin(a*i / 180 * Math.PI); // Y座標
+      var ang = a*i / 180 * Math.PI;
+      var X = x + r * Math.cos(ang); // X座標
+      var Y = y + r * Math.sin(ang); // Y座標
       this.drawDot(X, Y);
     }
   },
