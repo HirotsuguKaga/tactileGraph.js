@@ -10,10 +10,9 @@
  */
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
-var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
+var tactileGraphic = function(ID, size, TYPE, AUG, AUG2) {
   var coo = [[],[],[]];
   var dot = 1;
-  var size = "A4"; //Paper size
   var sizeX = 599;
   var sizeY = 744;
   var l = 30; // Line height
@@ -32,7 +31,10 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
   }
   
   setsize=function(){
-    switch(SIZE){
+    switch(size){
+      case "A4":
+        sizeX = 599;
+        sizeY = 744;
       case "B5":
         sizeX = 479;
         sizeY = 725;
@@ -57,10 +59,6 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
         sizeX = 536;
         sizeY = 790;
         break;
-      default:
-        sizeX = 599;
-        sizeY = 744;
-        size="A4";
     }
   }
 
