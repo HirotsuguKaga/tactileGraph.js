@@ -505,9 +505,9 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
 
   readEdl:function(str){              //////////// エーデルファイルの読み込み////// 点種に未対応？
     str+="";
-    str = str.replace(/^.+?[\n\r]/,"");
-    str = str.replace(/[\n\r]/,"");
-    str = str.replace(/[0-9]/g,"");
+    str = str.replace(/^.+?[\n\r]/,"")
+              .replace(/[\n\r]/,"")
+               .replace(/[0-9]/g,"");
     var edlarr = splitByLength(str, 4);
     var len = edlarr.length;
     for(var i=0; i<len; i++){
@@ -576,9 +576,9 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
 
     function num2edi(num){  //10進数をエーデルの26進数に変換
       var str = num.toString(26); //26進数に変換
-      str = str.replace(/10(.)/, "Z$1");  //26進数の3桁を置換
-      str = str.replace(/11(.)/, "\[$1"); //26進数の3桁を置換
-      str = str.replace(/12(.)/, "\\$1"); //26進数の3桁を置換
+      str = str.replace(/10(.)/, "Z$1")
+                .replace(/11(.)/, "\[$1")
+                 .replace(/12(.)/, "\\$1"); //26進数の3桁を置換
       var code = [["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"],
                   ["@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y"]];
       for(var i=0; i<26; i++){
