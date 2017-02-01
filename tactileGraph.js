@@ -101,7 +101,7 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
 
   setSize:function(str){
     size = str;
-    this.setsize();
+    setsize();
   },
 
   setInterval:function(num){
