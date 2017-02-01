@@ -31,7 +31,8 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
     canvas = document.getElementById(ID);
     ctx = canvas.getContext("2d");
   }
-  if(SIZE){
+  
+  function setsize(){
     size = SIZE;
     switch(size){
       case "A4":
@@ -64,6 +65,11 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
         break;
     }
   }
+
+  if(SIZE){
+    setSize();
+  }
+
   if(TYPE==="edi"){
     l = 28; // Line height
     w = 5;
@@ -95,36 +101,7 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
 
   setSize:function(str){
     size = str;
-    switch(str){
-      case "A4":
-        sizeX = 599;
-        sizeY = 744;
-        break;
-      case "B5":
-        sizeX = 479;
-        sizeY = 725;
-        break;
-      case "IJB6":
-        sizeX = 176;
-        sizeY = 272;
-        break;
-      case "IJB5":
-        sizeX = 320;
-        sizeY = 460;
-        break;
-      case "IJA4":
-        sizeX = 360;
-        sizeY = 540;
-        break;
-      case "IJB4":
-        sizeX = 456;
-        sizeY = 670;
-        break;
-      case "IJA3":
-        sizeX = 536;
-        sizeY = 790;
-        break;
-      }
+    this.setsize();
   },
 
   setInterval:function(num){
