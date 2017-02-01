@@ -298,8 +298,6 @@ var tactileGraphic = function(ID, SIZE, TYPE, AUG, AUG2) {
       var regex = new RegExp(code[0][i], "g");
       str=str.replace(regex,code[1][i]);
     }
-      var kakko="\\(";
-      var regex = new RegExp( kakko, "g");
     this.drawBraille(str, x,y);
   },
 
