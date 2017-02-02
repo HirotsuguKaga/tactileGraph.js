@@ -478,11 +478,11 @@ var tactileGraphic = function(id, size, type, AUG, AUG2) {
     ctx2.fillStyle = "#fff";
     ctx2.fillRect(0, 0, sizeX, sizeY);
 
-    ctx2.fillStyle = "#00F"; //小点　青
+    ctx2.fillStyle = "#00F"; //小点青
     draw(0);
-    ctx2.fillStyle = "#000"; //中点　黒
+    ctx2.fillStyle = "#000"; //中点黒
     draw(1);
-    ctx2.fillStyle = "#0F0"; //大点　緑
+    ctx2.fillStyle = "#0F0"; //大点緑
     draw(2);
 
     function draw(dot){
