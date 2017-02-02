@@ -1,7 +1,7 @@
 [![Code Climate](https://codeclimate.com/github/HirotsuguKaga/Braille.js/badges/gpa.svg)](https://codeclimate.com/github/HirotsuguKaga/Braille.js)
 [![GitHub version](https://badge.fury.io/gh/HirotsuguKaga%2FtactileGraph.js.svg)](https://badge.fury.io/gh/HirotsuguKaga%2FtactileGraph.js)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
-[![JavaScript](https://img.shields.io/badge/language-JavaScript-00ff33.svg)](LANGUAGE)
+[![JavaScript](https://img.shields.io/badge/language-JavaScript-009922.svg)](LANGUAGE)
 # tactileGraph.js
 Just a 'canvas like' tactile graphic drawing library.:octocat:
   
