@@ -10,7 +10,7 @@
  */
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
-var tactileGraphic = function(ID, size, TYPE, AUG, AUG2) {
+var tactileGraphic = function(id, size, type, AUG, AUG2) {
   var coo = [[],[],[]];
   var dot = 1;
   var sizeX = 599;
@@ -25,11 +25,11 @@ var tactileGraphic = function(ID, size, TYPE, AUG, AUG2) {
   var interval = 6;
   var right = false; //右寄せチェック
   var Adjust=false;
-  if(ID){
-    canvas = document.getElementById(ID);
+  if(id){
+    canvas = document.getElementById(id);
     ctx = canvas.getContext("2d");
   }
-  
+
   setsize=function(){
     switch(size){
       case "A4":
@@ -63,7 +63,7 @@ var tactileGraphic = function(ID, size, TYPE, AUG, AUG2) {
     }
   }
 
-  if(TYPE==="edi"){
+  if(type==="edi"){
     l = 28; // Line height
     w = 5;
     h = 5;
