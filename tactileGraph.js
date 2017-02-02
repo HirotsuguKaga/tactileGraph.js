@@ -35,6 +35,7 @@ var tactileGraphic = function(ID, size, TYPE, AUG, AUG2) {
       case "A4":
         sizeX = 599;
         sizeY = 744;
+        break;
       case "B5":
         sizeX = 479;
         sizeY = 725;
@@ -314,8 +315,9 @@ var tactileGraphic = function(ID, size, TYPE, AUG, AUG2) {
   },
 
   drawLineTilt(x, y, len, ang) {   ////傾きと長さを指定した点線の描画///
-    var x1 = x + len*Math.cos(ang/180*Math.PI);
-    var y1 = y + len*Math.sin(ang/180*Math.PI);
+    var temp = ang/180*Math.PI;
+    var x1 = x + len*Math.cos(temp);
+    var y1 = y + len*Math.sin(temp);
     this.drawLine(x, y , x1, y1);
   },
 
@@ -329,10 +331,12 @@ var tactileGraphic = function(ID, size, TYPE, AUG, AUG2) {
   },
 
   strokeRectTilt:function(x, y, w, h, ang) {  ////長方形の描画処理 傾き///
-    var x1 = x + w*Math.cos(ang/180*Math.PI);
-    var y1 = y + w*Math.sin(ang/180*Math.PI);
-    var x3 = x + h*Math.cos((ang+90)/180*Math.PI);
-    var y3 = y + h*Math.sin((ang+90)/180*Math.PI);
+    var ang1 = ang/180*Math.PI;
+    var x1 = x + w*Math.cos(ang1);
+    var y1 = y + w*Math.sin(ang1);
+    var ang2 = (ang+90)/180*Math.PI;
+    var x3 = x + h*Math.cos(ang2);
+    var y3 = y + h*Math.sin(ang2);
     var x2 = x3-x+x1;
     var y2 = y3-y+y1;
     this.drawLine(x, y , x1, y1);
