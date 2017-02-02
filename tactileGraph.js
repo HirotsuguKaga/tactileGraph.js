@@ -364,10 +364,12 @@ var tactileGraphic = function(id, size, type, AUG, AUG2) {
   },
 
   strokeRhombusTilt:function(x, y, w, h, ang) {   ////菱形の描画処理 傾き///
-    var x1 = x + w*Math.cos(ang/180*Math.PI)/2;
-    var y1 = y + w*Math.sin(ang/180*Math.PI)/2;
-    var x2 = x + h*Math.cos((ang+90)/180*Math.PI)/2;
-    var y2 = y + h*Math.sin((ang+90)/180*Math.PI)/2;
+    var ang1 = ang/180*Math.PI;
+    var x1 = x + w*Math.cos(ang1)/2;
+    var y1 = y + w*Math.sin(ang1)/2;
+    var ang2 = (ang+90)/180*Math.PI;
+    var x2 = x + h*Math.cos(ang2)/2;
+    var y2 = y + h*Math.sin(ang2)/2;
     var x3 = 2*x - x1;
     var y3 = 2*y - y1;
     var x4 = 2*x - x2;
