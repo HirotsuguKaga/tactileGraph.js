@@ -10,7 +10,7 @@
  */
 /*jshint bitwise:false,eqnull:true,newcap:false */
 
-var tactileGraphic = function(id, size, type, AUG, AUG2) {
+var tactileGraphic = function(id, size, type, aug, aug2) {
   var coo = [[],[],[]];
   var dot = 1;
   var sizeX = 599;
@@ -21,7 +21,8 @@ var tactileGraphic = function(id, size, type, AUG, AUG2) {
   var r = 15; //
   var fromX = 0;
   var fromY = 0;
-  var canvas,ctx;
+  var canvas;
+  var ctx;
   var interval = 6;
   var right = false; //右寄せチェック
   var Adjust=false;
@@ -61,7 +62,7 @@ var tactileGraphic = function(id, size, type, AUG, AUG2) {
         sizeY = 790;
         break;
     }
-  }
+  };
 
   if(type==="edi"){
     l = 28; // Line height
@@ -177,8 +178,6 @@ var tactileGraphic = function(id, size, type, AUG, AUG2) {
                .replace(/数数/g, "数")                         //数符の連続があればそれを解消する
                 .replace(/([0-9０１２３４５６７８９])([ろロﾛＪJｊjあアｱＡAａaいイｲＢBｂbうウｳＣCｃcるルﾙＤDｄdらラﾗＥEｅeれレﾚＧGｇgえエｴＦFｆfりリﾘＨHｈhおオｵＩIｉi])/g, "$1_$2");
                                                                //数字の直後にア行とラ行、AからJまでのアルファベットがあったら間に繋ぎ符を挿入する
-                                                               
-    console.log(str);
     for(var i = 0 ; i < arr.length ; i++){ //>配列の変換
       var regex = new RegExp(arr[i][0], "g");
       str = str.replace(regex,arr[i][1]);
@@ -222,7 +221,7 @@ var tactileGraphic = function(id, size, type, AUG, AUG2) {
     ["＿_「」-‐継～：:","36"],["七＝=","2356"],
     ["斜‡ぴピﾋﾟ≠","46"],["？?＋+五疑","26"],
     ["二；;","23"],["！!！感六","235"],["｜|拡","456"]];
-      str += "";
+    str += "";
 
     str=str.replace(/&yen;[a-z]/g,"￥a");
     str = this.convertText(str);
@@ -429,28 +428,27 @@ var tactileGraphic = function(id, size, type, AUG, AUG2) {
       var Y = y + r * Math.sin(ang); // Y座標
       this.drawDot(X, Y);
     }
-  }, 
+  },
 
   strokeOval:function(x, y, r) {     ////楕円の描画処理///未処理
     var cir = 2 * Math.PI * r;
     var a = 360 / Math.round(cir / interval); // 角度（度)
-    
     for(var i=0; a*i < 360; i++){
       var ang = a*i / 180 * Math.PI;
       var X = x + r * Math.cos(ang)*0.8; // X座標
       var Y = y + r * Math.sin(ang)*1.2; // Y座標
       this.drawDot(X, Y);
     }
-  }, 
+  },
 
-  drawPattern:function(code, x, y) {   ////図形の描画処理///
+  drawPattern:function(code, x, y) {  ////図形の描画処理///
     var len = code.length;
     for(var i=0; i < len; i++){
       this.drawDot(code[i][0]+x, code[i][1]+y);
     }
   },
 
-  drawDot:function(x,y) {              /////点の描画///////
+  drawDot:function(x,y) {             /////点の描画///////
     x = Math.round(x);
     y = Math.round(y);
     this.dot2preview(x,y);
@@ -472,7 +470,7 @@ var tactileGraphic = function(id, size, type, AUG, AUG2) {
     }
   },
 
-  clearDot:function(x,y) {               /////点の削除///////
+  clearDot:function(x,y) {            /////点の削除///////
     if(ctx){
       ctx.fillStyle = "#fff";
       ctx.beginPath();
@@ -492,7 +490,7 @@ var tactileGraphic = function(id, size, type, AUG, AUG2) {
     fromY = 0;
     ctx.clearRect(0, 0, sizeX, sizeY);
   },
-             /////////////入出力系メソッド//////////////////
+      /////////////////入出力系メソッド//////////////////
   map2esa:function(){
     var element = document.createElement("canvas");
     element.setAttribute("width", 599);
@@ -612,7 +610,7 @@ var tactileGraphic = function(id, size, type, AUG, AUG2) {
     str = "EDEL" + size + ",0,740" + str;
     return str;
   },
-  AUG,
-  AUG2
+  aug,
+  aug2
  };
 };
