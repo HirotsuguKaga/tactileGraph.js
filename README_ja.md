@@ -338,5 +338,14 @@ return array.
 ### その他
 #### convertText(String str);
  濁点や拗音などを記号に置き換えた文字列を返します。数字列の直前に数符を挿入し、数字の後にア行やラ行の文字がある場合は間に繋ぎ符（3,6の点）を挿入します。漢字や分かち書き、長音の変換、外字符や大文字符の挿入は未対応です。
+#拡張ライブラリ
+### 使い方
+```javascript
+ex.
+  var tg = tactileGraph(id, "A4", edl, decapoint, kleintype);  //(ID, SIZE, TYPE, AUG, AUG2)
 
->>>>>>> origin/master
+  tg.aug("ABCDEF", 0, 10);  //eg. draw decapoint
+  tg.aug2(0,20,50,20);  //eg. draw kleintype
+```
+## decapoint(string str, int x, int y);
+## kleintype(string str, int x, int y);

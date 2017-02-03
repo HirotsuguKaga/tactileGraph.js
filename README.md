@@ -166,9 +166,10 @@ return converted string.
 ```javascript
 ex.
   var tg = tactileGraph(id, "A4", edl, decapoint, kleintype);  //(ID, SIZE, TYPE, AUG, AUG2)
- 
-  tg.AUG("ABCDEF", 0, 10);  //draw decapoint
-  tg.AUG2(0,20,50,20);  //draw kleintype
+
+  tg.aug("ABCDEF", 0, 10);  //eg. draw decapoint
+  tg.aug2(0,20,50,20);  //eg. draw kleintype
+```
 ## decapoint(string str, int x, int y);
 ## kleintype(string str, int x, int y);
 >>>>>>> origin/gh-pages
