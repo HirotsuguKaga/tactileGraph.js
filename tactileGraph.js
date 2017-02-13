@@ -106,7 +106,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     ctx.fillStyle = color;
   },
 
-  setAdjust(bool){
+  setAdjust:function(bool){
     Adjust=bool;
   },
 
@@ -117,7 +117,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     r = R;
   },
 
-  setType(TYPE){
+  setType:function(TYPE){
     switch(TYPE){
     case "edi":
       this.setBraille(28,5,5,12);
@@ -238,7 +238,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
       ["?","26"], ["\{","2356"], ["\}","2356"], ["\^"," "],
       ["$","56"], ["-","36"], ["\|","456"], ["\/","34"]];
       for(var i= 0 ; i < a.length ; i++){ //エスケープが必要な文字を先に文字列として比較
-        if(letter === a[i][0]){console.log(letter);return a[i][1];}
+        if(letter === a[i][0]){return a[i][1];}
       }
 
       for(var j = 0 ; j < arrLetter.length ; j++){ //>
@@ -315,28 +315,34 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     }
     this.drawBraille(str, x,y);
   },
-
-  drawLine:function(x1, y1, x2, y2) {     ///////点線の描画処理//////
+/////////////////////////////////////////////////////////////////////////////////////
+  drawLine:function(x1, y1, x2, y2, flag) {     ///////点線の描画処理//////
     if(y2 === undefined)return this.drawLine(fromX, fromY, x1, y1);
     fromX = x2;
     fromY = y2;
-    var d = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    var d = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)); //distance
     var rad = Math.atan2(y2 - y1, x2 - x1);
     var dotted = Math.floor(d / interval);
+    if(dotted===0)dotted = 1;
     var int;
     if(Adjust){
       int = d/dotted;
     }else{
       int = interval;
     }
-    for (var i = 0; i <= dotted; i++) {
+    var i=0;
+
+    if(flag === 1 || flag === 3) i=1;
+    if(flag === 2|| flag === 3) dotted--;
+
+    for (; i <= dotted; i++) {
       var x3 = Math.cos(rad) * int * i + x1;
       var y3 = Math.sin(rad) * int * i + y1;
       this.drawDot(x3, y3);
     }
   },
 
-  drawLineTilt(x, y, len, ang) {   ////傾きと長さを指定した点線の描画///
+  drawLineTilt:function(x, y, len, ang) {   ////傾きと長さを指定した点線の描画///
     var temp = ang/180*Math.PI;
     var x1 = x + len*Math.cos(temp);
     var y1 = y + len*Math.sin(temp);
@@ -577,7 +583,6 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
       return 0;
     });
 
-    console.log(tempArr);
     var s = 0;
     var str = "";
     var leng = tempArr.length;
@@ -586,7 +591,6 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
       var Y = (tempArr[int] - x) / 10000; //Y座標を取得
       var S = x % 10 + 1; //点種を取得
       var X = (x-S) /10; //X座標を取得
-      console.log(Y);
       if(tempArr[int-1] !== tempArr[int] && X < sizeX && Y < sizeY){  //重複した座標と領域の外側の座標を除外
         if(S===s){str += num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));}        //前の点と点種が同じ場合
         else{str += "\n" + S + num2edi(parseInt(X,10)) + num2edi(parseInt(Y,10));} //異なる場合は改行して行頭に数字を置く
@@ -610,7 +614,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     str = "EDEL" + size + ",0,740" + str;
     return str;
   },
-  aug,
-  aug2
+  aug:aug,
+  aug2:aug2
  };
 };
