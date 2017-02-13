@@ -178,6 +178,11 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
                .replace(/数数/g, "数")                         //数符の連続があればそれを解消する
                 .replace(/([0-9０１２３４５６７８９])([ろロﾛＪJｊjあアｱＡAａaいイｲＢBｂbうウｳＣCｃcるルﾙＤDｄdらラﾗＥEｅeれレﾚＧGｇgえエｴＦFｆfりリﾘＨHｈhおオｵＩIｉi])/g, "$1_$2");
                                                                //数字の直後にア行とラ行、AからJまでのアルファベットがあったら間に繋ぎ符を挿入する
+
+    str = str.replace(/([a-zA-Z])/g, "外$1")  //全てのアルファベットの直前に外字符を置く
+              .replace(/([a-zA-Z])外/g, "$1") //外字符の直前にアルファベットがあったら、その外字符を取り除く
+               .replace(/外外/g, "外")                         //数符の連続があればそれを解消する
+
     for(var i = 0 ; i < arr.length ; i++){ //>配列の変換
       var regex = new RegExp(arr[i][0], "g");
       str = str.replace(regex,arr[i][1]);
@@ -246,7 +251,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
           return arrLetter[j][1];
         }
       }
-      console.log("文字列に点字に変換出来ない文字が含まれています。");
+      alert("文字列に点字に変換出来ない文字が含まれています。");
       return "none";
     }
     return this.arr2braille(arr,x,y,returnX);
@@ -347,6 +352,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     var x1 = x + len*Math.cos(temp);
     var y1 = y + len*Math.sin(temp);
     this.drawLine(x, y , x1, y1);
+    return [Math.round(x1), Math.round(y1)];
   },
 
   strokeRect:function(x, y, w, h, ang) {   ////長方形の描画処理①///
@@ -356,6 +362,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     this.drawLine(x, y , x, y+h);
     this.drawLine(x+w, y , x+w, y+h);
     this.drawLine(x, y+h , x+w, y+h);
+    return [Math.round(x+w), Math.round(y+h)];
   },
 
   strokeRectTilt:function(x, y, w, h, ang) {  ////長方形の描画処理 傾き///
@@ -371,6 +378,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
     this.drawLine(x2,y2);
     this.drawLine(x3,y3);
     this.drawLine(x, y);
+    return [Math.round(x2), Math.round(y2)];
   },
 
   fillRect:function(x, y, w, h) {     ////長方形の描画処理  塗りつぶし///
@@ -412,6 +420,7 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
         this.strokeRect(x+w*i,y+h*j,w,h);
       }
     }
+    return [x+w*col, y+h*row];
   },
 
   strokeCircle:function(x, y, r) {     ////円の描画処理///
@@ -428,26 +437,26 @@ var tactileGraphic = function(id, size, type, aug, aug2) {
   strokeArc:function(x, y, r,s,e) {    ////円弧の描画処理///
     var cir = 2 * Math.PI * r;
     var a = 360 / Math.round(cir / interval); // 角度（度)
+    var startX;
+    var startY;
+    var endX;
+    var endY;
     for(var i=0; a*i < e-s; i++){
       var ang = (s-90+a*i) / 180 * Math.PI;
       var X = x + r * Math.cos(ang); // X座標
       var Y = y + r * Math.sin(ang); // Y座標
       this.drawDot(X, Y);
+      if(i===0){
+        startX = X;
+        startY = Y;
+      }
+      endX = X;
+      endY = Y;
     }
+    return [startX, startY, Math.round(endX), Math.round(endY)];
   },
 
-  strokeOval:function(x, y, r) {     ////楕円の描画処理///未処理
-    var cir = 2 * Math.PI * r;
-    var a = 360 / Math.round(cir / interval); // 角度（度)
-    for(var i=0; a*i < 360; i++){
-      var ang = a*i / 180 * Math.PI;
-      var X = x + r * Math.cos(ang)*0.8; // X座標
-      var Y = y + r * Math.sin(ang)*1.2; // Y座標
-      this.drawDot(X, Y);
-    }
-  },
-
-  drawPattern:function(code, x, y) {  ////図形の描画処理///
+  drawPattern:function(code, x, y) {  ////パターン図形の描画処理///
     var len = code.length;
     for(var i=0; i < len; i++){
       this.drawDot(code[i][0]+x, code[i][1]+y);

@@ -2,9 +2,11 @@ var tg = tactileGraphic("a","IJB4","edl", decapoint, kleintype);
 function drawGraph(){///////////////////////////////////////////////////////
   tg.clear();
   ///////ここから下に描画メソッドを記述します//////////////
-
- tg.drawBrailleMath("(数１２３４５数数　数数　123c)",0,180);
-
+ tg.drawBraille("ABCDE");
+ var line = tg.drawLineTilt(400,200,300,80);
+ console.log(line);
+ var arr = tg.strokeArc(200,200,100,90,180);
+console.log(arr);
 
   //////////////ここまで///////////////
 }
