@@ -1,5 +1,7 @@
-var decapoint = function(str, posx, posy, returnX){
+var decapoint = function(str, posx, posy, returnX, int){
     var sp=2;//文字の間隔
+    var interval = 7;
+    if(int)interval=int;
     posx = posx || 0;
     posy = posy || 0;
     var pos = posx;
@@ -299,13 +301,13 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     function draw(id) {
       var sp = 2;
       var num=Math.max.apply(null, id[0]) + sp;
-      if(pos+num*7>returnX){CR();}          //改行チェック
+      if(pos+num*interval>returnX){CR();}          //改行チェック
       for (var int = 0; int < id[0].length; int++){
         var X=id[0][int];
         var Y=id[1][int];
-        code.push([X*7+pos, Y*7+line]);
+        code.push([X*interval+pos, Y*interval+line]);
       }
-      pos=pos+num*7;
+      pos=pos+num*interval;
     }
     function SP(){ //空白
       pos+=50;
@@ -318,4 +320,7 @@ var han=[[1,1,1,2,2,3,3,3],[1,2,3,1,3,1,2,3]];
     for(var i=0; i<code.length; i++){  //配列の描画
       this.drawDot(code[i][0],code[i][1]);
     }
+  return {
+    setInterval:function(int){this.interval=int}
+  }
 }

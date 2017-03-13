@@ -1,7 +1,9 @@
+
 var tg = tactileGraphic("a","IJB4","edl", decapoint, kleintype);
 function drawGraph(){///////////////////////////////////////////////////////
   tg.clear();
   ///////ここから下に描画メソッドを記述します//////////////
+ tg.aug("ABCDE",0,0,600,12);
  tg.drawBraille("ABCDE");
  var line = tg.drawLineTilt(400,200,300,80);
  console.log(line);
