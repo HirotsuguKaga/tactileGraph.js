@@ -134,6 +134,7 @@ hoge.href = tg.map2esa();
 濁点や拗音などを記号に置き換えた文字列を返します。数字列の直前に数符を挿入し、数字の後にア行やラ行の文字がある場合は間に繋ぎ符（3,6の点）を挿入します。漢字や分かち書き、長音の変換、外字符や大文字符の挿入は未対応です。
 
 =======
+
 [![Code Climate](https://codeclimate.com/github/HirotsuguKaga/Braille.js/badges/gpa.svg)](https://codeclimate.com/github/HirotsuguKaga/Braille.js)
 [![GitHub version](https://badge.fury.io/gh/HirotsuguKaga%2FtactileGraph.js.svg)](https://badge.fury.io/gh/HirotsuguKaga%2FtactileGraph.js)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
