@@ -18,7 +18,7 @@ html5のキャンバスライクなシンプルな命令で、エーデルやMAP
 ### JavaScript
 1. 初期設定 
 ```javascript
-var tg = tactileGraph;
+var tg = tactileGraphic();
 tg.setCanvas('hoge'); //プレビュー用CanvasのIDを指定（任意）
 ```
 2. 描画 
